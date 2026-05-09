@@ -7,22 +7,21 @@ const values = [
   { icon: '🌿', title: 'Quality', desc: 'We never compromise on product standards — every item is verified, tested, and certified before it reaches our clients.' },
   { icon: '🤝', title: 'Trust', desc: 'Transparent dealings, consistent supply, and honest communication are the foundation of every Layma partnership.' },
   { icon: '📦', title: 'Reliability', desc: 'On-time delivery, accurate order fulfilment, and responsive service — we do what we say, every time.' },
-  { icon: '🌍', title: 'Global Reach', desc: 'Headquartered in Qatar with operations in Kerala, we connect sourcing origins with markets across the GCC and beyond.' },
+  { icon: '🌍', title: 'Global Reach', desc: 'Headquartered in Doha, Qatar, we connect premium sourcing origins across India, Saudi Arabia, and beyond with markets across the GCC.' },
 ];
 
 const timeline = [
   { year: '2016', event: 'Founded in Doha', desc: 'Layma Global Trading & Services established in Doha, Qatar — with a mission to bring authentic premium food products to the GCC market.' },
-  { year: '2018', event: 'Layma Export Launched', desc: 'Layma Export established in Ramanattukara, Kerala — creating a dedicated sourcing, processing, and export arm in India.' },
+  { year: '2018', event: 'First Partnerships', desc: 'Built direct supply relationships with certified producers across Kerala, India and Saudi Arabia for spices, nuts, and dates.' },
   { year: '2020', event: 'GCC Expansion', desc: 'Extended distribution network across the GCC region; added Saudi Arabia and Gulf import partnerships for dates and honey.' },
-  { year: '2022', event: 'Retail Packaging', desc: 'Launched branded retail small-packet range and private-label packaging services through Layma Export.' },
-  { year: '2024', event: 'International Export Growth', desc: 'Expanded international export reach beyond the GCC, serving clients in Europe and Southeast Asia through Layma Export.' },
+  { year: '2022', event: 'Retail Packaging', desc: 'Launched branded retail small-packet range and private-label packaging services for Qatar retail clients.' },
+  { year: '2024', event: 'B2B Growth', desc: 'Expanded B2B supply programmes for hotels, restaurants, catering companies, and institutional buyers across Qatar.' },
   { year: '2026', event: 'Full Product Range', desc: 'Completed full product portfolio — spices, nuts, dry fruits, honey, tea powder — supplied in bulk and retail branded formats.' },
 ];
 
 export default function About() {
   const aboutHeroImg = useSiteImage('about_hero');
   const aboutGlobalImg = useSiteImage('about_global');
-  const aboutExportImg = useSiteImage('about_export');
   return (
     <div>
       {/* Hero */}
@@ -37,26 +36,9 @@ export default function About() {
             <div style={{ fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600, marginBottom: 20 }}>Our Story</div>
             <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(52px, 8vw, 96px)', fontWeight: 600, color: '#F1F2C4', lineHeight: 1, marginBottom: 28 }}>About Layma</h1>
             <p style={{ fontSize: 18, lineHeight: 1.8, color: 'rgba(241,242,196,0.8)', maxWidth: 620, margin: '0 auto' }}>
-              An international food trading group — with a parent company in Qatar and an export division in Kerala — built on quality, trust, and a passion for premium natural food products.
+              Qatar's trusted food trading company — built on quality, reliability, and a genuine passion for premium natural food products from the world's best origins.
             </p>
           </motion.div>
-        </div>
-      </section>
-
-      {/* Group overview */}
-      <section style={{ padding: '80px 0', background: '#BABF26' }}>
-        <div className="container" style={{ textAlign: 'center' }}>
-          <ScrollReveal>
-            <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(26,26,26,0.1)', borderRadius: 40, padding: '6px 18px', marginBottom: 20 }}>
-              <span style={{ fontSize: 11, fontWeight: 700, letterSpacing: 3, textTransform: 'uppercase', color: 'rgba(26,26,26,0.7)' }}>The Layma Group</span>
-            </div>
-            <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(32px, 4vw, 52px)', fontWeight: 600, color: '#1a1a1a', marginBottom: 16 }}>
-              One Brand. Two Operations.
-            </h2>
-            <p style={{ fontSize: 16, color: 'rgba(26,26,26,0.7)', maxWidth: 680, margin: '0 auto' }}>
-              Layma Group is an international food trading and export company connecting global markets with premium-quality food products. The group operates through two complementary entities — Layma Global in Qatar and Layma Export in Kerala, India.
-            </p>
-          </ScrollReveal>
         </div>
       </section>
 
@@ -162,87 +144,6 @@ export default function About() {
                   <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: item.bg === '#497336' ? '#BABF26' : 'rgba(26,26,26,0.55)', fontWeight: 600, marginBottom: 12 }}>{item.label}</div>
                   <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 30, fontWeight: 600, color: item.bg === '#497336' ? '#F1F2C4' : '#1a1a1a', lineHeight: 1.2, marginBottom: 20, whiteSpace: 'pre-line' }}>{item.title}</h3>
                   <p style={{ fontSize: 15, lineHeight: 1.8, color: item.bg === '#497336' ? 'rgba(241,242,196,0.8)' : 'rgba(26,26,26,0.72)' }}>{item.text}</p>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Section 2: Layma Export */}
-      <section style={{ padding: '120px 0', background: '#1a1a1a' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center' }} className="two-col">
-            <ScrollReveal direction="right">
-              <div>
-                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(186,191,38,0.15)', border: '1px solid rgba(186,191,38,0.3)', borderRadius: 40, padding: '6px 16px', marginBottom: 20 }}>
-                  <span style={{ width: 6, height: 6, background: '#BABF26', borderRadius: '50%', display: 'inline-block' }} />
-                  <span style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600 }}>Subsidiary Company</span>
-                </div>
-                <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(34px, 4vw, 52px)', fontWeight: 600, lineHeight: 1.1, marginBottom: 24, color: '#F1F2C4' }}>
-                  Layma Export<br /><em style={{ color: '#BABF26' }}>Ramanattukara, Kerala</em>
-                </h2>
-                <p style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(241,242,196,0.7)', marginBottom: 16 }}>
-                  Layma Export is the India-based production and export division of Layma Group, located in Ramanattukara, Kerala. As a subsidiary of Layma Global Trading & Services, this entity focuses on Kerala-origin products — sourcing, processing, packaging, and exporting premium Indian spices, nuts, honey, tea powder, and dry fruits to international markets.
-                </p>
-                <p style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(241,242,196,0.7)', marginBottom: 16 }}>
-                  Kerala has been the world's spice capital for millennia. Layma Export is deeply embedded in this ecosystem — working directly with farmers and processing units across the spice-growing districts of Wayanad, Idukki, Ernakulam, and Kozhikode to source produce of the highest quality and purity.
-                </p>
-                <p style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(241,242,196,0.7)', marginBottom: 16 }}>
-                  Beyond export, Layma Export also serves the Indian local market with retail consumer packs, honey small bottles, and branded food products — establishing Layma as a trusted domestic brand in Kerala and South India.
-                </p>
-                <p style={{ fontSize: 16, lineHeight: 1.9, color: 'rgba(241,242,196,0.7)', marginBottom: 32 }}>
-                  All processing is carried out in FSSAI-certified facilities. Products are exported under APEDA guidelines and Spices Board of India certification, with full traceability from farm to destination.
-                </p>
-
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 14 }}>
-                  {[
-                    { label: 'Type', value: 'Food Processing & Export' },
-                    { label: 'Location', value: 'Ramanattukara, Kerala, India' },
-                    { label: 'Export Markets', value: 'Qatar · GCC · Global' },
-                    { label: 'Compliance', value: 'APEDA · FSSAI · Spices Board' },
-                  ].map(item => (
-                    <div key={item.label} style={{ padding: '14px 16px', background: 'rgba(241,242,196,0.05)', borderRadius: 12, border: '1px solid rgba(186,191,38,0.15)' }}>
-                      <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600, marginBottom: 4 }}>{item.label}</div>
-                      <div style={{ fontSize: 13, fontWeight: 600, color: '#F1F2C4' }}>{item.value}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </ScrollReveal>
-
-            <ScrollReveal direction="left">
-              <div style={{ position: 'relative' }}>
-                <div style={{ borderRadius: 24, overflow: 'hidden', aspectRatio: '4/5', backgroundImage: `url(${aboutExportImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-                <div style={{ position: 'absolute', top: 20, right: 20, background: 'rgba(26,26,26,0.85)', backdropFilter: 'blur(8px)', borderRadius: 16, padding: '16px 18px', border: '1px solid rgba(186,191,38,0.3)' }}>
-                  <div style={{ fontSize: 28 }}>🇮🇳</div>
-                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#BABF26', marginTop: 6 }}>Kerala, India</div>
-                </div>
-                <div style={{ position: 'absolute', bottom: 20, left: 20, background: '#BABF26', borderRadius: 16, padding: '18px 22px' }}>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 34, fontWeight: 700, color: '#1a1a1a', lineHeight: 1 }}>30+</div>
-                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: 'rgba(26,26,26,0.6)' }}>Products<br/>Exported</div>
-                </div>
-              </div>
-            </ScrollReveal>
-          </div>
-
-          {/* Export products grid */}
-          <ScrollReveal>
-            <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, fontWeight: 600, color: '#F1F2C4', marginTop: 80, marginBottom: 24 }}>Products Handled</h3>
-          </ScrollReveal>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: 16 }}>
-            {[
-              { icon: '🌶️', cat: 'Kerala Spices', items: 'Cardamom · Pepper · Cloves · Cinnamon · Turmeric' },
-              { icon: '🥜', cat: 'Nuts', items: 'Cashew · Almonds · Pistachios' },
-              { icon: '🍇', cat: 'Dry Fruits', items: 'Raisins · Dates · Figs · Banana · Mango · Jackfruit · Pineapple' },
-              { icon: '🍯', cat: 'Honey', items: 'Pure Honey · Honey Small Bottles' },
-              { icon: '🍵', cat: 'Tea Powder', items: 'CTC Grade · Kerala Estate Tea' },
-            ].map((p, i) => (
-              <ScrollReveal key={p.cat} delay={i * 0.1}>
-                <div style={{ background: 'rgba(241,242,196,0.05)', borderRadius: 16, padding: '24px 18px', border: '1px solid rgba(186,191,38,0.15)', textAlign: 'center' }}>
-                  <div style={{ fontSize: 36, marginBottom: 10 }}>{p.icon}</div>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 18, fontWeight: 600, color: '#F1F2C4', marginBottom: 6 }}>{p.cat}</div>
-                  <div style={{ fontSize: 11, color: 'rgba(241,242,196,0.5)', lineHeight: 1.6 }}>{p.items}</div>
                 </div>
               </ScrollReveal>
             ))}

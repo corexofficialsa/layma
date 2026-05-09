@@ -1,118 +1,31 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal';
 import { getProducts } from '../data/store';
 
-const categories = ['All', 'Spices', 'Nuts', 'Dry Fruits', 'Honey', 'Tea'];
-
 export default function Products() {
   const [products, setProducts] = useState([]);
-  const [activeCategory, setActiveCategory] = useState('All');
-  const [search, setSearch] = useState('');
-  const [filterVisible, setFilterVisible] = useState(true);
-  const lastScrollY = useRef(0);
 
   useEffect(() => {
     setProducts(getProducts());
   }, []);
 
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      setFilterVisible(y < 120 || y < lastScrollY.current);
-      lastScrollY.current = y;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
-
-  const filtered = products.filter(p => {
-    const matchCat = activeCategory === 'All' || p.category === activeCategory;
-    const matchSearch = p.name.toLowerCase().includes(search.toLowerCase()) ||
-      p.origin.toLowerCase().includes(search.toLowerCase()) ||
-      p.category.toLowerCase().includes(search.toLowerCase());
-    return matchCat && matchSearch;
-  });
+  const filtered = products;
 
   return (
     <div>
       {/* Hero */}
-      <section className="prod-hero-section" style={{ paddingTop: 160, paddingBottom: 80, background: '#F1F2C4', position: 'relative', overflow: 'hidden' }}>
-        <div style={{
-          position: 'absolute', right: -100, top: -100,
-          width: 600, height: 600,
-          background: 'radial-gradient(circle, rgba(73,115,54,0.12) 0%, transparent 70%)',
-          borderRadius: '50%',
-        }} />
-        <div className="container" style={{ position: 'relative', zIndex: 1 }}>
-          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
-            <div style={{ fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: '#497336', fontWeight: 600, marginBottom: 20 }}>Our Catalogue</div>
-            <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(52px, 8vw, 96px)', fontWeight: 600, color: '#1a1a1a', lineHeight: 1, marginBottom: 28 }}>
-              Premium<br /><em style={{ color: '#497336' }}>Products</em>
+      <section className="prod-hero-section" style={{ paddingTop: 160, paddingBottom: 64, background: '#F1F2C4' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
+            <div style={{ fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: '#497336', fontWeight: 600, marginBottom: 16 }}>Our Catalogue</div>
+            <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(44px, 7vw, 80px)', fontWeight: 600, color: '#1a1a1a', lineHeight: 1.05, marginBottom: 0 }}>
+              Premium <em style={{ color: '#497336' }}>Products</em>
             </h1>
-            <p style={{ fontSize: 17, lineHeight: 1.8, color: '#666', maxWidth: 520 }}>
-              Every product in our catalogue is sourced with intention — chosen for its purity, provenance, and premium quality.
-            </p>
           </motion.div>
         </div>
       </section>
-
-      {/* Filter + Search — hides on scroll down, reappears on scroll up */}
-      <motion.section
-        animate={{ y: filterVisible ? 0 : '-100%', opacity: filterVisible ? 1 : 0 }}
-        transition={{ duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-        style={{ padding: '20px 0', background: 'white', borderBottom: '1px solid rgba(73,115,54,0.1)', position: 'sticky', top: 72, zIndex: 100 }}
-      >
-        <div className="container">
-          <div className="filter-row" style={{ display: 'flex', flexWrap: 'wrap', gap: 16, alignItems: 'center', justifyContent: 'space-between' }}>
-            <div className="filter-cats" style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-              {categories.map(cat => (
-                <motion.button
-                  key={cat}
-                  whileHover={{ scale: 1.04 }}
-                  whileTap={{ scale: 0.96 }}
-                  onClick={() => setActiveCategory(cat)}
-                  style={{
-                    padding: '8px 20px',
-                    borderRadius: 40,
-                    border: '1.5px solid',
-                    borderColor: activeCategory === cat ? '#497336' : 'rgba(73,115,54,0.2)',
-                    background: activeCategory === cat ? '#497336' : 'transparent',
-                    color: activeCategory === cat ? '#F1F2C4' : '#497336',
-                    fontFamily: 'Inter, sans-serif',
-                    fontSize: 13,
-                    fontWeight: 500,
-                    cursor: 'pointer',
-                    transition: 'all 0.2s',
-                    letterSpacing: 0.5,
-                  }}
-                >
-                  {cat}
-                </motion.button>
-              ))}
-            </div>
-            <input
-              className="filter-search"
-              type="text"
-              placeholder="Search products or origins..."
-              value={search}
-              onChange={e => setSearch(e.target.value)}
-              style={{
-                padding: '10px 20px',
-                borderRadius: 40,
-                border: '1.5px solid rgba(73,115,54,0.2)',
-                background: '#F1F2C4',
-                fontFamily: 'Inter, sans-serif',
-                fontSize: 13,
-                color: '#1a1a1a',
-                outline: 'none',
-                width: 240,
-              }}
-            />
-          </div>
-        </div>
-      </motion.section>
 
       {/* Products Grid */}
       <section className="prod-section" style={{ padding: '64px 0 100px', background: '#F1F2C4' }}>
@@ -224,40 +137,17 @@ export default function Products() {
       </section>
       <style>{`
         @media (max-width: 640px) {
-          /* Hero */
           .prod-hero-section { padding-top: 120px !important; padding-bottom: 40px !important; text-align: center !important; }
-
-          /* Filter bar */
-          .filter-row { flex-direction: column !important; gap: 10px !important; align-items: stretch !important; }
-          .filter-cats { flex-wrap: nowrap !important; overflow-x: auto !important; padding-bottom: 2px !important; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-          .filter-cats::-webkit-scrollbar { display: none; }
-          .filter-search { width: 100% !important; box-sizing: border-box !important; }
-
-          /* Section */
           .prod-section { padding: 28px 0 60px !important; }
-
-          /* Grid */
           .products-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px !important; }
-
-          /* Card shell */
           .product-card { border-radius: 14px !important; }
-
-          /* Image */
           .prod-img-wrap { aspect-ratio: 1/1 !important; }
-
-          /* Badge */
           .prod-badge { font-size: 9px !important; padding: 2px 7px !important; top: 6px !important; left: 6px !important; max-width: calc(100% - 12px) !important; letter-spacing: 0.5px !important; }
-
-          /* Category pill — hidden, no room */
           .prod-cat-pill { display: none !important; }
-
-          /* Card body */
           .prod-card-body { padding: 9px 10px 11px !important; }
           .prod-origin { font-size: 9px !important; margin-bottom: 3px !important; letter-spacing: 0.3px !important; }
           .products-grid h3 { font-size: 13px !important; margin-bottom: 5px !important; line-height: 1.25 !important; }
           .prod-desc { display: none !important; }
-
-          /* Footer — price only */
           .prod-footer { gap: 0 !important; }
           .prod-price { font-size: 14px !important; }
           .prod-view-link { display: none !important; }

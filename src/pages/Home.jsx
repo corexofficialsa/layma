@@ -7,7 +7,7 @@ import useSiteImage from '../hooks/useSiteImage';
 const stats = [
   { value: '5+', label: 'Product Categories' },
   { value: 'GCC+', label: 'Markets Served' },
-  { value: '2', label: 'Company Locations' },
+  { value: 'GCC+', label: 'Distribution Reach' },
   { value: '100%', label: 'Quality Committed' },
 ];
 
@@ -21,7 +21,7 @@ const processSteps = [
   {
     num: '02',
     title: 'Quality Control',
-    desc: 'Every batch is quality-checked and tested — from our Kerala processing facility to our Qatar warehouse — ensuring only certified, premium-grade products reach your business.',
+    desc: 'Every batch is quality-checked and tested — from origin to our Qatar warehouse — ensuring only certified, premium-grade products reach your business.',
     icon: '🔬',
   },
   {
@@ -55,12 +55,6 @@ const reviews = [
     name: 'Mohammed Khalid',
     role: 'Owner, Noor Fine Foods',
     text: 'Their Medjool dates and Sidr honey are the best we have sourced. Layma\'s team is professional, transparent, and genuinely passionate about quality.',
-    rating: 5,
-  },
-  {
-    name: 'Priya Nair',
-    role: 'Procurement Manager, Lulu Hypermarket',
-    text: 'Working with Layma Export for Kerala spices has been a game changer. The freshness of their black pepper and cardamom speaks for itself in every shipment.',
     rating: 5,
   },
 ];
@@ -134,7 +128,7 @@ export default function Home() {
           }} />
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'linear-gradient(135deg, rgba(73,115,54,0.85) 0%, rgba(26,26,26,0.6) 60%, rgba(186,191,38,0.3) 100%)',
+            background: 'linear-gradient(135deg, rgba(73,115,54,0.92) 0%, rgba(42,69,32,0.78) 50%, rgba(73,115,54,0.65) 100%)',
           }} />
         </motion.div>
 
@@ -162,7 +156,7 @@ export default function Home() {
             >
               <span style={{ width: 6, height: 6, background: '#BABF26', borderRadius: '50%', display: 'inline-block' }} />
               <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600 }}>
-                Doha, Qatar · Ramanattukara, Kerala
+                Doha, Qatar · GCC Region
               </span>
             </motion.div>
 
@@ -354,10 +348,10 @@ export default function Home() {
                   <em style={{ color: '#497336' }}>Purpose</em> & Precision
                 </h2>
                 <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 20 }}>
-                  Layma Group is an international food trading and export company with two operations: Layma Global Trading & Services in Doha, Qatar — the parent company managing import, distribution, and B2B supply — and Layma Export in Ramanattukara, Kerala, India, our dedicated production and export division.
+                  Layma Global Trading & Services is Qatar's trusted food trading partner — headquartered in Doha, managing international sourcing, import, and B2B distribution across the GCC and beyond.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 36 }}>
-                  Together, we source, process, package, and distribute premium spices, nuts, dry fruits, honey, and tea powder — in bulk supply and retail branded formats — to supermarkets, wholesalers, retailers, and food businesses across Qatar, the GCC, and international markets.
+                  We source, package, and distribute premium spices, nuts, dry fruits, honey, and tea powder — in bulk supply and retail branded formats — to supermarkets, wholesalers, retailers, and food businesses across Qatar and the GCC.
                 </p>
                 <Link to="/about" style={{
                   display: 'inline-flex',

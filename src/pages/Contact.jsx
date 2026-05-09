@@ -41,17 +41,8 @@ const offices = [
     flag: '🇶🇦',
     name: 'Layma Global Trading & Services',
     city: 'Doha, Qatar',
-    type: 'Parent Company · International Trading & Distribution',
+    type: 'International Trading & Distribution',
     address: 'Doha, Qatar',
-    phone: '+974 7207 4466',
-    email: 'info@laymaglobal.com',
-  },
-  {
-    flag: '🇮🇳',
-    name: 'Layma Export',
-    city: 'Ramanattukara, Kerala, India',
-    type: 'Subsidiary · Food Processing & Export Division',
-    address: 'Ramanattukara, Kozhikode, Kerala, India',
     phone: '+974 7207 4466',
     email: 'info@laymaglobal.com',
   },
@@ -304,8 +295,7 @@ export default function Contact() {
                 <div style={{ background: '#497336', borderRadius: 20, padding: '28px 24px' }}>
                   <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#F1F2C4', marginBottom: 8 }}>Business Hours</div>
                   <div style={{ fontSize: 14, color: 'rgba(241,242,196,0.75)', lineHeight: 2 }}>
-                    <div>🇶🇦 Qatar: Sunday – Thursday, 9:00 AM – 6:00 PM (AST)</div>
-                    <div>🇮🇳 Kerala: Monday – Saturday, 9:00 AM – 7:00 PM (IST)</div>
+                    <div>🇶🇦 Sunday – Thursday, 9:00 AM – 6:00 PM (AST)</div>
                     <div style={{ marginTop: 8, color: '#BABF26' }}>Enquiries responded within 24 business hours</div>
                   </div>
                 </div>

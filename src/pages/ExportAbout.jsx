@@ -1,0 +1,215 @@
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import ScrollReveal from '../components/ScrollReveal';
+import useSiteImage from '../hooks/useSiteImage';
+
+const values = [
+  { icon: '🌿', title: 'Quality First', desc: 'Every product we export is verified, graded, and certified before it leaves our facility — no compromises on standards.' },
+  { icon: '🤝', title: 'Partnership', desc: 'We build long-term relationships with farmers, suppliers, and buyers based on trust and transparent communication.' },
+  { icon: '🌍', title: 'Global Reach', desc: 'From Kerala to Qatar and beyond — we bridge the best of Indian produce with global markets.' },
+  { icon: '📦', title: 'Reliability', desc: 'On-time delivery, accurate documentation, and consistent supply are what our buyers count on from us.' },
+];
+
+const timeline = [
+  { year: '2016', event: 'Established', desc: 'Layma Export founded as the sourcing and export arm of Layma Global Trading, based in Ramanattukara, Kerala.' },
+  { year: '2018', event: 'Farm Partnerships', desc: 'Built direct relationships with certified spice and nut farmers across Kerala, Karnataka, and Tamil Nadu.' },
+  { year: '2020', event: 'GCC Exports', desc: 'First major bulk export shipments to Qatar and GCC, establishing Layma as a reliable food export partner.' },
+  { year: '2022', event: 'Processing Facility', desc: 'Expanded our Ramanattukara facility with modern cleaning, grading, and packaging infrastructure.' },
+  { year: '2024', event: 'Retail Packaging', desc: 'Launched branded retail packaging range and private-label solutions for Gulf retail and institutional buyers.' },
+  { year: '2026', event: 'Full Range Export', desc: 'Complete export portfolio — spices, nuts, dry fruits, honey, tea — shipped to multiple countries from Kerala.' },
+];
+
+export default function ExportAbout() {
+  const aboutImg = useSiteImage('export_about');
+  const heroImg = useSiteImage('export_hero');
+  return (
+    <div style={{ background: '#F0F2F0' }}>
+      {/* Hero */}
+      <section style={{ paddingTop: 160, paddingBottom: 100, background: '#497336', position: 'relative', overflow: 'hidden' }}>
+        <motion.div
+          animate={{ scale: [1, 1.05, 1] }}
+          transition={{ duration: 20, repeat: Infinity }}
+          style={{ position: 'absolute', inset: 0, backgroundImage: `url(${heroImg})`, backgroundSize: 'cover', backgroundPosition: 'center', opacity: 0.12 }}
+        />
+        <div className="container" style={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+          <motion.div initial={{ opacity: 0, y: 30 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8 }}>
+            <div style={{ fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: '#AFBFA3', fontWeight: 600, marginBottom: 20 }}>Our Story</div>
+            <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(52px, 8vw, 96px)', fontWeight: 600, color: '#F0F2F0', lineHeight: 1, marginBottom: 28 }}>About Layma Export</h1>
+            <p style={{ fontSize: 18, lineHeight: 1.8, color: 'rgba(240,242,240,0.75)', maxWidth: 600, margin: '0 auto' }}>
+              Kerala's trusted food export company — built on authentic farm sourcing, rigorous quality, and a genuine passion for bringing India's finest produce to the world.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section style={{ padding: '120px 0', background: '#F0F2F0' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 80, alignItems: 'center', marginBottom: 80 }} className="two-col">
+            <ScrollReveal direction="right">
+              <div style={{ position: 'relative' }}>
+                <div style={{ borderRadius: 24, overflow: 'hidden', aspectRatio: '4/5', backgroundImage: `url(${aboutImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
+                <div style={{ position: 'absolute', top: -16, left: -16, background: '#5C8C46', borderRadius: 16, padding: '20px 24px', boxShadow: '0 12px 40px rgba(92,140,70,0.4)' }}>
+                  <div style={{ fontSize: 36 }}>🇮🇳</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#AFBFA3', marginTop: 6 }}>Kerala, India</div>
+                </div>
+                <div style={{ position: 'absolute', bottom: 20, right: 20, background: '#88A67B', borderRadius: 16, padding: '16px 20px' }}>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 32, fontWeight: 700, color: '#1a1a1a', lineHeight: 1 }}>Export</div>
+                  <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: 'rgba(26,26,26,0.6)' }}>Division</div>
+                </div>
+              </div>
+            </ScrollReveal>
+
+            <ScrollReveal direction="left">
+              <div>
+                <div style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: 'rgba(92,140,70,0.1)', border: '1px solid rgba(92,140,70,0.2)', borderRadius: 40, padding: '6px 16px', marginBottom: 20 }}>
+                  <span style={{ width: 6, height: 6, background: '#5C8C46', borderRadius: '50%', display: 'inline-block' }} />
+                  <span style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#5C8C46', fontWeight: 600 }}>Export Division</span>
+                </div>
+                <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(34px, 4vw, 52px)', fontWeight: 600, lineHeight: 1.1, marginBottom: 24, color: '#1a1a1a' }}>
+                  Layma Export<br />Ramanattukara, Kerala
+                </h2>
+                <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
+                  Layma Export is the sourcing and export subsidiary of Layma Global Trading & Services, headquartered in Ramanattukara, Kerala, India. We specialise in procuring premium spices, nuts, dry fruits, honey, and tea from Kerala's farms and processing them for international export.
+                </p>
+                <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
+                  Our products reach Qatar, the GCC region, and international markets through our parent company's distribution network, as well as direct B2B export partnerships with importers, wholesalers, and food businesses worldwide.
+                </p>
+                <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 32 }}>
+                  With direct farm relationships, a modern processing facility, and deep expertise in food export compliance, we deliver consistency, quality, and reliability in every shipment.
+                </p>
+
+                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
+                  {[
+                    { label: 'Type', value: 'Food Export & Sourcing' },
+                    { label: 'Location', value: 'Ramanattukara, Kerala' },
+                    { label: 'Markets', value: 'Qatar · GCC · Global' },
+                    { label: 'Formats', value: 'Bulk · Retail · Private Label' },
+                  ].map(item => (
+                    <div key={item.label} style={{ padding: '14px 16px', background: 'white', borderRadius: 12, border: '1px solid rgba(92,140,70,0.1)' }}>
+                      <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#5C8C46', fontWeight: 600, marginBottom: 4 }}>{item.label}</div>
+                      <div style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>{item.value}</div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+          </div>
+
+          {/* What We Do */}
+          <ScrollReveal>
+            <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, fontWeight: 600, color: '#1a1a1a', marginBottom: 24 }}>What We Do</h3>
+          </ScrollReveal>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 80 }}>
+            {[
+              { icon: '🌾', label: 'Farm-Level Sourcing' },
+              { icon: '🏭', label: 'Processing & Grading' },
+              { icon: '📦', label: 'Custom Packaging' },
+              { icon: '🔖', label: 'Private Label' },
+              { icon: '🚢', label: 'Sea & Air Export' },
+              { icon: '📋', label: 'Export Documentation' },
+              { icon: '✅', label: 'Quality Certification' },
+              { icon: '🤝', label: 'B2B Partnerships' },
+            ].map((s, i) => (
+              <ScrollReveal key={s.label} delay={i * 0.06}>
+                <div style={{ background: 'white', borderRadius: 16, padding: '20px 18px', textAlign: 'center', border: '1px solid rgba(92,140,70,0.1)' }}>
+                  <div style={{ fontSize: 28, marginBottom: 8 }}>{s.icon}</div>
+                  <div style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a', lineHeight: 1.4 }}>{s.label}</div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+
+          {/* Mission & Vision */}
+          <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28 }} className="two-col">
+            {[
+              {
+                icon: '🎯', label: 'Our Mission',
+                title: 'Pure Quality,\nDirect from Source',
+                text: 'To export the finest Kerala produce with uncompromising quality, transparent sourcing, and reliable fulfilment — building lasting partnerships with buyers across the globe.',
+                bg: '#497336', textColor: '#F0F2F0', subColor: '#AFBFA3',
+              },
+              {
+                icon: '🔭', label: 'Our Vision',
+                title: "Kerala's Premier\nExport Brand",
+                text: "To become India's most trusted food export brand — known for direct farm access, certified quality, and the authenticity of every spice, nut, and fruit we ship.",
+                bg: '#88A67B', textColor: '#1a1a1a', subColor: 'rgba(26,26,26,0.55)',
+              },
+            ].map(item => (
+              <ScrollReveal key={item.label} direction="up">
+                <div style={{ background: item.bg, borderRadius: 24, padding: '48px 40px', height: '100%' }}>
+                  <div style={{ fontSize: 40, marginBottom: 16 }}>{item.icon}</div>
+                  <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: item.subColor, fontWeight: 600, marginBottom: 12 }}>{item.label}</div>
+                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 30, fontWeight: 600, color: item.textColor, lineHeight: 1.2, marginBottom: 20, whiteSpace: 'pre-line' }}>{item.title}</h3>
+                  <p style={{ fontSize: 15, lineHeight: 1.8, color: item.bg === '#497336' ? 'rgba(240,242,240,0.8)' : 'rgba(26,26,26,0.72)' }}>{item.text}</p>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Values */}
+      <section style={{ padding: '100px 0', background: '#F0F2F0' }}>
+        <div className="container">
+          <ScrollReveal>
+            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+              <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#5C8C46', fontWeight: 600, marginBottom: 14 }}>What Drives Us</div>
+              <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#1a1a1a' }}>Our Core Values</h2>
+            </div>
+          </ScrollReveal>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 24 }}>
+            {values.map((v, i) => (
+              <ScrollReveal key={v.title} delay={i * 0.1}>
+                <motion.div
+                  whileHover={{ y: -8 }}
+                  style={{ background: 'white', borderRadius: 20, padding: '36px 28px', textAlign: 'center', border: '1px solid rgba(92,140,70,0.08)', transition: 'box-shadow 0.3s' }}
+                  onMouseEnter={e => e.currentTarget.style.boxShadow = '0 20px 50px rgba(92,140,70,0.12)'}
+                  onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
+                >
+                  <div style={{ fontSize: 44, marginBottom: 16 }}>{v.icon}</div>
+                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 24, fontWeight: 600, color: '#1a1a1a', marginBottom: 12 }}>{v.title}</h3>
+                  <p style={{ fontSize: 14, lineHeight: 1.8, color: '#666' }}>{v.desc}</p>
+                </motion.div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Timeline */}
+      <section style={{ padding: '100px 0', background: '#497336' }}>
+        <div className="container">
+          <ScrollReveal>
+            <div style={{ textAlign: 'center', marginBottom: 72 }}>
+              <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#AFBFA3', fontWeight: 600, marginBottom: 14 }}>Our Journey</div>
+              <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F0F2F0' }}>Milestones</h2>
+            </div>
+          </ScrollReveal>
+          <div style={{ maxWidth: 700, margin: '0 auto', position: 'relative' }}>
+            <div style={{ position: 'absolute', left: 44, top: 0, bottom: 0, width: 2, background: 'rgba(175,191,163,0.3)' }} />
+            {timeline.map((item, i) => (
+              <ScrollReveal key={item.year} delay={i * 0.1}>
+                <div style={{ display: 'flex', gap: 32, marginBottom: 48, alignItems: 'flex-start' }}>
+                  <div style={{ flexShrink: 0, width: 88, height: 88, borderRadius: '50%', background: '#88A67B', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 18, fontWeight: 700, color: '#1a1a1a', position: 'relative', zIndex: 1 }}>
+                    {item.year}
+                  </div>
+                  <div style={{ paddingTop: 20 }}>
+                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 24, fontWeight: 600, color: '#F0F2F0', marginBottom: 8 }}>{item.event}</div>
+                    <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(240,242,240,0.65)' }}>{item.desc}</p>
+                  </div>
+                </div>
+              </ScrollReveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <style>{`
+        @media (max-width: 768px) {
+          .two-col { grid-template-columns: 1fr !important; gap: 48px !important; }
+        }
+      `}</style>
+    </div>
+  );
+}

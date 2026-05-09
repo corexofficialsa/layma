@@ -29,7 +29,7 @@ export default function Footer() {
               <img src="/logo.png" alt="Layma" style={{ height: 52, width: 'auto', marginBottom: 8 }} />
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(241,242,196,0.7)', maxWidth: 240, marginBottom: 24 }}>
-              International food trading and export — premium spices, nuts, dry fruits, honey, and tea from trusted origins, supplied to Qatar, GCC, and global markets.
+              Premium food trading and distribution — sourcing the finest spices, nuts, dry fruits, honey, and tea from trusted global origins, supplied to Qatar and the GCC.
             </p>
             <div style={{ display: 'flex', gap: 12 }}>
               {[
@@ -110,12 +110,11 @@ export default function Footer() {
           <div>
             <h5 style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#BABF26', marginBottom: 20, fontFamily: 'Inter, sans-serif', fontWeight: 600 }}>Contact</h5>
             <div style={{ fontSize: 14, color: 'rgba(241,242,196,0.7)', lineHeight: 1.8 }}>
-              <p style={{ marginBottom: 8 }}>🇶🇦 Doha, Qatar (HQ)</p>
-              <p style={{ marginBottom: 8 }}>🇮🇳 Ramanattukara, Kerala (Export)</p>
+              <p style={{ marginBottom: 8 }}>🇶🇦 Doha, Qatar</p>
               <p style={{ marginBottom: 8 }}>📧 info@laymaglobal.com</p>
               <p style={{ marginBottom: 16 }}>📱 +974 7207 4466</p>
               <div style={{ padding: '10px 16px', background: 'rgba(186,191,38,0.15)', borderRadius: 8, border: '1px solid rgba(186,191,38,0.3)', fontSize: 12 }}>
-                <span style={{ color: '#BABF26' }}>✦ </span>Doha · Ramanattukara · Global
+                <span style={{ color: '#BABF26' }}>✦ </span>Doha, Qatar · GCC Region
               </div>
             </div>
           </div>
