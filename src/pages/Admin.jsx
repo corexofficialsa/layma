@@ -32,7 +32,7 @@ function LoginScreen({ onLogin }) {
         style={{ background: '#F1F2C4', borderRadius: 28, padding: '56px 48px', width: '100%', maxWidth: 440, position: 'relative', zIndex: 1 }}
       >
         <div style={{ textAlign: 'center', marginBottom: 40 }}>
-          <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 36, fontWeight: 700, color: '#497336', letterSpacing: 2 }}>LAYMA</div>
+          <img src="/logo.png" alt="Layma" style={{ height: 52, width: 'auto', marginBottom: 10 }} />
           <div style={{ fontSize: 9, fontWeight: 600, color: '#BABF26', letterSpacing: 4, textTransform: 'uppercase', marginBottom: 12 }}>ADMIN PANEL</div>
           <div style={{ height: 2, background: 'linear-gradient(90deg, transparent, #BABF26, transparent)' }} />
         </div>
