@@ -226,7 +226,18 @@ export default function Navbar() {
                 </motion.div>
               </div>
             ))}
-            <div style={{ marginTop: 40, display: 'flex', gap: 20 }}>
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: links.length * 0.07 + 0.1 }}
+              style={{ marginTop: 32 }}
+            >
+              <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: 'rgba(241,242,196,0.4)', fontWeight: 600, marginBottom: 12 }}>Also Visit</div>
+              <Link to="/export" onClick={() => setMobileOpen(false)} style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
+                <img src="/logo-export.png" alt="Layma Export" style={{ height: 36, width: 'auto' }} />
+              </Link>
+            </motion.div>
+            <div style={{ marginTop: 32, display: 'flex', gap: 20 }}>
               <a href="https://www.instagram.com/laymaglobal/" target="_blank" rel="noreferrer" style={{ color: '#BABF26', textDecoration: 'none', fontSize: 13, letterSpacing: 1 }}>Instagram</a>
               <a href="https://wa.me/97472074466" target="_blank" rel="noreferrer" style={{ color: '#BABF26', textDecoration: 'none', fontSize: 13, letterSpacing: 1 }}>WhatsApp</a>
             </div>

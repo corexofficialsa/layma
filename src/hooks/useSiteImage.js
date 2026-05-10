@@ -6,9 +6,13 @@ export default function useSiteImage(key) {
   const [url, setUrl] = useState(() => getSiteImage(key));
 
   useEffect(() => {
-    const onStorage = () => setUrl(getSiteImage(key));
-    window.addEventListener('layma_images_updated', onStorage);
-    return () => window.removeEventListener('layma_images_updated', onStorage);
+    const onUpdate = () => setUrl(getSiteImage(key));
+    window.addEventListener('layma_images_updated', onUpdate);
+    window.addEventListener('storage', onUpdate);
+    return () => {
+      window.removeEventListener('layma_images_updated', onUpdate);
+      window.removeEventListener('storage', onUpdate);
+    };
   }, [key]);
 
   return url;

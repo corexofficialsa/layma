@@ -1,6 +1,18 @@
 import { useState, useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
+import { CLOUD_NAME, UPLOAD_PRESET } from '../config/cloudinary';
+
+async function uploadToCloudinary(dataUrl) {
+  const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ file: dataUrl, upload_preset: UPLOAD_PRESET }),
+  });
+  if (!res.ok) throw new Error(`Cloudinary error ${res.status}`);
+  const data = await res.json();
+  return data.secure_url;
+}
 import {
   getProducts, addProduct, deleteProduct,
   getCareers, addCareer, deleteCareer,
@@ -218,6 +230,8 @@ function CropModal({ imageSrc, aspectRatio, onConfirm, onCancel }) {
   const [minScale, setMinScale] = useState(1);
   const [scale, setScale] = useState(1);
   const [offset, setOffset] = useState({ x: 0, y: 0 });
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
   const dragRef = useRef(null);
 
   useEffect(() => {
@@ -241,11 +255,23 @@ function CropModal({ imageSrc, aspectRatio, onConfirm, onCancel }) {
   const endDrag = () => { dragRef.current = null; };
   const changeScale = (v) => { const s = Math.max(minScale, Math.min(minScale * 3, parseFloat(v))); setScale(s); setOffset(o => clamp(o.x, o.y, s)); };
   const doCrop = () => {
+    setUploading(true);
+    setUploadError('');
     const canvas = document.createElement('canvas');
     canvas.width = CROP_W; canvas.height = CROP_H;
     const ctx = canvas.getContext('2d');
     const img = new window.Image();
-    img.onload = () => { ctx.drawImage(img, CROP_W / 2 + offset.x - dispW / 2, CROP_H / 2 + offset.y - dispH / 2, dispW, dispH); onConfirm(canvas.toDataURL('image/jpeg', 0.92)); };
+    img.onload = async () => {
+      ctx.drawImage(img, CROP_W / 2 + offset.x - dispW / 2, CROP_H / 2 + offset.y - dispH / 2, dispW, dispH);
+      const base64 = canvas.toDataURL('image/jpeg', 0.85);
+      try {
+        const url = await uploadToCloudinary(base64);
+        onConfirm(url);
+      } catch {
+        setUploadError('Upload failed — check your Cloudinary credentials in src/config/cloudinary.js');
+        setUploading(false);
+      }
+    };
     img.src = imageSrc;
   };
 
@@ -276,9 +302,12 @@ function CropModal({ imageSrc, aspectRatio, onConfirm, onCancel }) {
           <input type="range" min={minScale} max={minScale * 3} step={minScale * 0.01} value={scale} onChange={e => changeScale(e.target.value)} style={{ flex: 1, accentColor: '#BABF26' }} />
           <span style={{ fontSize: 10, color: 'rgba(241,242,196,0.4)', minWidth: 34, textAlign: 'right' }}>{minScale > 0 ? Math.round((scale / minScale) * 100) : 100}%</span>
         </div>
+        {uploadError && <div style={{ marginTop: 12, fontSize: 11, color: '#ff6b6b', lineHeight: 1.4, textAlign: 'center' }}>{uploadError}</div>}
         <div style={{ display: 'flex', gap: 10, marginTop: 18 }}>
-          <button onClick={onCancel} style={{ flex: 1, background: 'transparent', border: '1px solid rgba(241,242,196,0.15)', color: 'rgba(241,242,196,0.7)', borderRadius: 40, padding: '11px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
-          <button onClick={doCrop} style={{ flex: 2, background: '#BABF26', color: '#1a1a1a', border: 'none', borderRadius: 40, padding: '11px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, cursor: 'pointer', letterSpacing: 0.5 }}>Crop & Save →</button>
+          <button onClick={onCancel} disabled={uploading} style={{ flex: 1, background: 'transparent', border: '1px solid rgba(241,242,196,0.15)', color: 'rgba(241,242,196,0.7)', borderRadius: 40, padding: '11px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: uploading ? 'not-allowed' : 'pointer', opacity: uploading ? 0.5 : 1 }}>Cancel</button>
+          <button onClick={doCrop} disabled={uploading} style={{ flex: 2, background: uploading ? '#888' : '#BABF26', color: '#1a1a1a', border: 'none', borderRadius: 40, padding: '11px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, cursor: uploading ? 'not-allowed' : 'pointer', letterSpacing: 0.5 }}>
+            {uploading ? '⏳ Uploading...' : 'Crop & Upload →'}
+          </button>
         </div>
       </motion.div>
     </motion.div>
@@ -290,13 +319,23 @@ function ImageCard({ imgKey, label, aspectRatio, currentUrl, onSave, onReset, ac
   const [urlInput, setUrlInput] = useState(currentUrl);
   const [preview, setPreview] = useState(currentUrl);
   const [saved, setSaved] = useState(false);
+  const [saveError, setSaveError] = useState('');
   const [cropSrc, setCropSrc] = useState(null);
   const ar = aspectRatio || 16 / 9;
 
+  useEffect(() => {
+    const onError = (e) => { setSaveError(e.detail); setTimeout(() => setSaveError(''), 4000); };
+    window.addEventListener('layma_images_error', onError);
+    return () => window.removeEventListener('layma_images_error', onError);
+  }, []);
+
   const handleFile = (e) => { const file = e.target.files[0]; if (!file) return; const reader = new FileReader(); reader.onload = ev => setCropSrc(ev.target.result); reader.readAsDataURL(file); e.target.value = ''; };
   const handleCropConfirm = (croppedUrl) => { setPreview(croppedUrl); setUrlInput(croppedUrl); setCropSrc(null); };
-  const handleSave = () => { onSave(urlInput || preview); setSaved(true); setTimeout(() => setSaved(false), 2000); };
-  const handleReset = () => { onReset(); setSaved(false); setPreview(currentUrl); setUrlInput(currentUrl); };
+  const handleSave = () => {
+    const ok = onSave(urlInput || preview);
+    if (ok !== false) { setSaved(true); setTimeout(() => setSaved(false), 2000); }
+  };
+  const handleReset = () => { onReset(); setSaved(false); setSaveError(''); setPreview(currentUrl); setUrlInput(currentUrl); };
 
   return (
     <div style={{ background: 'white', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(73,115,54,0.1)' }}>
@@ -319,14 +358,15 @@ function ImageCard({ imgKey, label, aspectRatio, currentUrl, onSave, onReset, ac
           style={{ width: '100%', padding: '8px 11px', borderRadius: 8, border: '1.5px solid rgba(73,115,54,0.2)', fontFamily: 'Inter, sans-serif', fontSize: 12, color: '#1a1a1a', outline: 'none', marginBottom: 10, boxSizing: 'border-box' }} />
         <div style={{ display: 'flex', gap: 8 }}>
           <button onClick={handleSave}
-            style={{ flex: 1, background: saved ? '#497336' : (accentColor === '#5C8C46' ? '#88A67B' : '#BABF26'), color: saved ? '#F1F2C4' : '#1a1a1a', border: 'none', borderRadius: 40, padding: '9px 12px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer', transition: 'all 0.2s' }}>
-            {saved ? '✓ Saved!' : 'Save'}
+            style={{ flex: 1, background: saved ? '#497336' : saveError ? '#c0392b' : (accentColor === '#5C8C46' ? '#88A67B' : '#BABF26'), color: saved || saveError ? '#F1F2C4' : '#1a1a1a', border: 'none', borderRadius: 40, padding: '9px 12px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', cursor: 'pointer', transition: 'all 0.2s' }}>
+            {saved ? '✓ Saved!' : saveError ? '⚠ Failed' : 'Save'}
           </button>
           <button onClick={handleReset}
             style={{ background: 'rgba(73,115,54,0.08)', border: '1px solid rgba(73,115,54,0.15)', color: accentColor, borderRadius: 40, padding: '9px 12px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer' }}>
             ↺ Reset
           </button>
         </div>
+        {saveError && <div style={{ marginTop: 8, fontSize: 11, color: '#c0392b', lineHeight: 1.4 }}>{saveError}</div>}
       </div>
       {cropSrc && createPortal(<CropModal imageSrc={cropSrc} aspectRatio={ar} onConfirm={handleCropConfirm} onCancel={() => setCropSrc(null)} />, document.body)}
     </div>

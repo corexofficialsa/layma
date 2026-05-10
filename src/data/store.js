@@ -86,10 +86,16 @@ export function getSiteImage(key) {
 }
 
 export function updateSiteImage(key, url) {
-  const imgs = getImages();
-  imgs[key] = { ...imgs[key], url };
-  localStorage.setItem(IMAGES_KEY, JSON.stringify(imgs));
-  window.dispatchEvent(new Event('layma_images_updated'));
+  try {
+    const imgs = getImages();
+    imgs[key] = { ...imgs[key], url };
+    localStorage.setItem(IMAGES_KEY, JSON.stringify(imgs));
+    window.dispatchEvent(new Event('layma_images_updated'));
+    return true;
+  } catch {
+    window.dispatchEvent(new CustomEvent('layma_images_error', { detail: 'Storage full — try a smaller image or use a URL instead.' }));
+    return false;
+  }
 }
 
 // ── Export Products ──
