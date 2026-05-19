@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
+import { getExportTeam } from '../data/store';
 
 const values = [
   { title: 'Quality First', desc: 'Every product we export is verified, graded, and certified before it leaves our facility — no compromises on standards.' },
@@ -10,16 +11,8 @@ const values = [
   { title: 'Reliability', desc: 'On-time delivery, accurate documentation, and consistent supply are what our buyers count on from us.' },
 ];
 
-const timeline = [
-  { year: '2016', event: 'Established', desc: 'Layma Export founded as the sourcing and export arm of Layma Global Trading, based in Ramanattukara, Kerala.' },
-  { year: '2018', event: 'Farm Partnerships', desc: 'Built direct relationships with certified spice and nut farmers across Kerala, Karnataka, and Tamil Nadu.' },
-  { year: '2020', event: 'GCC Exports', desc: 'First major bulk export shipments to Qatar and GCC, establishing Layma as a reliable food export partner.' },
-  { year: '2022', event: 'Processing Facility', desc: 'Expanded our Ramanattukara facility with modern cleaning, grading, and packaging infrastructure.' },
-  { year: '2024', event: 'Retail Packaging', desc: 'Launched branded retail packaging range and private-label solutions for Gulf retail and institutional buyers.' },
-  { year: '2026', event: 'Full Range Export', desc: 'Complete export portfolio — spices, nuts, dry fruits, honey, tea — shipped to multiple countries from Kerala.' },
-];
-
 export default function ExportAbout() {
+  const team = getExportTeam();
   const aboutImg = useSiteImage('export_about');
   const heroImg = useSiteImage('export_hero');
   return (
@@ -176,33 +169,35 @@ export default function ExportAbout() {
         </div>
       </section>
 
-      {/* Timeline */}
-      <section style={{ padding: '100px 0', background: '#497336' }}>
-        <div className="container">
-          <ScrollReveal>
-            <div style={{ textAlign: 'center', marginBottom: 72 }}>
-              <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#AFBFA3', fontWeight: 600, marginBottom: 14 }}>Our Journey</div>
-              <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F0F2F0' }}>Milestones</h2>
+      {/* Team */}
+      {team.length > 0 && (
+        <section style={{ padding: '100px 0', background: '#497336' }}>
+          <div className="container">
+            <ScrollReveal>
+              <div style={{ textAlign: 'center', marginBottom: 64 }}>
+                <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#AFBFA3', fontWeight: 600, marginBottom: 14 }}>The People Behind Layma Export</div>
+                <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F0F2F0' }}>Our Team</h2>
+              </div>
+            </ScrollReveal>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 28 }}>
+              {team.map((member, i) => (
+                <ScrollReveal key={member.id} delay={i * 0.1}>
+                  <motion.div whileHover={{ y: -6 }} style={{ background: 'rgba(240,242,240,0.07)', border: '1px solid rgba(136,166,123,0.25)', borderRadius: 24, overflow: 'hidden', textAlign: 'center' }}>
+                    <div style={{ aspectRatio: '1', backgroundImage: member.image ? `url(${member.image})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center top', background: member.image ? undefined : 'rgba(136,166,123,0.15)' }}>
+                      {!member.image && <div style={{ height: '100%', minHeight: 180, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(136,166,123,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#88A67B' }}>{member.name.charAt(0)}</div></div>}
+                    </div>
+                    <div style={{ padding: '24px 20px' }}>
+                      <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#F0F2F0', marginBottom: 6 }}>{member.name}</div>
+                      <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: '#88A67B', fontWeight: 600, marginBottom: member.bio ? 12 : 0 }}>{member.role}</div>
+                      {member.bio && <p style={{ fontSize: 13, lineHeight: 1.7, color: 'rgba(240,242,240,0.65)', marginTop: 10 }}>{member.bio}</p>}
+                    </div>
+                  </motion.div>
+                </ScrollReveal>
+              ))}
             </div>
-          </ScrollReveal>
-          <div style={{ maxWidth: 700, margin: '0 auto', position: 'relative' }}>
-            <div style={{ position: 'absolute', left: 44, top: 0, bottom: 0, width: 2, background: 'rgba(175,191,163,0.3)' }} />
-            {timeline.map((item, i) => (
-              <ScrollReveal key={item.year} delay={i * 0.1}>
-                <div style={{ display: 'flex', gap: 32, marginBottom: 48, alignItems: 'flex-start' }}>
-                  <div style={{ flexShrink: 0, width: 88, height: 88, borderRadius: '50%', background: '#88A67B', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 18, fontWeight: 700, color: '#1a1a1a', position: 'relative', zIndex: 1 }}>
-                    {item.year}
-                  </div>
-                  <div style={{ paddingTop: 20 }}>
-                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 24, fontWeight: 600, color: '#F0F2F0', marginBottom: 8 }}>{item.event}</div>
-                    <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(240,242,240,0.65)' }}>{item.desc}</p>
-                  </div>
-                </div>
-              </ScrollReveal>
-            ))}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <style>{`
         @media (max-width: 768px) {

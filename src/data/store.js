@@ -6,6 +6,8 @@ const CAREERS_KEY = 'layma_careers';
 const IMAGES_KEY = 'layma_images';
 const EXPORT_PRODUCTS_KEY = 'layma_export_products';
 const EXPORT_CAREERS_KEY = 'layma_export_careers';
+const TEAM_KEY = 'layma_team';
+const EXPORT_TEAM_KEY = 'layma_export_team';
 const DATA_VERSION = 'layma_data_v4';
 
 // Reset data when version changes so seed updates take effect
@@ -29,6 +31,8 @@ seed(CAREERS_KEY, initialCareers);
 seed(IMAGES_KEY, initialImages);
 seed(EXPORT_PRODUCTS_KEY, initialExportProducts);
 seed(EXPORT_CAREERS_KEY, initialExportCareers);
+seed(TEAM_KEY, []);
+seed(EXPORT_TEAM_KEY, []);
 
 export function getProducts() {
   return JSON.parse(localStorage.getItem(PRODUCTS_KEY) || '[]');
@@ -135,6 +139,39 @@ export function addExportProduct(product) {
 
 export function deleteExportProduct(id) {
   localStorage.setItem(EXPORT_PRODUCTS_KEY, JSON.stringify(getExportProducts().filter(p => p.id !== id)));
+}
+
+// ── Team ──
+export function getTeam() {
+  return JSON.parse(localStorage.getItem(TEAM_KEY) || '[]');
+}
+export function addTeamMember(member) {
+  const team = getTeam();
+  const m = { ...member, id: Date.now().toString() };
+  localStorage.setItem(TEAM_KEY, JSON.stringify([...team, m]));
+  return m;
+}
+export function updateTeamMember(id, data) {
+  localStorage.setItem(TEAM_KEY, JSON.stringify(getTeam().map(m => m.id === id ? { ...m, ...data } : m)));
+}
+export function deleteTeamMember(id) {
+  localStorage.setItem(TEAM_KEY, JSON.stringify(getTeam().filter(m => m.id !== id)));
+}
+
+export function getExportTeam() {
+  return JSON.parse(localStorage.getItem(EXPORT_TEAM_KEY) || '[]');
+}
+export function addExportTeamMember(member) {
+  const team = getExportTeam();
+  const m = { ...member, id: 'expt_' + Date.now() };
+  localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify([...team, m]));
+  return m;
+}
+export function updateExportTeamMember(id, data) {
+  localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(getExportTeam().map(m => m.id === id ? { ...m, ...data } : m)));
+}
+export function deleteExportTeamMember(id) {
+  localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(getExportTeam().filter(m => m.id !== id)));
 }
 
 // ── Export Careers ──

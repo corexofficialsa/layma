@@ -4,12 +4,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { CLOUD_NAME, UPLOAD_PRESET } from '../config/cloudinary';
 
 async function uploadToCloudinary(dataUrl) {
+  const formData = new FormData();
+  formData.append('file', dataUrl);
+  formData.append('upload_preset', UPLOAD_PRESET);
   const res = await fetch(`https://api.cloudinary.com/v1_1/${CLOUD_NAME}/image/upload`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ file: dataUrl, upload_preset: UPLOAD_PRESET }),
+    body: formData,
   });
-  if (!res.ok) throw new Error(`Cloudinary error ${res.status}`);
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error?.message || `Cloudinary error ${res.status}`);
+  }
   const data = await res.json();
   return data.secure_url;
 }
@@ -19,6 +24,8 @@ import {
   getExportProducts, addExportProduct, deleteExportProduct,
   getExportCareers, addExportCareer, deleteExportCareer,
   getImages, updateSiteImage,
+  getTeam, addTeamMember, updateTeamMember, deleteTeamMember,
+  getExportTeam, addExportTeamMember, updateExportTeamMember, deleteExportTeamMember,
 } from '../data/store';
 import { initialImages } from '../data/initialData';
 
@@ -221,6 +228,94 @@ function AddCareerModal({ onClose, onSave, brand }) {
   );
 }
 
+// ─── Team Member Modal ────────────────────────────────────────────────────────
+function TeamMemberModal({ onClose, onSave, brand, existing }) {
+  const isExport = brand === 'export';
+  const accentColor = isExport ? '#5C8C46' : '#497336';
+  const [form, setForm] = useState(existing
+    ? { name: existing.name, role: existing.role, bio: existing.bio || '', image: existing.image || '' }
+    : { name: '', role: '', bio: '', image: '' });
+  const [preview, setPreview] = useState(existing?.image || '');
+  const [cropSrc, setCropSrc] = useState(null);
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
+
+  const inputStyle = { width: '100%', padding: '12px 14px', borderRadius: 10, border: `1.5px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)`, background: 'white', fontFamily: 'Inter, sans-serif', fontSize: 14, color: '#1a1a1a', outline: 'none', boxSizing: 'border-box' };
+  const labelStyle = { display: 'block', fontSize: 11, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: accentColor, marginBottom: 6 };
+
+  const handleFile = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => setCropSrc(ev.target.result);
+    reader.readAsDataURL(file);
+    e.target.value = '';
+  };
+
+  const handleCropConfirm = async (dataUrl) => {
+    setUploading(true);
+    setUploadError('');
+    setCropSrc(null);
+    try {
+      const url = await uploadToCloudinary(dataUrl);
+      setPreview(url);
+      setForm(f => ({ ...f, image: url }));
+    } catch {
+      setUploadError('Upload failed — check Cloudinary credentials.');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    onSave({ ...form, image: form.image || preview });
+    onClose();
+  };
+
+  return (
+    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+      style={{ position: 'fixed', inset: 0, background: 'rgba(26,26,26,0.7)', backdropFilter: 'blur(8px)', zIndex: 3000, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: 24 }}
+      onClick={e => e.target === e.currentTarget && onClose()}>
+      <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
+        style={{ background: isExport ? '#F0F2F0' : '#F1F2C4', borderRadius: 24, padding: '40px 36px', width: '100%', maxWidth: 520, maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
+        <button onClick={onClose} style={{ position: 'absolute', top: 16, right: 20, background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#666' }}>×</button>
+        <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>{existing ? 'Edit' : 'Add'} Team Member</h2>
+        <p style={{ fontSize: 12, color: accentColor, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 600, marginBottom: 28 }}>{isExport ? 'Layma Export' : 'Layma Global'}</p>
+
+        {/* Photo upload */}
+        <div style={{ marginBottom: 24 }}>
+          <label style={labelStyle}>Photo</label>
+          <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
+            <div style={{ width: 96, height: 96, borderRadius: '50%', overflow: 'hidden', background: 'rgba(73,115,54,0.1)', flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center', border: `2px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)` }}>
+              {preview ? <img src={preview} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span style={{ fontSize: 32, color: '#ccc' }}>👤</span>}
+            </div>
+            <div style={{ flex: 1 }}>
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, background: accentColor, color: '#F0F2F0', borderRadius: 40, padding: '10px 18px', cursor: uploading ? 'not-allowed' : 'pointer', fontSize: 12, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', width: 'fit-content', marginBottom: 10, opacity: uploading ? 0.6 : 1 }}>
+                <input type="file" accept="image/*" onChange={handleFile} style={{ display: 'none' }} disabled={uploading} />
+                {uploading ? '⏳ Uploading...' : '📷 Upload Photo'}
+              </label>
+              <input style={{ ...inputStyle, fontSize: 12 }} placeholder="Or paste photo URL..." value={form.image.startsWith('data:') ? '' : form.image}
+                onChange={e => { setForm(f => ({ ...f, image: e.target.value })); setPreview(e.target.value); }} />
+              {uploadError && <div style={{ fontSize: 11, color: '#c0392b', marginTop: 6 }}>{uploadError}</div>}
+            </div>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit}>
+          <div style={{ marginBottom: 16 }}><label style={labelStyle}>Name *</label><input style={inputStyle} value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="e.g. Ahmed Al-Rashid" required /></div>
+          <div style={{ marginBottom: 16 }}><label style={labelStyle}>Role / Position *</label><input style={inputStyle} value={form.role} onChange={e => setForm(f => ({ ...f, role: e.target.value }))} placeholder="e.g. Managing Director" required /></div>
+          <div style={{ marginBottom: 28 }}><label style={labelStyle}>Bio (optional)</label><textarea rows={3} style={{ ...inputStyle, resize: 'vertical' }} value={form.bio} onChange={e => setForm(f => ({ ...f, bio: e.target.value }))} placeholder="Short description about this person..." /></div>
+          <button type="submit" style={{ width: '100%', background: accentColor, color: '#F0F2F0', border: 'none', borderRadius: 50, padding: '15px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', cursor: 'pointer' }}>
+            {existing ? 'Save Changes →' : 'Add Team Member →'}
+          </button>
+        </form>
+      </motion.div>
+      {cropSrc && createPortal(<CropModal imageSrc={cropSrc} aspectRatio={1} onConfirm={handleCropConfirm} onCancel={() => setCropSrc(null)} />, document.body)}
+    </motion.div>
+  );
+}
+
 // ─── Crop Modal ───────────────────────────────────────────────────────────────
 function CropModal({ imageSrc, aspectRatio, onConfirm, onCancel }) {
   const MAX_W = 460, MAX_H = 450;
@@ -382,9 +477,12 @@ export default function Admin() {
   const [globalCareers, setGlobalCareers] = useState([]);
   const [exportProducts, setExportProducts] = useState([]);
   const [exportCareers, setExportCareers] = useState([]);
+  const [globalTeam, setGlobalTeam] = useState([]);
+  const [exportTeam, setExportTeam] = useState([]);
   const [images, setImages] = useState({});
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [showAddCareer, setShowAddCareer] = useState(false);
+  const [showTeamModal, setShowTeamModal] = useState(null); // null | 'add' | member object
   const [confirmDelete, setConfirmDelete] = useState(null);
 
   useEffect(() => {
@@ -393,6 +491,8 @@ export default function Admin() {
       setGlobalCareers(getCareers());
       setExportProducts(getExportProducts());
       setExportCareers(getExportCareers());
+      setGlobalTeam(getTeam());
+      setExportTeam(getExportTeam());
       setImages(getImages());
     }
   }, [loggedIn]);
@@ -401,6 +501,7 @@ export default function Admin() {
   const isExport = activeBrand === 'export';
   const products = isExport ? exportProducts : globalProducts;
   const careers = isExport ? exportCareers : globalCareers;
+  const team = isExport ? exportTeam : globalTeam;
 
   const handleAddProduct = (data) => {
     if (isExport) { addExportProduct(data); setExportProducts(getExportProducts()); }
@@ -418,6 +519,24 @@ export default function Admin() {
   const handleDeleteCareer = (id) => {
     if (isExport) { deleteExportCareer(id); setExportCareers(getExportCareers()); }
     else { deleteCareer(id); setGlobalCareers(getCareers()); }
+    setConfirmDelete(null);
+  };
+
+  const handleSaveTeamMember = (data) => {
+    if (typeof showTeamModal === 'object' && showTeamModal?.id) {
+      // editing
+      if (isExport) { updateExportTeamMember(showTeamModal.id, data); setExportTeam(getExportTeam()); }
+      else { updateTeamMember(showTeamModal.id, data); setGlobalTeam(getTeam()); }
+    } else {
+      // adding
+      if (isExport) { addExportTeamMember(data); setExportTeam(getExportTeam()); }
+      else { addTeamMember(data); setGlobalTeam(getTeam()); }
+    }
+    setShowTeamModal(null);
+  };
+  const handleDeleteTeamMember = (id) => {
+    if (isExport) { deleteExportTeamMember(id); setExportTeam(getExportTeam()); }
+    else { deleteTeamMember(id); setGlobalTeam(getTeam()); }
     setConfirmDelete(null);
   };
 
@@ -488,11 +607,11 @@ export default function Admin() {
       {/* Stats */}
       <div style={{ background: 'white', padding: '24px 0', borderBottom: '1px solid rgba(73,115,54,0.08)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 24 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 24 }}>
             {[
               { label: 'Products', value: products.length, emoji: '📦' },
               { label: 'Careers', value: careers.length, emoji: '💼' },
-              { label: 'Categories', value: [...new Set(products.map(p => p.category))].length, emoji: '🏷️' },
+              { label: 'Team', value: team.length, emoji: '👥' },
               { label: 'Site Images', value: brandImages.length, emoji: '🖼️' },
             ].map(s => (
               <div key={s.label} style={{ textAlign: 'center', padding: '12px 0' }}>
@@ -510,6 +629,7 @@ export default function Admin() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 36, background: 'white', borderRadius: 50, padding: 6, width: 'fit-content', border: `1px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.1)` }}>
           {tabBtn('products', 'Products', '📦')}
           {tabBtn('careers', 'Careers', '💼')}
+          {tabBtn('team', 'Our Team', '👥')}
           {tabBtn('images', 'Site Images', '🖼️')}
         </div>
 
@@ -596,6 +716,53 @@ export default function Admin() {
           </div>
         )}
 
+        {/* Team Tab */}
+        {activeTab === 'team' && (
+          <div style={{ paddingBottom: 80 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
+              <div>
+                <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 32, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>Our Team</h2>
+                <div style={{ fontSize: 11, color: brand.green, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 600 }}>{brand.name}</div>
+              </div>
+              <button onClick={() => setShowTeamModal('add')}
+                style={{ background: brand.accent, color: brand.accentText, border: 'none', borderRadius: 40, padding: '12px 28px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', cursor: 'pointer' }}>
+                + Add Member
+              </button>
+            </div>
+            {team.length === 0 && (
+              <div style={{ textAlign: 'center', padding: '80px 0', color: '#aaa' }}>
+                <div style={{ fontSize: 48, marginBottom: 12 }}>👥</div>
+                <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22 }}>No team members yet. Add your first member above.</p>
+              </div>
+            )}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 24 }}>
+              {team.map(member => (
+                <motion.div key={member.id} layout initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+                  style={{ background: 'white', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(73,115,54,0.08)', textAlign: 'center' }}>
+                  <div style={{ aspectRatio: '1', backgroundImage: member.image ? `url(${member.image})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center top', background: member.image ? undefined : '#e8e9c8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {!member.image && <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(73,115,54,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: brand.green }}>{member.name.charAt(0)}</div>}
+                  </div>
+                  <div style={{ padding: '18px 16px 20px' }}>
+                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>{member.name}</div>
+                    <div style={{ fontSize: 11, letterSpacing: 1.5, textTransform: 'uppercase', color: brand.green, fontWeight: 600, marginBottom: member.bio ? 10 : 16 }}>{member.role}</div>
+                    {member.bio && <p style={{ fontSize: 12, color: '#888', lineHeight: 1.6, marginBottom: 16 }}>{member.bio}</p>}
+                    <div style={{ display: 'flex', gap: 8 }}>
+                      <button onClick={() => setShowTeamModal(member)}
+                        style={{ flex: 1, background: `rgba(${isExport ? '92,140,70' : '73,115,54'},0.08)`, color: brand.green, border: `1px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)`, borderRadius: 40, padding: '8px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
+                        Edit
+                      </button>
+                      <button onClick={() => setConfirmDelete({ type: 'team', id: member.id, name: member.name })}
+                        style={{ flex: 1, background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)', borderRadius: 40, padding: '8px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
+                        🗑 Remove
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Images Tab */}
         {activeTab === 'images' && (
           <div style={{ paddingBottom: 80 }}>
@@ -638,7 +805,7 @@ export default function Admin() {
               <p style={{ fontSize: 14, color: '#666', marginBottom: 28 }}>Are you sure you want to remove <strong>"{confirmDelete.name}"</strong>? This cannot be undone.</p>
               <div style={{ display: 'flex', gap: 12 }}>
                 <button onClick={() => setConfirmDelete(null)} style={{ flex: 1, background: 'transparent', border: `1.5px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.3)`, color: brand.green, borderRadius: 40, padding: '12px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
-                <button onClick={() => confirmDelete.type === 'product' ? handleDeleteProduct(confirmDelete.id) : handleDeleteCareer(confirmDelete.id)}
+                <button onClick={() => confirmDelete.type === 'product' ? handleDeleteProduct(confirmDelete.id) : confirmDelete.type === 'career' ? handleDeleteCareer(confirmDelete.id) : handleDeleteTeamMember(confirmDelete.id)}
                   style={{ flex: 1, background: '#c0392b', color: 'white', border: 'none', borderRadius: 40, padding: '12px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
                   Delete
                 </button>
@@ -651,6 +818,7 @@ export default function Admin() {
       <AnimatePresence>
         {showAddProduct && <AddProductModal onClose={() => setShowAddProduct(false)} onSave={handleAddProduct} brand={activeBrand} />}
         {showAddCareer && <AddCareerModal onClose={() => setShowAddCareer(false)} onSave={handleAddCareer} brand={activeBrand} />}
+        {showTeamModal && <TeamMemberModal onClose={() => setShowTeamModal(null)} onSave={handleSaveTeamMember} brand={activeBrand} existing={typeof showTeamModal === 'object' ? showTeamModal : null} />}
       </AnimatePresence>
     </div>
   );

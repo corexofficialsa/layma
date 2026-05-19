@@ -176,7 +176,9 @@ export default function Navbar() {
               }}
             >×</button>
             <div style={{ marginBottom: 40 }}>
-              <img src="/logo.png" alt="Layma" style={{ height: 52, width: 'auto' }} />
+              <div style={{ display: 'inline-block', background: 'white', borderRadius: 12, padding: '8px 14px' }}>
+                <img src="/logo.png" alt="Layma" style={{ height: 44, width: 'auto', display: 'block' }} />
+              </div>
             </div>
             {links.map((link, i) => (
               <div key={link.to}>
@@ -234,7 +236,9 @@ export default function Navbar() {
             >
               <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: 'rgba(241,242,196,0.4)', fontWeight: 600, marginBottom: 12 }}>Also Visit</div>
               <Link to="/export" onClick={() => setMobileOpen(false)} style={{ display: 'inline-flex', alignItems: 'center', textDecoration: 'none' }}>
-                <img src="/logo-export.png" alt="Layma Export" style={{ height: 36, width: 'auto' }} />
+                <div style={{ background: 'white', borderRadius: 10, padding: '6px 12px' }}>
+                  <img src="/logo-export.png" alt="Layma Export" style={{ height: 32, width: 'auto', display: 'block' }} />
+                </div>
               </Link>
             </motion.div>
             <div style={{ marginTop: 32, display: 'flex', gap: 20 }}>

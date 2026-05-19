@@ -116,7 +116,9 @@ export default function ExportNavbar() {
           >
             <button onClick={() => setMobileOpen(false)} style={{ position: 'absolute', top: 24, right: 24, background: 'none', border: 'none', color: '#F0F2F0', fontSize: 32, cursor: 'pointer', lineHeight: 1 }}>×</button>
             <div style={{ marginBottom: 40 }}>
-              <img src="/logo-export.png" alt="Layma Export" style={{ height: 48, width: 'auto' }} />
+              <div style={{ display: 'inline-block', background: 'white', borderRadius: 12, padding: '8px 14px' }}>
+                <img src="/logo-export.png" alt="Layma Export" style={{ height: 40, width: 'auto', display: 'block' }} />
+              </div>
             </div>
             {links.map((link, i) => (
               <motion.div key={link.to} initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 + 0.1 }}>
@@ -127,7 +129,9 @@ export default function ExportNavbar() {
             ))}
             <div style={{ marginTop: 40 }}>
               <Link to="/" onClick={() => setMobileOpen(false)} style={{ display: 'inline-block', textDecoration: 'none' }}>
-                <img src="/logo.png" alt="Layma Global" style={{ height: 40, width: 'auto' }} />
+                <div style={{ background: 'white', borderRadius: 10, padding: '6px 12px' }}>
+                  <img src="/logo.png" alt="Layma Global" style={{ height: 34, width: 'auto', display: 'block' }} />
+                </div>
               </Link>
             </div>
           </motion.div>
