@@ -4,10 +4,10 @@ import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
 
 const values = [
-  { icon: '🌿', title: 'Quality First', desc: 'Every product we export is verified, graded, and certified before it leaves our facility — no compromises on standards.' },
-  { icon: '🤝', title: 'Partnership', desc: 'We build long-term relationships with farmers, suppliers, and buyers based on trust and transparent communication.' },
-  { icon: '🌍', title: 'Global Reach', desc: 'From Kerala to Qatar and beyond — we bridge the best of Indian produce with global markets.' },
-  { icon: '📦', title: 'Reliability', desc: 'On-time delivery, accurate documentation, and consistent supply are what our buyers count on from us.' },
+  { title: 'Quality First', desc: 'Every product we export is verified, graded, and certified before it leaves our facility — no compromises on standards.' },
+  { title: 'Partnership', desc: 'We build long-term relationships with farmers, suppliers, and buyers based on trust and transparent communication.' },
+  { title: 'Global Reach', desc: 'From Kerala to Qatar and beyond — we bridge the best of Indian produce with global markets.' },
+  { title: 'Reliability', desc: 'On-time delivery, accurate documentation, and consistent supply are what our buyers count on from us.' },
 ];
 
 const timeline = [
@@ -51,7 +51,7 @@ export default function ExportAbout() {
                 <div style={{ borderRadius: 24, overflow: 'hidden', aspectRatio: '4/5', backgroundImage: `url(${aboutImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
                 <div style={{ position: 'absolute', top: -16, left: -16, background: '#5C8C46', borderRadius: 16, padding: '20px 24px', boxShadow: '0 12px 40px rgba(92,140,70,0.4)' }}>
                   <div style={{ fontSize: 36 }}>🇮🇳</div>
-                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#AFBFA3', marginTop: 6 }}>Kerala, India</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#AFBFA3' }}>Kerala, India</div>
                 </div>
                 <div style={{ position: 'absolute', bottom: 20, right: 20, background: '#88A67B', borderRadius: 16, padding: '16px 20px' }}>
                   <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 32, fontWeight: 700, color: '#1a1a1a', lineHeight: 1 }}>Export</div>
@@ -102,18 +102,17 @@ export default function ExportAbout() {
           </ScrollReveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 16, marginBottom: 80 }}>
             {[
-              { icon: '🌾', label: 'Farm-Level Sourcing' },
-              { icon: '🏭', label: 'Processing & Grading' },
-              { icon: '📦', label: 'Custom Packaging' },
-              { icon: '🔖', label: 'Private Label' },
-              { icon: '🚢', label: 'Sea & Air Export' },
-              { icon: '📋', label: 'Export Documentation' },
-              { icon: '✅', label: 'Quality Certification' },
-              { icon: '🤝', label: 'B2B Partnerships' },
+              { label: 'Farm-Level Sourcing' },
+              { label: 'Processing & Grading' },
+              { label: 'Custom Packaging' },
+              { label: 'Private Label' },
+              { label: 'Sea & Air Export' },
+              { label: 'Export Documentation' },
+              { label: 'Quality Certification' },
+              { label: 'B2B Partnerships' },
             ].map((s, i) => (
               <ScrollReveal key={s.label} delay={i * 0.06}>
                 <div style={{ background: 'white', borderRadius: 16, padding: '20px 18px', textAlign: 'center', border: '1px solid rgba(92,140,70,0.1)' }}>
-                  <div style={{ fontSize: 28, marginBottom: 8 }}>{s.icon}</div>
                   <div style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a', lineHeight: 1.4 }}>{s.label}</div>
                 </div>
               </ScrollReveal>
@@ -124,13 +123,13 @@ export default function ExportAbout() {
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 28 }} className="two-col">
             {[
               {
-                icon: '🎯', label: 'Our Mission',
+                label: 'Our Mission',
                 title: 'Pure Quality,\nDirect from Source',
                 text: 'To export the finest Kerala produce with uncompromising quality, transparent sourcing, and reliable fulfilment — building lasting partnerships with buyers across the globe.',
                 bg: '#497336', textColor: '#F0F2F0', subColor: '#AFBFA3',
               },
               {
-                icon: '🔭', label: 'Our Vision',
+                label: 'Our Vision',
                 title: "Kerala's Premier\nExport Brand",
                 text: "To become India's most trusted food export brand — known for direct farm access, certified quality, and the authenticity of every spice, nut, and fruit we ship.",
                 bg: '#88A67B', textColor: '#1a1a1a', subColor: 'rgba(26,26,26,0.55)',
@@ -138,7 +137,6 @@ export default function ExportAbout() {
             ].map(item => (
               <ScrollReveal key={item.label} direction="up">
                 <div style={{ background: item.bg, borderRadius: 24, padding: '48px 40px', height: '100%' }}>
-                  <div style={{ fontSize: 40, marginBottom: 16 }}>{item.icon}</div>
                   <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: item.subColor, fontWeight: 600, marginBottom: 12 }}>{item.label}</div>
                   <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 30, fontWeight: 600, color: item.textColor, lineHeight: 1.2, marginBottom: 20, whiteSpace: 'pre-line' }}>{item.title}</h3>
                   <p style={{ fontSize: 15, lineHeight: 1.8, color: item.bg === '#497336' ? 'rgba(240,242,240,0.8)' : 'rgba(26,26,26,0.72)' }}>{item.text}</p>
@@ -163,12 +161,13 @@ export default function ExportAbout() {
               <ScrollReveal key={v.title} delay={i * 0.1}>
                 <motion.div
                   whileHover={{ y: -8 }}
-                  style={{ background: 'white', borderRadius: 20, padding: '36px 28px', textAlign: 'center', border: '1px solid rgba(92,140,70,0.08)', transition: 'box-shadow 0.3s' }}
+                  style={{ background: 'white', borderRadius: 20, padding: '36px 28px', textAlign: 'center', border: '1px solid rgba(92,140,70,0.08)', transition: 'box-shadow 0.3s', overflow: 'hidden', position: 'relative' }}
                   onMouseEnter={e => e.currentTarget.style.boxShadow = '0 20px 50px rgba(92,140,70,0.12)'}
                   onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
                 >
-                  <div style={{ fontSize: 44, marginBottom: 16 }}>{v.icon}</div>
-                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 24, fontWeight: 600, color: '#1a1a1a', marginBottom: 12 }}>{v.title}</h3>
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 4, background: i % 2 === 0 ? '#88A67B' : '#5C8C46' }} />
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 72, fontWeight: 700, color: 'rgba(92,140,70,0.07)', lineHeight: 1, marginBottom: 12, marginTop: 8 }}>0{i + 1}</div>
+                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, fontWeight: 600, color: '#1a1a1a', marginBottom: 12 }}>{v.title}</h3>
                   <p style={{ fontSize: 14, lineHeight: 1.8, color: '#666' }}>{v.desc}</p>
                 </motion.div>
               </ScrollReveal>

@@ -38,7 +38,6 @@ const socials = [
 
 const offices = [
   {
-    flag: '🇶🇦',
     name: 'Layma Global Trading & Services',
     city: 'Doha, Qatar',
     type: 'International Trading & Distribution',
@@ -159,8 +158,7 @@ export default function Contact() {
                     animate={{ opacity: 1, scale: 1 }}
                     style={{ background: '#497336', borderRadius: 24, padding: '56px 40px', textAlign: 'center' }}
                   >
-                    <div style={{ fontSize: 56, marginBottom: 16 }}>✅</div>
-                    <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 32, fontWeight: 600, color: '#F1F2C4', marginBottom: 12 }}>Message Received!</h3>
+                    <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 40, fontWeight: 600, color: '#F1F2C4', marginBottom: 12 }}>Message Received!</h3>
                     <p style={{ fontSize: 16, color: 'rgba(241,242,196,0.75)', lineHeight: 1.7 }}>Thank you for reaching out. Our team will get back to you within 24 business hours.</p>
                     <button onClick={() => { setSubmitted(false); setSendError(''); setForm({ name: '', email: '', company: '', subject: '', message: '' }); }} style={{ marginTop: 24, background: '#BABF26', color: '#1a1a1a', border: 'none', borderRadius: 40, padding: '12px 28px', fontSize: 13, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
                       Send Another
@@ -270,7 +268,7 @@ export default function Contact() {
                 <ScrollReveal key={office.name} delay={i * 0.15}>
                   <div style={{ background: 'white', borderRadius: 20, padding: '28px 24px', marginBottom: 20, border: '1px solid rgba(73,115,54,0.1)' }}>
                     <div style={{ display: 'flex', alignItems: 'flex-start', gap: 12, marginBottom: 16 }}>
-                      <span style={{ fontSize: 28, marginTop: 2 }}>{office.flag}</span>
+                      <span style={{ fontSize: 28, marginTop: 2 }}>🇶🇦</span>
                       <div>
                         <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600, color: '#1a1a1a' }}>{office.name}</div>
                         <div style={{ fontSize: 12, color: '#497336', letterSpacing: 0.5, marginBottom: 2 }}>{office.city}</div>

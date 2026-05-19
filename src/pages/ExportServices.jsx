@@ -4,14 +4,14 @@ import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
 
 const offerings = [
-  { icon: '🌾', title: 'Farm-Direct Sourcing', desc: 'We work directly with certified farmers and growers across Kerala, Karnataka, and Tamil Nadu, ensuring provenance and eliminating unnecessary markups.' },
-  { icon: '🏭', title: 'Processing & Grading', desc: 'Our Ramanattukara facility handles cleaning, drying, sorting, and grading to international specifications for spices, nuts, and dry fruits.' },
-  { icon: '📦', title: 'Bulk Export Packaging', desc: 'Available in 5kg, 10kg, 25kg, and custom FIBC sacks for wholesale and commercial buyers with proper FSSAI and export-compliant labelling.' },
-  { icon: '🔖', title: 'Private Label & Retail', desc: 'Custom branded retail packs (50g–1kg) with your label — ideal for supermarkets, specialty stores, and Gulf retail brands.' },
-  { icon: '🚢', title: 'Sea & Air Freight', desc: 'FCL/LCL sea freight and air cargo solutions with complete export documentation — Bill of Lading, COO, Health Certificate, Phytosanitary.' },
-  { icon: '✅', title: 'Quality Certification', desc: 'All products supplied with relevant certifications: FSSAI, ISO, organic (where applicable), and GCC food import compliance.' },
-  { icon: '📋', title: 'Export Documentation', desc: 'Full handling of shipping bill, packing list, invoice, certificates of origin, and customs clearance paperwork for hassle-free import at destination.' },
-  { icon: '🤝', title: 'Long-Term Supply', desc: 'Consistent monthly or quarterly supply programmes for importers, distributors, and hospitality buyers who need reliable year-round stock.' },
+  { title: 'Farm-Direct Sourcing', desc: 'We work directly with certified farmers and growers across Kerala, Karnataka, and Tamil Nadu, ensuring provenance and eliminating unnecessary markups.' },
+  { title: 'Processing & Grading', desc: 'Our Ramanattukara facility handles cleaning, drying, sorting, and grading to international specifications for spices, nuts, and dry fruits.' },
+  { title: 'Bulk Export Packaging', desc: 'Available in 5kg, 10kg, 25kg, and custom FIBC sacks for wholesale and commercial buyers with proper FSSAI and export-compliant labelling.' },
+  { title: 'Private Label & Retail', desc: 'Custom branded retail packs (50g–1kg) with your label — ideal for supermarkets, specialty stores, and Gulf retail brands.' },
+  { title: 'Sea & Air Freight', desc: 'FCL/LCL sea freight and air cargo solutions with complete export documentation — Bill of Lading, COO, Health Certificate, Phytosanitary.' },
+  { title: 'Quality Certification', desc: 'All products supplied with relevant certifications: FSSAI, ISO, organic (where applicable), and GCC food import compliance.' },
+  { title: 'Export Documentation', desc: 'Full handling of shipping bill, packing list, invoice, certificates of origin, and customs clearance paperwork for hassle-free import at destination.' },
+  { title: 'Long-Term Supply', desc: 'Consistent monthly or quarterly supply programmes for importers, distributors, and hospitality buyers who need reliable year-round stock.' },
 ];
 
 const products = [
@@ -73,12 +73,13 @@ export default function ExportServices() {
               <ScrollReveal key={item.title} delay={i * 0.07}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  style={{ background: 'white', borderRadius: 20, padding: '32px 28px', border: '1px solid rgba(92,140,70,0.1)', transition: 'box-shadow 0.3s', height: '100%' }}
+                  style={{ background: 'white', borderRadius: 20, padding: '32px 28px', border: '1px solid rgba(92,140,70,0.1)', transition: 'box-shadow 0.3s', height: '100%', position: 'relative', overflow: 'hidden' }}
                   onMouseEnter={e => e.currentTarget.style.boxShadow = '0 20px 50px rgba(92,140,70,0.12)'}
                   onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
                 >
-                  <div style={{ fontSize: 40, marginBottom: 16 }}>{item.icon}</div>
-                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#1a1a1a', marginBottom: 10 }}>{item.title}</h3>
+                  <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: 4, background: 'linear-gradient(to bottom, #88A67B, #5C8C46)' }} />
+                  <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#5C8C46', marginBottom: 12 }}>0{i + 1}</div>
+                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 26, fontWeight: 600, color: '#1a1a1a', marginBottom: 10 }}>{item.title}</h3>
                   <p style={{ fontSize: 14, lineHeight: 1.7, color: '#666' }}>{item.desc}</p>
                 </motion.div>
               </ScrollReveal>
@@ -104,7 +105,7 @@ export default function ExportServices() {
                 <div style={{ background: 'rgba(240,242,240,0.07)', border: '1px solid rgba(240,242,240,0.12)', borderRadius: 16, padding: '20px 18px' }}>
                   <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#88A67B', fontWeight: 600, marginBottom: 6 }}>{p.category}</div>
                   <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 18, fontWeight: 600, color: '#F0F2F0', marginBottom: 6 }}>{p.name}</div>
-                  <div style={{ fontSize: 12, color: 'rgba(240,242,240,0.5)' }}>📍 {p.origin}</div>
+                  <div style={{ fontSize: 14, color: 'rgba(240,242,240,0.5)' }}>{p.origin}</div>
                 </div>
               </ScrollReveal>
             ))}

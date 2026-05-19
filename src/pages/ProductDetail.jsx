@@ -24,7 +24,6 @@ export default function ProductDetail() {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F1F2C4' }}>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 60, marginBottom: 16 }}>🌿</div>
           <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#497336' }}>Product not found</p>
           <Link to="/products" style={{ color: '#497336', textDecoration: 'none', fontSize: 14, fontWeight: 600, letterSpacing: 1 }}>← Back to Products</Link>
         </div>
@@ -60,9 +59,7 @@ export default function ProductDetail() {
             >
               <div style={{ position: 'relative', borderRadius: 28, overflow: 'hidden', aspectRatio: '1' }}>
                 {!imgLoaded && (
-                  <div style={{ position: 'absolute', inset: 0, background: '#e8e9a8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    <div style={{ fontSize: 48 }}>🌿</div>
-                  </div>
+                  <div style={{ position: 'absolute', inset: 0, background: '#e8e9a8' }} />
                 )}
                 <motion.img
                   src={product.image}
@@ -92,7 +89,6 @@ export default function ProductDetail() {
                 transition={{ delay: 0.4 }}
                 style={{ marginTop: 20, background: '#497336', borderRadius: 20, padding: '20px 24px', display: 'flex', alignItems: 'center', gap: 16 }}
               >
-                <div style={{ fontSize: 32 }}>📍</div>
                 <div>
                   <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#BABF26', marginBottom: 4 }}>Origin</div>
                   <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600, color: '#F1F2C4' }}>{product.origin}</div>

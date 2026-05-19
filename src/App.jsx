@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { syncImagesFromSupabase } from './data/store';
 import { AnimatePresence, motion } from 'framer-motion';
 import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
@@ -85,6 +86,7 @@ export default function App() {
 
   useEffect(() => {
     const t = setTimeout(() => setLoading(false), 500);
+    syncImagesFromSupabase();
     return () => clearTimeout(t);
   }, []);
 

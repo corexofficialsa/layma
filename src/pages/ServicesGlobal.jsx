@@ -4,29 +4,29 @@ import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
 
 const offerings = [
-  { icon: '🌐', title: 'International Product Sourcing', desc: 'We source premium food products from trusted suppliers across India, Saudi Arabia, Iran, Turkey, and beyond — building direct relationships with producers to guarantee authenticity and competitive pricing.' },
-  { icon: '🏪', title: 'Supermarket & Retail Supply', desc: 'We supply supermarkets and retail chains across Qatar with consistent, quality-verified products in bulk formats and branded retail small packets ready for shelf display.' },
-  { icon: '📦', title: 'Wholesale Distribution', desc: 'Flexible bulk supply agreements for distributors, wholesalers, and food service operators — with competitive pricing, reliable delivery schedules, and customisable order quantities.' },
-  { icon: '🏷️', title: 'Product Branding & Retail Packaging', desc: 'We offer retail-ready branded small packet packaging and customised private-label packaging solutions — helping your products stand out on the shelf with professional presentation.' },
-  { icon: '🔖', title: 'Private Label Solutions', desc: 'Supply premium nuts, spices, dry fruits, honey, or tea under your own brand identity. We manage sourcing, grading, packaging, and labelling to your specifications.' },
-  { icon: '🤝', title: 'B2B Supply Solutions', desc: 'Tailored B2B supply programmes for hotels, restaurants, catering companies, and institutional buyers — consistent quality, dedicated account management, and flexible delivery.' },
-  { icon: '🚢', title: 'Import & Logistics Coordination', desc: 'Full import management including customs clearance, quality documentation, and last-mile distribution to your warehouse or retail outlets across Qatar and the GCC.' },
-  { icon: '📋', title: 'Quality Certification & Documentation', desc: 'All products supplied by Layma Global come with complete documentation — lab test reports, certificates of origin, and relevant food safety certifications for GCC market compliance.' },
+  { title: 'International Product Sourcing', desc: 'We source premium food products from trusted suppliers across India, Saudi Arabia, Iran, Turkey, and beyond — building direct relationships with producers to guarantee authenticity and competitive pricing.' },
+  { title: 'Supermarket & Retail Supply', desc: 'We supply supermarkets and retail chains across Qatar with consistent, quality-verified products in bulk formats and branded retail small packets ready for shelf display.' },
+  { title: 'Wholesale Distribution', desc: 'Flexible bulk supply agreements for distributors, wholesalers, and food service operators — with competitive pricing, reliable delivery schedules, and customisable order quantities.' },
+  { title: 'Product Branding & Retail Packaging', desc: 'We offer retail-ready branded small packet packaging and customised private-label packaging solutions — helping your products stand out on the shelf with professional presentation.' },
+  { title: 'Private Label Solutions', desc: 'Supply premium nuts, spices, dry fruits, honey, or tea under your own brand identity. We manage sourcing, grading, packaging, and labelling to your specifications.' },
+  { title: 'B2B Supply Solutions', desc: 'Tailored B2B supply programmes for hotels, restaurants, catering companies, and institutional buyers — consistent quality, dedicated account management, and flexible delivery.' },
+  { title: 'Import & Logistics Coordination', desc: 'Full import management including customs clearance, quality documentation, and last-mile distribution to your warehouse or retail outlets across Qatar and the GCC.' },
+  { title: 'Quality Certification & Documentation', desc: 'All products supplied by Layma Global come with complete documentation — lab test reports, certificates of origin, and relevant food safety certifications for GCC market compliance.' },
 ];
 
 const products = [
-  { name: 'Cashew Nuts', emoji: '🥜', origin: 'Kerala, India', tag: 'Grade W240' },
-  { name: 'Almonds', emoji: '🥜', origin: 'California / Spain', tag: 'Non-pareil' },
-  { name: 'Walnuts', emoji: '🥜', origin: 'Afghanistan', tag: 'Light Amber' },
-  { name: 'Cardamom', emoji: '🌶️', origin: 'Kerala, India', tag: 'AGEB Grade' },
-  { name: 'Black Pepper', emoji: '🌶️', origin: 'Kerala, India', tag: 'Malabar Select' },
-  { name: 'Raisins', emoji: '🍇', origin: 'Iran / Afghanistan', tag: 'Sulphur-free' },
-  { name: 'Dried Figs', emoji: '🍇', origin: 'Turkey', tag: 'Sun-dried' },
-  { name: 'Dried Banana', emoji: '🍌', origin: 'Kerala, India', tag: 'Nendran' },
-  { name: 'Dried Mango', emoji: '🥭', origin: 'India', tag: 'No Added Sugar' },
-  { name: 'Dates', emoji: '🌴', origin: 'Saudi Arabia', tag: 'Saudi Select' },
-  { name: 'Pure Honey', emoji: '🍯', origin: 'Kerala / Saudi Arabia', tag: 'Raw & Pure' },
-  { name: 'Tea Powder', emoji: '🍵', origin: 'Kerala, India', tag: 'CTC Grade' },
+  { name: 'Cashew Nuts', origin: 'Kerala, India', tag: 'Grade W240' },
+  { name: 'Almonds', origin: 'California / Spain', tag: 'Non-pareil' },
+  { name: 'Walnuts', origin: 'Afghanistan', tag: 'Light Amber' },
+  { name: 'Cardamom', origin: 'Kerala, India', tag: 'AGEB Grade' },
+  { name: 'Black Pepper', origin: 'Kerala, India', tag: 'Malabar Select' },
+  { name: 'Raisins', origin: 'Iran / Afghanistan', tag: 'Sulphur-free' },
+  { name: 'Dried Figs', origin: 'Turkey', tag: 'Sun-dried' },
+  { name: 'Dried Banana', origin: 'Kerala, India', tag: 'Nendran' },
+  { name: 'Dried Mango', origin: 'India', tag: 'No Added Sugar' },
+  { name: 'Dates', origin: 'Saudi Arabia', tag: 'Saudi Select' },
+  { name: 'Pure Honey', origin: 'Kerala / Saudi Arabia', tag: 'Raw & Pure' },
+  { name: 'Tea Powder', origin: 'Kerala, India', tag: 'CTC Grade' },
 ];
 
 export default function ServicesGlobal() {
@@ -92,12 +92,13 @@ export default function ServicesGlobal() {
               <ScrollReveal key={o.title} delay={i * 0.07}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  style={{ background: 'white', borderRadius: 20, padding: '32px 26px', border: '1px solid rgba(73,115,54,0.1)', height: '100%', transition: 'box-shadow 0.3s' }}
+                  style={{ background: 'white', borderRadius: 20, padding: '32px 26px', border: '1px solid rgba(73,115,54,0.1)', height: '100%', transition: 'box-shadow 0.3s', position: 'relative', overflow: 'hidden' }}
                   onMouseEnter={e => e.currentTarget.style.boxShadow = '0 20px 50px rgba(73,115,54,0.12)'}
                   onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
                 >
-                  <div style={{ fontSize: 36, marginBottom: 16 }}>{o.icon}</div>
-                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#1a1a1a', marginBottom: 10 }}>{o.title}</h3>
+                  <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: 4, background: 'linear-gradient(to bottom, #BABF26, #497336)' }} />
+                  <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#BABF26', marginBottom: 12 }}>0{i + 1}</div>
+                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 26, fontWeight: 600, color: '#1a1a1a', marginBottom: 10 }}>{o.title}</h3>
                   <p style={{ fontSize: 14, lineHeight: 1.8, color: '#666' }}>{o.desc}</p>
                 </motion.div>
               </ScrollReveal>
@@ -123,7 +124,6 @@ export default function ServicesGlobal() {
             {products.map((p, i) => (
               <ScrollReveal key={p.name} delay={i * 0.05}>
                 <div style={{ background: 'rgba(241,242,196,0.08)', borderRadius: 16, padding: '20px 16px', textAlign: 'center', border: '1px solid rgba(186,191,38,0.18)' }}>
-                  <div style={{ fontSize: 32, marginBottom: 8 }}>{p.emoji}</div>
                   <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 17, fontWeight: 600, color: '#F1F2C4', marginBottom: 4 }}>{p.name}</div>
                   <div style={{ fontSize: 11, color: 'rgba(241,242,196,0.5)', marginBottom: 6 }}>{p.origin}</div>
                   <div style={{ display: 'inline-block', background: '#BABF26', borderRadius: 40, padding: '2px 10px', fontSize: 10, fontWeight: 700, color: '#1a1a1a', letterSpacing: 0.5 }}>{p.tag}</div>
@@ -146,14 +146,13 @@ export default function ServicesGlobal() {
           </ScrollReveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 20 }}>
             {[
-              { icon: '📦', name: 'Bulk Supply Packaging', desc: 'For wholesalers and distributors requiring large-quantity orders.' },
-              { icon: '🛍️', name: 'Retail Branded Packets', desc: 'Layma-branded small consumer packets ready for retail shelving.' },
-              { icon: '🏷️', name: 'Private Label Packaging', desc: 'Custom packaging under your own brand identity and specifications.' },
+              { name: 'Bulk Supply Packaging', desc: 'For wholesalers and distributors requiring large-quantity orders.' },
+              { name: 'Retail Branded Packets', desc: 'Layma-branded small consumer packets ready for retail shelving.' },
+              { name: 'Private Label Packaging', desc: 'Custom packaging under your own brand identity and specifications.' },
             ].map((p, i) => (
               <ScrollReveal key={p.name} delay={i * 0.1}>
                 <div style={{ background: 'white', borderRadius: 20, padding: '32px 24px', textAlign: 'center', border: '1px solid rgba(73,115,54,0.1)' }}>
-                  <div style={{ fontSize: 44, marginBottom: 14 }}>{p.icon}</div>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#1a1a1a', marginBottom: 10 }}>{p.name}</div>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 26, fontWeight: 600, color: '#1a1a1a', marginBottom: 10 }}>{p.name}</div>
                   <p style={{ fontSize: 14, lineHeight: 1.7, color: '#666' }}>{p.desc}</p>
                 </div>
               </ScrollReveal>

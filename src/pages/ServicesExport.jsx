@@ -4,30 +4,30 @@ import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
 
 const offerings = [
-  { icon: '🌶️', title: 'Kerala Spice Export', desc: 'Direct export of premium Kerala spices — cardamom, black pepper, cloves, cinnamon, turmeric, and more. Sourced from certified farms across Wayanad, Idukki, and Kozhikode districts.' },
-  { icon: '🍯', title: 'Honey Export & Supply', desc: 'Cold-extracted, raw pure honey from Kerala\'s forest and farm regions. Supplied in bulk containers and retail small bottles, tested for purity and packed hygienically.' },
-  { icon: '🥜', title: 'Nuts & Dry Fruits', desc: 'Premium cashew nuts, almonds, pistachios, raisins, dates, dried figs, dried banana, dried mango, dried jackfruit, and dried pineapple — sourced, graded, and exported to international standards.' },
-  { icon: '🍵', title: 'Kerala Tea Powder', desc: 'Premium CTC grade tea powder from Munnar and Wayanad estates. Packed fresh in airtight bags for bulk export and retail consumer packs. Strong, rich, and authentically Kerala.' },
-  { icon: '🌱', title: 'Direct Farm Sourcing', desc: 'We work directly with spice farmers, beekeepers, and agricultural cooperatives across Kerala — building fair trade relationships that ensure product traceability and community benefit.' },
-  { icon: '📋', title: 'APEDA-Certified Export', desc: 'Full export compliance with APEDA, Spices Board of India, and FSSAI regulations. We handle all documentation — phytosanitary certificates, fumigation reports, and quality certifications.' },
-  { icon: '🛍️', title: 'Retail & Consumer Packaging', desc: 'Small consumer packets, honey small bottles, and branded retail packs for both the Indian local market and international retail clients. Custom brand packaging available.' },
-  { icon: '🚢', title: 'Export Shipping & Logistics', desc: 'Experienced freight management from Kerala ports. Sea freight and air freight options for bulk and express orders. We coordinate directly with freight forwarders for smooth export clearance.' },
+  { title: 'Kerala Spice Export', desc: 'Direct export of premium Kerala spices — cardamom, black pepper, cloves, cinnamon, turmeric, and more. Sourced from certified farms across Wayanad, Idukki, and Kozhikode districts.' },
+  { title: 'Honey Export & Supply', desc: 'Cold-extracted, raw pure honey from Kerala\'s forest and farm regions. Supplied in bulk containers and retail small bottles, tested for purity and packed hygienically.' },
+  { title: 'Nuts & Dry Fruits', desc: 'Premium cashew nuts, almonds, pistachios, raisins, dates, dried figs, dried banana, dried mango, dried jackfruit, and dried pineapple — sourced, graded, and exported to international standards.' },
+  { title: 'Kerala Tea Powder', desc: 'Premium CTC grade tea powder from Munnar and Wayanad estates. Packed fresh in airtight bags for bulk export and retail consumer packs. Strong, rich, and authentically Kerala.' },
+  { title: 'Direct Farm Sourcing', desc: 'We work directly with spice farmers, beekeepers, and agricultural cooperatives across Kerala — building fair trade relationships that ensure product traceability and community benefit.' },
+  { title: 'APEDA-Certified Export', desc: 'Full export compliance with APEDA, Spices Board of India, and FSSAI regulations. We handle all documentation — phytosanitary certificates, fumigation reports, and quality certifications.' },
+  { title: 'Retail & Consumer Packaging', desc: 'Small consumer packets, honey small bottles, and branded retail packs for both the Indian local market and international retail clients. Custom brand packaging available.' },
+  { title: 'Export Shipping & Logistics', desc: 'Experienced freight management from Kerala ports. Sea freight and air freight options for bulk and express orders. We coordinate directly with freight forwarders for smooth export clearance.' },
 ];
 
 const productList = [
-  { cat: 'Kerala Spices', icon: '🌶️', items: ['Premium Cardamom (AGEB Grade)', 'Malabar Black Pepper', 'Whole Cloves', 'Ceylon Cinnamon', 'Turmeric Powder'] },
-  { cat: 'Nuts', icon: '🥜', items: ['Cashew Nuts (W240)', 'Almonds', 'Pistachios'] },
-  { cat: 'Dry Fruits', icon: '🍇', items: ['Golden Raisins', 'Dates', 'Dried Figs', 'Dried Banana (Nendran)', 'Dried Mango', 'Dried Jackfruit', 'Dried Pineapple'] },
-  { cat: 'Honey', icon: '🍯', items: ['Pure Natural Honey (Bulk)', 'Honey Small Bottles (Retail)'] },
-  { cat: 'Tea', icon: '🍵', items: ['Kerala CTC Tea Powder', 'Export Carton Packs', 'Retail Consumer Bags'] },
+  { cat: 'Kerala Spices', items: ['Premium Cardamom (AGEB Grade)', 'Malabar Black Pepper', 'Whole Cloves', 'Ceylon Cinnamon', 'Turmeric Powder'] },
+  { cat: 'Nuts', items: ['Cashew Nuts (W240)', 'Almonds', 'Pistachios'] },
+  { cat: 'Dry Fruits', items: ['Golden Raisins', 'Dates', 'Dried Figs', 'Dried Banana (Nendran)', 'Dried Mango', 'Dried Jackfruit', 'Dried Pineapple'] },
+  { cat: 'Honey', items: ['Pure Natural Honey (Bulk)', 'Honey Small Bottles (Retail)'] },
+  { cat: 'Tea', items: ['Kerala CTC Tea Powder', 'Export Carton Packs', 'Retail Consumer Bags'] },
 ];
 
 const packagingTypes = [
-  { icon: '🛍️', name: 'Small Consumer Packets', desc: 'Retail-ready branded small packets for supermarket and local market distribution.' },
-  { icon: '🍯', name: 'Small Honey Bottles', desc: 'Hygienic glass or PET bottle filling — Layma branded or private label.' },
-  { icon: '📦', name: 'Export Cartons', desc: 'Standard export carton packing meeting international shipping requirements.' },
-  { icon: '🏭', name: 'Bulk Packaging', desc: 'Large-format bulk bags and sacks for wholesale and industrial buyers.' },
-  { icon: '🏷️', name: 'Custom Brand Packaging', desc: 'We design and produce packaging under your own brand identity.' },
+  { name: 'Small Consumer Packets', desc: 'Retail-ready branded small packets for supermarket and local market distribution.' },
+  { name: 'Small Honey Bottles', desc: 'Hygienic glass or PET bottle filling — Layma branded or private label.' },
+  { name: 'Export Cartons', desc: 'Standard export carton packing meeting international shipping requirements.' },
+  { name: 'Bulk Packaging', desc: 'Large-format bulk bags and sacks for wholesale and industrial buyers.' },
+  { name: 'Custom Brand Packaging', desc: 'We design and produce packaging under your own brand identity.' },
 ];
 
 export default function ServicesExport() {
@@ -91,12 +91,13 @@ export default function ServicesExport() {
               <ScrollReveal key={o.title} delay={i * 0.07}>
                 <motion.div
                   whileHover={{ y: -6 }}
-                  style={{ background: 'white', borderRadius: 20, padding: '32px 26px', border: '1px solid rgba(92,140,70,0.12)', height: '100%', transition: 'box-shadow 0.3s' }}
+                  style={{ background: 'white', borderRadius: 20, padding: '32px 26px', border: '1px solid rgba(92,140,70,0.12)', height: '100%', transition: 'box-shadow 0.3s', position: 'relative', overflow: 'hidden' }}
                   onMouseEnter={e => e.currentTarget.style.boxShadow = '0 20px 50px rgba(92,140,70,0.14)'}
                   onMouseLeave={e => e.currentTarget.style.boxShadow = 'none'}
                 >
-                  <div style={{ fontSize: 36, marginBottom: 16 }}>{o.icon}</div>
-                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#1a1a1a', marginBottom: 10 }}>{o.title}</h3>
+                  <div style={{ position: 'absolute', top: 0, left: 0, bottom: 0, width: 4, background: 'linear-gradient(to bottom, #88A67B, #5C8C46)' }} />
+                  <div style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, fontWeight: 700, letterSpacing: 2, color: '#5C8C46', marginBottom: 12 }}>0{i + 1}</div>
+                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 26, fontWeight: 600, color: '#1a1a1a', marginBottom: 10 }}>{o.title}</h3>
                   <p style={{ fontSize: 14, lineHeight: 1.8, color: '#666' }}>{o.desc}</p>
                 </motion.div>
               </ScrollReveal>
@@ -122,8 +123,7 @@ export default function ServicesExport() {
             {productList.map((cat, i) => (
               <ScrollReveal key={cat.cat} delay={i * 0.1}>
                 <div style={{ background: 'rgba(240,242,240,0.07)', borderRadius: 20, padding: '28px 22px', border: '1px solid rgba(175,191,163,0.25)' }}>
-                  <div style={{ fontSize: 32, marginBottom: 10 }}>{cat.icon}</div>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600, color: '#AFBFA3', marginBottom: 14 }}>{cat.cat}</div>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 24, fontWeight: 600, color: '#AFBFA3', marginBottom: 14 }}>{cat.cat}</div>
                   {cat.items.map(item => (
                     <div key={item} style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 8 }}>
                       <span style={{ width: 5, height: 5, background: '#88A67B', borderRadius: '50%', flexShrink: 0 }} />
@@ -151,8 +151,7 @@ export default function ServicesExport() {
             {packagingTypes.map((p, i) => (
               <ScrollReveal key={p.name} delay={i * 0.08}>
                 <div style={{ background: 'white', borderRadius: 18, padding: '28px 20px', textAlign: 'center', border: '1px solid rgba(92,140,70,0.1)' }}>
-                  <div style={{ fontSize: 36, marginBottom: 12 }}>{p.icon}</div>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 18, fontWeight: 600, color: '#1a1a1a', marginBottom: 8 }}>{p.name}</div>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#1a1a1a', marginBottom: 8 }}>{p.name}</div>
                   <p style={{ fontSize: 13, lineHeight: 1.7, color: '#666' }}>{p.desc}</p>
                 </div>
               </ScrollReveal>
@@ -173,18 +172,17 @@ export default function ServicesExport() {
           </ScrollReveal>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 16 }}>
             {[
-              { step: '01', label: 'Farm Sourcing', icon: '🌱' },
-              { step: '02', label: 'Quality Grading', icon: '🔬' },
-              { step: '03', label: 'Processing & Packing', icon: '📦' },
-              { step: '04', label: 'FSSAI / APEDA Cert.', icon: '📋' },
-              { step: '05', label: 'Export Clearance', icon: '✅' },
-              { step: '06', label: 'Global Delivery', icon: '🌍' },
+              { step: '01', label: 'Farm Sourcing' },
+              { step: '02', label: 'Quality Grading' },
+              { step: '03', label: 'Processing & Packing' },
+              { step: '04', label: 'FSSAI / APEDA Cert.' },
+              { step: '05', label: 'Export Clearance' },
+              { step: '06', label: 'Global Delivery' },
             ].map((p, i) => (
               <ScrollReveal key={p.step} delay={i * 0.08}>
                 <div style={{ textAlign: 'center', padding: '24px 14px', background: 'rgba(240,242,240,0.04)', borderRadius: 16, border: '1px solid rgba(175,191,163,0.15)' }}>
                   <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 32, color: 'rgba(136,166,123,0.4)', marginBottom: 6 }}>{p.step}</div>
-                  <div style={{ fontSize: 28, marginBottom: 8 }}>{p.icon}</div>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 14, fontWeight: 600, color: '#F0F2F0' }}>{p.label}</div>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 16, fontWeight: 600, color: '#F0F2F0' }}>{p.label}</div>
                 </div>
               </ScrollReveal>
             ))}

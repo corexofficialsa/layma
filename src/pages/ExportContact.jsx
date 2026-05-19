@@ -85,8 +85,8 @@ export default function ExportContact() {
                   <h4 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#1a1a1a', marginBottom: 16 }}>Follow Us</h4>
                   <div style={{ display: 'flex', gap: 16 }}>
                     {[
-                      { label: 'Instagram', href: 'https://www.instagram.com/laymaexport/', icon: '📸' },
-                      { label: 'WhatsApp', href: 'https://wa.me/916282322958', icon: '💬' },
+                      { label: 'Instagram', href: 'https://www.instagram.com/laymaexport/' },
+                      { label: 'WhatsApp', href: 'https://wa.me/916282322958' },
                     ].map(s => (
                       <a key={s.label} href={s.href} target="_blank" rel="noreferrer" style={{
                         display: 'flex', alignItems: 'center', gap: 8, padding: '10px 18px',
@@ -97,7 +97,7 @@ export default function ExportContact() {
                         onMouseEnter={e => e.currentTarget.style.background = 'rgba(92,140,70,0.15)'}
                         onMouseLeave={e => e.currentTarget.style.background = 'rgba(92,140,70,0.08)'}
                       >
-                        <span>{s.icon}</span> {s.label}
+                        {s.label}
                       </a>
                     ))}
                   </div>
@@ -110,8 +110,7 @@ export default function ExportContact() {
               <div style={{ background: 'white', borderRadius: 28, padding: '48px 44px', border: '1px solid rgba(92,140,70,0.1)', boxShadow: '0 20px 60px rgba(92,140,70,0.06)' }}>
                 {sent ? (
                   <div style={{ textAlign: 'center', padding: '40px 0' }}>
-                    <div style={{ fontSize: 56, marginBottom: 20 }}>✅</div>
-                    <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 32, fontWeight: 600, color: '#1a1a1a', marginBottom: 12 }}>Enquiry Sent!</h3>
+                    <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 40, fontWeight: 600, color: '#1a1a1a', marginBottom: 12 }}>Enquiry Sent!</h3>
                     <p style={{ fontSize: 16, color: '#666', lineHeight: 1.7 }}>Our export team will reach out within 24 hours with pricing and availability details.</p>
                   </div>
                 ) : (

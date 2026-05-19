@@ -40,15 +40,17 @@ export default function Careers() {
         <div className="container">
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: 24 }}>
             {[
-              { icon: '🌏', title: 'Global Impact', desc: 'Your work reaches markets from Qatar to the world.' },
-              { icon: '🤝', title: 'Strong Culture', desc: 'A team built on trust, respect, and shared ambition.' },
-              { icon: '📈', title: 'Growth Focused', desc: 'We invest in your development and career progression.' },
-              { icon: '🌿', title: 'Purposeful Work', desc: 'Premium natural foods with real story and provenance.' },
+              { title: 'Global Impact', desc: 'Your work reaches markets from Qatar to the world.' },
+              { title: 'Strong Culture', desc: 'A team built on trust, respect, and shared ambition.' },
+              { title: 'Growth Focused', desc: 'We invest in your development and career progression.' },
+              { title: 'Purposeful Work', desc: 'Premium natural foods with real story and provenance.' },
             ].map((v, i) => (
               <ScrollReveal key={v.title} delay={i * 0.1}>
-                <div style={{ textAlign: 'center', padding: '28px 20px' }}>
-                  <div style={{ fontSize: 40, marginBottom: 12 }}>{v.icon}</div>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600, color: '#F1F2C4', marginBottom: 8 }}>{v.title}</div>
+                <div style={{ textAlign: 'center', padding: '32px 24px', background: 'rgba(241,242,196,0.06)', borderRadius: 20, border: '1px solid rgba(186,191,38,0.2)' }}>
+                  <div style={{ width: 44, height: 44, borderRadius: '50%', background: 'rgba(186,191,38,0.15)', border: '1.5px solid rgba(186,191,38,0.45)', display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 18px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 700, color: '#BABF26', letterSpacing: 1 }}>
+                    0{i + 1}
+                  </div>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 26, fontWeight: 600, color: '#F1F2C4', marginBottom: 8 }}>{v.title}</div>
                   <div style={{ fontSize: 14, color: 'rgba(241,242,196,0.65)', lineHeight: 1.6 }}>{v.desc}</div>
                 </div>
               </ScrollReveal>
@@ -89,8 +91,7 @@ export default function Careers() {
 
           {filtered.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '80px 0', color: '#999' }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>🌱</div>
-              <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 24 }}>No positions currently open in this department.</p>
+              <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#497336', marginBottom: 8 }}>No positions currently open in this department.</p>
               <p style={{ fontSize: 14, color: '#bbb', marginTop: 8 }}>Check back soon or send us your CV speculatively.</p>
             </div>
           ) : (
@@ -120,10 +121,10 @@ export default function Careers() {
                           <span style={{ background: 'rgba(186,191,38,0.15)', color: '#8a8f0a', borderRadius: 40, padding: '4px 12px', fontSize: 11, fontWeight: 600, letterSpacing: 1 }}>{career.type}</span>
                         </div>
                         <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 26, fontWeight: 600, color: '#1a1a1a', marginBottom: 8 }}>{career.title}</h3>
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 13, color: '#666' }}>
-                          <span>📍 {career.location}</span>
-                          <span>💼 {career.experience}</span>
-                          <span>💰 {career.salary}</span>
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: 16, fontSize: 14, color: '#666' }}>
+                          <span>{career.location}</span>
+                          <span>{career.experience}</span>
+                          <span>{career.salary}</span>
                           <span style={{ color: '#999' }}>Posted: {career.posted}</span>
                         </div>
                       </div>

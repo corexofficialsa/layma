@@ -32,8 +32,7 @@ export default function Products() {
         <div className="container">
           {filtered.length === 0 ? (
             <div style={{ textAlign: 'center', padding: '80px 0', color: '#999' }}>
-              <div style={{ fontSize: 48, marginBottom: 16 }}>🔍</div>
-              <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 24 }}>No products found</p>
+              <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 30 }}>No products found</p>
             </div>
           ) : (
             <motion.div
@@ -114,7 +113,7 @@ export default function Products() {
                           </div>
                         </div>
                         <div className="prod-card-body" style={{ padding: '18px 20px 22px' }}>
-                          <div className="prod-origin" style={{ fontSize: 11, color: '#497336', letterSpacing: 1, marginBottom: 6, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>📍 {product.origin}</div>
+                          <div className="prod-origin" style={{ fontSize: 14, color: '#497336', letterSpacing: 1, marginBottom: 6, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{product.origin}</div>
                           <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#1a1a1a', marginBottom: 8, lineHeight: 1.2 }}>
                             {product.name}
                           </h3>

@@ -38,8 +38,7 @@ export default function CareerDetail() {
     return (
       <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: '#F1F2C4' }}>
         <div style={{ textAlign: 'center' }}>
-          <div style={{ fontSize: 60, marginBottom: 16 }}>🌿</div>
-          <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#497336' }}>Position not found</p>
+          <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 32, color: '#497336', marginBottom: 16 }}>Position not found</p>
           <Link to="/careers" style={{ color: '#497336', textDecoration: 'none', fontSize: 14, fontWeight: 600 }}>← Back to Careers</Link>
         </div>
       </div>
@@ -62,11 +61,11 @@ export default function CareerDetail() {
           <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 6vw, 68px)', fontWeight: 600, color: '#F1F2C4', lineHeight: 1.05, marginBottom: 24 }}>
             {career.title}
           </h1>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, fontSize: 14, color: 'rgba(241,242,196,0.75)', marginBottom: 32 }}>
-            <span>📍 {career.location}</span>
-            <span>💼 {career.experience} experience</span>
-            <span>💰 {career.salary}</span>
-            <span>📅 Posted: {career.posted}</span>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 24, fontSize: 15, color: 'rgba(241,242,196,0.75)', marginBottom: 32 }}>
+            <span>{career.location}</span>
+            <span>{career.experience} experience</span>
+            <span>{career.salary}</span>
+            <span>Posted: {career.posted}</span>
           </div>
           {!submitted ? (
             <motion.button
@@ -90,7 +89,7 @@ export default function CareerDetail() {
               animate={{ opacity: 1, scale: 1 }}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'rgba(186,191,38,0.2)', border: '1px solid rgba(186,191,38,0.4)', borderRadius: 40, padding: '14px 28px', color: '#BABF26', fontWeight: 600, fontSize: 15 }}
             >
-              ✅ Application Submitted — We'll be in touch!
+              Application Submitted — We'll be in touch!
             </motion.div>
           )}
         </div>
@@ -259,7 +258,6 @@ export default function CareerDetail() {
                     transition: 'all 0.2s',
                   }}>
                     <input type="file" accept=".pdf" onChange={handleCvChange} style={{ display: 'none' }} />
-                    <div style={{ fontSize: 36, marginBottom: 8 }}>{cvName ? '✅' : '📄'}</div>
                     {cvName ? (
                       <>
                         <div style={{ fontWeight: 600, color: '#497336', fontSize: 14 }}>{cvName}</div>

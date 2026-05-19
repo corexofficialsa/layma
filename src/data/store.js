@@ -1,4 +1,5 @@
 import { initialProducts, initialCareers, initialImages, initialExportProducts, initialExportCareers } from './initialData';
+import { supabase } from '../lib/supabaseClient';
 
 const PRODUCTS_KEY = 'layma_products';
 const CAREERS_KEY = 'layma_careers';
@@ -85,17 +86,39 @@ export function getSiteImage(key) {
   return imgs[key]?.url || initialImages[key]?.url || '';
 }
 
+// Fetch all images from Supabase and cache locally — call on app load
+export async function syncImagesFromSupabase() {
+  if (!supabase) return;
+  try {
+    const { data, error } = await supabase.from('site_images').select('key, url');
+    if (error) throw error;
+    if (!data?.length) return;
+    const imgs = getImages();
+    data.forEach(({ key, url }) => { imgs[key] = { ...imgs[key], url }; });
+    localStorage.setItem(IMAGES_KEY, JSON.stringify(imgs));
+    window.dispatchEvent(new Event('layma_images_updated'));
+  } catch (e) {
+    console.warn('Supabase image sync failed, using local cache:', e.message);
+  }
+}
+
 export function updateSiteImage(key, url) {
+  // Save to localStorage instantly so UI updates immediately
   try {
     const imgs = getImages();
     imgs[key] = { ...imgs[key], url };
     localStorage.setItem(IMAGES_KEY, JSON.stringify(imgs));
     window.dispatchEvent(new Event('layma_images_updated'));
-    return true;
   } catch {
     window.dispatchEvent(new CustomEvent('layma_images_error', { detail: 'Storage full — try a smaller image or use a URL instead.' }));
     return false;
   }
+  // Also save to Supabase in background so all visitors see the update
+  if (supabase) {
+    supabase.from('site_images').upsert({ key, url }, { onConflict: 'key' })
+      .then(({ error }) => { if (error) console.warn('Supabase image save failed:', error.message); });
+  }
+  return true;
 }
 
 // ── Export Products ──

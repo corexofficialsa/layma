@@ -16,25 +16,21 @@ const processSteps = [
     num: '01',
     title: 'Global Sourcing',
     desc: 'We source premium food products from trusted origins — spices from Kerala, dates from Saudi Arabia, nuts from Iran and India — through direct supplier relationships.',
-    icon: '🌱',
   },
   {
     num: '02',
     title: 'Quality Control',
     desc: 'Every batch is quality-checked and tested — from origin to our Qatar warehouse — ensuring only certified, premium-grade products reach your business.',
-    icon: '🔬',
   },
   {
     num: '03',
     title: 'Packaging & Branding',
     desc: 'Products are cleaned, graded, and packed in bulk supply formats or retail branded small packets — with private-label options available for wholesale clients.',
-    icon: '📦',
   },
   {
     num: '04',
     title: 'Reliable Supply',
     desc: 'Our Qatar distribution team ensures timely, accurate delivery to supermarkets, wholesalers, and retailers across Qatar and the GCC — dependable supply, every order.',
-    icon: '🚢',
   },
 ];
 
@@ -101,11 +97,11 @@ export default function Home() {
   const catImgTea = useSiteImage('home_cat_tea');
 
   const categories = [
-    { name: 'Spices', emoji: '🌶️', img: catImgSpices, count: 'Cardamom · Pepper · Cloves · More' },
-    { name: 'Nuts', emoji: '🥜', img: catImgNuts, count: 'Cashew · Almonds · Walnuts · Pistachios' },
-    { name: 'Dry Fruits', emoji: '🍇', img: catImgDryFruits, count: 'Raisins · Figs · Dates · Banana · More' },
-    { name: 'Honey', emoji: '🍯', img: catImgHoney, count: 'Pure Honey · Small Bottles' },
-    { name: 'Tea', emoji: '🍵', img: catImgTea, count: 'Kerala CTC Tea Powder' },
+    { name: 'Spices', img: catImgSpices, count: 'Cardamom · Pepper · Cloves · More' },
+    { name: 'Nuts', img: catImgNuts, count: 'Cashew · Almonds · Walnuts · Pistachios' },
+    { name: 'Dry Fruits', img: catImgDryFruits, count: 'Raisins · Figs · Dates · Banana · More' },
+    { name: 'Honey', img: catImgHoney, count: 'Pure Honey · Small Bottles' },
+    { name: 'Tea', img: catImgTea, count: 'Kerala CTC Tea Powder' },
   ];
 
   useEffect(() => {
@@ -415,8 +411,7 @@ export default function Home() {
                     }} />
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,26,26,0.85) 0%, transparent 60%)' }} />
                     <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '20px 18px' }}>
-                      <div style={{ fontSize: 22, marginBottom: 4 }}>{cat.emoji}</div>
-                      <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#F1F2C4' }}>{cat.name}</div>
+                      <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 26, fontWeight: 600, color: '#F1F2C4' }}>{cat.name}</div>
                       <div style={{ fontSize: 11, color: '#BABF26', letterSpacing: 1 }}>{cat.count}</div>
                     </div>
                   </motion.div>
@@ -468,8 +463,7 @@ export default function Home() {
                   }}>
                     {step.num}
                   </div>
-                  <div style={{ fontSize: 32, marginBottom: 12 }}>{step.icon}</div>
-                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 24, fontWeight: 600, color: '#1a1a1a', marginBottom: 12 }}>{step.title}</h3>
+                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 26, fontWeight: 600, color: '#1a1a1a', marginBottom: 12 }}>{step.title}</h3>
                   <p style={{ fontSize: 14, lineHeight: 1.8, color: '#666' }}>{step.desc}</p>
                 </motion.div>
               </ScrollReveal>

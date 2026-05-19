@@ -12,10 +12,10 @@ const stats = [
 ];
 
 const processSteps = [
-  { num: '01', title: 'Farm Sourcing', desc: 'We partner directly with certified farmers across Kerala, Karnataka, and Tamil Nadu — cutting out middlemen to bring you the freshest produce at competitive prices.', icon: '🌱' },
-  { num: '02', title: 'Processing & Grading', desc: 'Products are cleaned, dried, and graded at our Ramanattukara facility under strict hygienic conditions to meet international food safety standards.', icon: '🏭' },
-  { num: '03', title: 'Packaging & Certification', desc: 'Packed in bulk sacks or custom retail formats with full export documentation — FSSAI, COO, Health Certificate, and GCC import compliance.', icon: '📦' },
-  { num: '04', title: 'Global Export', desc: 'Shipped via sea or air to Qatar, GCC, and international destinations — on-time, with full traceability from farm to final delivery.', icon: '🚢' },
+  { num: '01', title: 'Farm Sourcing', desc: 'We partner directly with certified farmers across Kerala, Karnataka, and Tamil Nadu — cutting out middlemen to bring you the freshest produce at competitive prices.' },
+  { num: '02', title: 'Processing & Grading', desc: 'Products are cleaned, dried, and graded at our Ramanattukara facility under strict hygienic conditions to meet international food safety standards.' },
+  { num: '03', title: 'Packaging & Certification', desc: 'Packed in bulk sacks or custom retail formats with full export documentation — FSSAI, COO, Health Certificate, and GCC import compliance.' },
+  { num: '04', title: 'Global Export', desc: 'Shipped via sea or air to Qatar, GCC, and international destinations — on-time, with full traceability from farm to final delivery.' },
 ];
 
 const reviews = [
@@ -49,11 +49,11 @@ export default function ExportHome() {
   const catImgTea = useSiteImage('export_cat_tea');
 
   const categories = [
-    { name: 'Spices', emoji: '🌶️', img: catImgSpices, count: 'Cardamom · Pepper · Turmeric · More' },
-    { name: 'Nuts', emoji: '🥜', img: catImgNuts, count: 'Cashew · Almonds · Walnuts · Pistachios' },
-    { name: 'Dry Fruits', emoji: '🍇', img: catImgDryFruits, count: 'Raisins · Figs · Mango · Jackfruit · More' },
-    { name: 'Honey', emoji: '🍯', img: catImgHoney, count: 'Pure Forest Honey · Bottles' },
-    { name: 'Kerala Tea', emoji: '🍵', img: catImgTea, count: 'CTC Tea Powder · Munnar Blends' },
+    { name: 'Spices', img: catImgSpices, count: 'Cardamom · Pepper · Turmeric · More' },
+    { name: 'Nuts', img: catImgNuts, count: 'Cashew · Almonds · Walnuts · Pistachios' },
+    { name: 'Dry Fruits', img: catImgDryFruits, count: 'Raisins · Figs · Mango · Jackfruit · More' },
+    { name: 'Honey', img: catImgHoney, count: 'Pure Forest Honey · Bottles' },
+    { name: 'Kerala Tea', img: catImgTea, count: 'CTC Tea Powder · Munnar Blends' },
   ];
 
   useEffect(() => {
@@ -246,8 +246,7 @@ export default function ExportHome() {
                     <div style={{ position: 'absolute', inset: 0, backgroundImage: `url(${cat.img})`, backgroundSize: 'cover', backgroundPosition: 'center', transition: 'transform 0.5s' }} />
                     <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(26,26,26,0.85) 0%, transparent 60%)' }} />
                     <div style={{ position: 'absolute', bottom: 0, left: 0, right: 0, padding: '20px 18px' }}>
-                      <div style={{ fontSize: 22, marginBottom: 4 }}>{cat.emoji}</div>
-                      <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#F0F2F0' }}>{cat.name}</div>
+                      <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 26, fontWeight: 600, color: '#F0F2F0' }}>{cat.name}</div>
                       <div style={{ fontSize: 11, color: '#AFBFA3', letterSpacing: 1 }}>{cat.count}</div>
                     </div>
                   </motion.div>
@@ -282,8 +281,7 @@ export default function ExportHome() {
                   <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 80, lineHeight: 0.8, marginBottom: 20, color: 'rgba(136,166,123,0.3)' }}>
                     {step.num}
                   </div>
-                  <div style={{ fontSize: 32, marginBottom: 12 }}>{step.icon}</div>
-                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 24, fontWeight: 600, color: '#1a1a1a', marginBottom: 12 }}>{step.title}</h3>
+                  <h3 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 26, fontWeight: 600, color: '#1a1a1a', marginBottom: 12 }}>{step.title}</h3>
                   <p style={{ fontSize: 14, lineHeight: 1.8, color: '#666' }}>{step.desc}</p>
                 </motion.div>
               </ScrollReveal>
