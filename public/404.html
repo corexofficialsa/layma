@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Layma Global Trading &amp; Services</title>
+  <script>
+    // GitHub Pages SPA redirect — encodes the path into a query string
+    // so index.html can restore it via History API
+    var l = window.location;
+    l.replace(
+      l.protocol + '//' + l.hostname + (l.port ? ':' + l.port : '') +
+      '/?p=' + encodeURIComponent(l.pathname + l.search) + (l.hash ? '&h=' + encodeURIComponent(l.hash) : '')
+    );
+  </script>
+</head>
+<body></body>
+</html>
