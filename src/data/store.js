@@ -75,11 +75,13 @@ export function addCareer(career) {
   const careers = getCareers();
   const newCareer = { ...career, id: Date.now().toString(), posted: new Date().toISOString().split('T')[0] };
   saveCareers([...careers, newCareer]);
+  if (supabase) supabase.from('careers').insert(newCareer).then(({ error }) => { if (error) console.warn('Supabase career save failed:', error.message); });
   return newCareer;
 }
 
 export function deleteCareer(id) {
   saveCareers(getCareers().filter(c => c.id !== id));
+  if (supabase) supabase.from('careers').delete().eq('id', id).then(({ error }) => { if (error) console.warn('Supabase career delete failed:', error.message); });
 }
 
 // Sync products from Supabase on app load
@@ -203,9 +205,27 @@ export function addExportCareer(career) {
   const careers = getExportCareers();
   const newCareer = { ...career, id: 'expc_' + Date.now(), posted: new Date().toISOString().split('T')[0] };
   localStorage.setItem(EXPORT_CAREERS_KEY, JSON.stringify([...careers, newCareer]));
+  if (supabase) supabase.from('export_careers').insert(newCareer).then(({ error }) => { if (error) console.warn('Supabase export career save failed:', error.message); });
   return newCareer;
 }
 
 export function deleteExportCareer(id) {
   localStorage.setItem(EXPORT_CAREERS_KEY, JSON.stringify(getExportCareers().filter(c => c.id !== id)));
+  if (supabase) supabase.from('export_careers').delete().eq('id', id).then(({ error }) => { if (error) console.warn('Supabase export career delete failed:', error.message); });
+}
+
+// Sync careers from Supabase on app load
+export async function syncCareersFromSupabase() {
+  if (!supabase) return;
+  try {
+    const [{ data: careers, error: e1 }, { data: expCareers, error: e2 }] = await Promise.all([
+      supabase.from('careers').select('*'),
+      supabase.from('export_careers').select('*'),
+    ]);
+    if (!e1 && careers?.length) localStorage.setItem(CAREERS_KEY, JSON.stringify(careers));
+    if (!e2 && expCareers?.length) localStorage.setItem(EXPORT_CAREERS_KEY, JSON.stringify(expCareers));
+    window.dispatchEvent(new Event('layma_careers_updated'));
+  } catch (e) {
+    console.warn('Supabase career sync failed, using local cache:', e.message);
+  }
 }
