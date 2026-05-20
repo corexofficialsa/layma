@@ -124,7 +124,7 @@ export default function Home() {
           }} />
           <div style={{
             position: 'absolute', inset: 0,
-            background: 'rgba(0,0,0,0.35)',
+            background: 'linear-gradient(135deg, rgba(73,115,54,0.35) 0%, rgba(42,69,32,0.25) 100%)',
           }} />
         </motion.div>
 
