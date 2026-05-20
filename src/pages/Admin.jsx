@@ -19,10 +19,10 @@ async function uploadToCloudinary(dataUrl) {
   return data.secure_url;
 }
 import {
-  getProducts, addProduct, deleteProduct,
-  getCareers, addCareer, deleteCareer,
-  getExportProducts, addExportProduct, deleteExportProduct,
-  getExportCareers, addExportCareer, deleteExportCareer,
+  getProducts, addProduct, updateProduct, deleteProduct,
+  getCareers, addCareer, updateCareer, deleteCareer,
+  getExportProducts, addExportProduct, updateExportProduct, deleteExportProduct,
+  getExportCareers, addExportCareer, updateExportCareer, deleteExportCareer,
   getImages, updateSiteImage,
 } from '../data/store';
 import { initialImages } from '../data/initialData';
@@ -109,7 +109,7 @@ function LoginScreen({ onLogin }) {
 }
 
 // ─── Add Product Modal ────────────────────────────────────────────────────────
-function AddProductModal({ onClose, onSave, brand }) {
+function AddProductModal({ onClose, onSave, brand, existing }) {
   const isExport = brand === 'export';
   const categories = isExport
     ? ['Spices', 'Nuts', 'Dry Fruits', 'Honey', 'Tea', 'Dates']
@@ -117,8 +117,10 @@ function AddProductModal({ onClose, onSave, brand }) {
   const pricePlaceholder = isExport ? 'e.g. ₹650 / kg (bulk)' : 'e.g. QAR 180 / kg';
   const accentColor = isExport ? '#5C8C46' : '#497336';
 
-  const [form, setForm] = useState({ name: '', category: categories[0], origin: '', price: '', description: '', details: '', badge: '', image: '' });
-  const [imagePreview, setImagePreview] = useState('');
+  const [form, setForm] = useState(existing
+    ? { name: existing.name || '', category: existing.category || categories[0], origin: existing.origin || '', price: existing.price || '', description: existing.description || '', details: existing.details || '', badge: existing.badge || '', image: existing.image || '' }
+    : { name: '', category: categories[0], origin: '', price: '', description: '', details: '', badge: '', image: '' });
+  const [imagePreview, setImagePreview] = useState(existing?.image || '');
   const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
 
@@ -156,7 +158,7 @@ function AddProductModal({ onClose, onSave, brand }) {
       <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }} exit={{ opacity: 0, scale: 0.9 }}
         style={{ background: isExport ? '#F0F2F0' : '#F1F2C4', borderRadius: 24, padding: '40px 36px', width: '100%', maxWidth: 620, maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
         <button onClick={onClose} style={{ position: 'absolute', top: 16, right: 20, background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#666' }}>×</button>
-        <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>Add Product</h2>
+        <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>{existing ? 'Edit Product' : 'Add Product'}</h2>
         <p style={{ fontSize: 12, color: accentColor, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 600, marginBottom: 28 }}>{isExport ? 'Layma Export' : 'Layma Global'}</p>
         <form onSubmit={handleSubmit}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
@@ -185,7 +187,7 @@ function AddProductModal({ onClose, onSave, brand }) {
             </div>
           </div>
           <button type="submit" disabled={uploading} style={{ width: '100%', background: uploading ? '#aaa' : accentColor, color: '#F0F2F0', border: 'none', borderRadius: 50, padding: '15px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', cursor: uploading ? 'not-allowed' : 'pointer' }}>
-            {uploading ? 'Uploading image...' : 'Add Product →'}
+            {uploading ? 'Uploading image...' : existing ? 'Save Changes →' : 'Add Product →'}
           </button>
         </form>
       </motion.div>
@@ -194,13 +196,15 @@ function AddProductModal({ onClose, onSave, brand }) {
 }
 
 // ─── Add Career Modal ─────────────────────────────────────────────────────────
-function AddCareerModal({ onClose, onSave, brand }) {
+function AddCareerModal({ onClose, onSave, brand, existing }) {
   const isExport = brand === 'export';
   const accentColor = isExport ? '#5C8C46' : '#497336';
   const locationHint = isExport ? 'e.g. Ramanattukara, Kerala' : 'e.g. Doha, Qatar';
   const salaryHint = isExport ? 'e.g. ₹40,000 – 60,000 / month' : 'e.g. QAR 8,000 – 12,000';
 
-  const [form, setForm] = useState({ title: '', department: '', location: '', type: 'Full-time', experience: '', salary: '', description: '', requirements: '', benefits: '' });
+  const [form, setForm] = useState(existing
+    ? { title: existing.title || '', department: existing.department || '', location: existing.location || '', type: existing.type || 'Full-time', experience: existing.experience || '', salary: existing.salary || '', description: existing.description || '', requirements: Array.isArray(existing.requirements) ? existing.requirements.join('\n') : (existing.requirements || ''), benefits: Array.isArray(existing.benefits) ? existing.benefits.join('\n') : (existing.benefits || '') }
+    : { title: '', department: '', location: '', type: 'Full-time', experience: '', salary: '', description: '', requirements: '', benefits: '' });
   const inputStyle = { width: '100%', padding: '12px 14px', borderRadius: 10, border: `1.5px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)`, background: 'white', fontFamily: 'Inter, sans-serif', fontSize: 14, color: '#1a1a1a', outline: 'none', boxSizing: 'border-box' };
   const labelStyle = { display: 'block', fontSize: 11, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: accentColor, marginBottom: 6 };
 
@@ -217,7 +221,7 @@ function AddCareerModal({ onClose, onSave, brand }) {
       <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}
         style={{ background: isExport ? '#F0F2F0' : '#F1F2C4', borderRadius: 24, padding: '40px 36px', width: '100%', maxWidth: 620, maxHeight: '90vh', overflowY: 'auto', position: 'relative' }}>
         <button onClick={onClose} style={{ position: 'absolute', top: 16, right: 20, background: 'none', border: 'none', fontSize: 22, cursor: 'pointer', color: '#666' }}>×</button>
-        <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>Add Career</h2>
+        <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 28, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>{existing ? 'Edit Career' : 'Add Career'}</h2>
         <p style={{ fontSize: 12, color: accentColor, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 600, marginBottom: 28 }}>{isExport ? 'Layma Export' : 'Layma Global'}</p>
         <form onSubmit={handleSubmit}>
           <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 16 }}>
@@ -232,7 +236,7 @@ function AddCareerModal({ onClose, onSave, brand }) {
           <div style={{ marginBottom: 16 }}><label style={labelStyle}>Requirements (one per line)</label><textarea rows={4} style={{ ...inputStyle, resize: 'vertical' }} value={form.requirements} onChange={e => setForm(f => ({ ...f, requirements: e.target.value }))} placeholder={"Degree in relevant field\n3+ years experience\nFluent English"} /></div>
           <div style={{ marginBottom: 28 }}><label style={labelStyle}>Benefits (one per line)</label><textarea rows={3} style={{ ...inputStyle, resize: 'vertical' }} value={form.benefits} onChange={e => setForm(f => ({ ...f, benefits: e.target.value }))} placeholder={"Health insurance\nPerformance bonus"} /></div>
           <button type="submit" style={{ width: '100%', background: accentColor, color: '#F0F2F0', border: 'none', borderRadius: 50, padding: '15px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', cursor: 'pointer' }}>
-            Add Career →
+            {existing ? 'Save Changes →' : 'Add Career →'}
           </button>
         </form>
       </motion.div>
@@ -492,6 +496,8 @@ export default function Admin() {
   const [images, setImages] = useState({});
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [showAddCareer, setShowAddCareer] = useState(false);
+  const [editingProduct, setEditingProduct] = useState(null);
+  const [editingCareer, setEditingCareer] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
 
   useEffect(() => {
@@ -526,6 +532,17 @@ export default function Admin() {
     if (isExport) { deleteExportCareer(id); setExportCareers(getExportCareers()); }
     else { deleteCareer(id); setGlobalCareers(getCareers()); }
     setConfirmDelete(null);
+  };
+
+  const handleUpdateProduct = (data) => {
+    if (isExport) { updateExportProduct(editingProduct.id, data); setExportProducts(getExportProducts()); }
+    else { updateProduct(editingProduct.id, data); setGlobalProducts(getProducts()); }
+    setEditingProduct(null);
+  };
+  const handleUpdateCareer = (data) => {
+    if (isExport) { updateExportCareer(editingCareer.id, data); setExportCareers(getExportCareers()); }
+    else { updateCareer(editingCareer.id, data); setGlobalCareers(getCareers()); }
+    setEditingCareer(null);
   };
 
   // Switch brand → reset to products tab
@@ -651,10 +668,16 @@ export default function Admin() {
                     <div style={{ fontSize: 10, color: brand.green, letterSpacing: 1, marginBottom: 4 }}>{p.category} · {p.origin}</div>
                     <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>{p.name}</div>
                     <div style={{ fontSize: 14, fontWeight: 600, color: brand.green, marginBottom: 12 }}>{p.price}</div>
-                    <button onClick={() => setConfirmDelete({ type: 'product', id: p.id, name: p.name })}
-                      style={{ width: '100%', background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)', borderRadius: 40, padding: '8px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
-                      🗑 Remove
-                    </button>
+                    <div style={{ display: 'flex', gap: 8 }}>
+                      <button onClick={() => setEditingProduct(p)}
+                        style={{ flex: 1, background: `rgba(${isExport ? '92,140,70' : '73,115,54'},0.08)`, color: brand.green, border: `1px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)`, borderRadius: 40, padding: '8px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
+                        ✏ Edit
+                      </button>
+                      <button onClick={() => setConfirmDelete({ type: 'product', id: p.id, name: p.name })}
+                        style={{ flex: 1, background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)', borderRadius: 40, padding: '8px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
+                        🗑 Remove
+                      </button>
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -693,10 +716,16 @@ export default function Admin() {
                     <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#1a1a1a', marginBottom: 6 }}>{c.title}</div>
                     <div style={{ fontSize: 13, color: '#777' }}>📍 {c.location} · 💼 {c.experience} · 💰 {c.salary}</div>
                   </div>
-                  <button onClick={() => setConfirmDelete({ type: 'career', id: c.id, name: c.title })}
-                    style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)', borderRadius: 40, padding: '8px 20px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase', flexShrink: 0 }}>
-                    🗑 Remove
-                  </button>
+                  <div style={{ display: 'flex', gap: 8, flexShrink: 0 }}>
+                    <button onClick={() => setEditingCareer(c)}
+                      style={{ background: `rgba(${isExport ? '92,140,70' : '73,115,54'},0.08)`, color: brand.green, border: `1px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)`, borderRadius: 40, padding: '8px 20px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
+                      ✏ Edit
+                    </button>
+                    <button onClick={() => setConfirmDelete({ type: 'career', id: c.id, name: c.title })}
+                      style={{ background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)', borderRadius: 40, padding: '8px 20px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
+                      🗑 Remove
+                    </button>
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -758,6 +787,8 @@ export default function Admin() {
       <AnimatePresence>
         {showAddProduct && <AddProductModal onClose={() => setShowAddProduct(false)} onSave={handleAddProduct} brand={activeBrand} />}
         {showAddCareer && <AddCareerModal onClose={() => setShowAddCareer(false)} onSave={handleAddCareer} brand={activeBrand} />}
+        {editingProduct && <AddProductModal onClose={() => setEditingProduct(null)} onSave={handleUpdateProduct} brand={activeBrand} existing={editingProduct} />}
+        {editingCareer && <AddCareerModal onClose={() => setEditingCareer(null)} onSave={handleUpdateCareer} brand={activeBrand} existing={editingCareer} />}
       </AnimatePresence>
     </div>
   );

@@ -54,6 +54,11 @@ export function addProduct(product) {
   return newProduct;
 }
 
+export function updateProduct(id, data) {
+  saveProducts(getProducts().map(p => p.id === id ? { ...p, ...data } : p));
+  if (supabase) supabase.from('products').update(data).eq('id', id).then(({ error }) => { if (error) console.warn('Supabase product update failed:', error.message); });
+}
+
 export function deleteProduct(id) {
   saveProducts(getProducts().filter(p => p.id !== id));
   if (supabase) supabase.from('products').delete().eq('id', id).then(({ error }) => { if (error) console.warn('Supabase product delete failed:', error.message); });
@@ -77,6 +82,11 @@ export function addCareer(career) {
   saveCareers([...careers, newCareer]);
   if (supabase) supabase.from('careers').insert(newCareer).then(({ error }) => { if (error) console.warn('Supabase career save failed:', error.message); });
   return newCareer;
+}
+
+export function updateCareer(id, data) {
+  saveCareers(getCareers().map(c => c.id === id ? { ...c, ...data } : c));
+  if (supabase) supabase.from('careers').update(data).eq('id', id).then(({ error }) => { if (error) console.warn('Supabase career update failed:', error.message); });
 }
 
 export function deleteCareer(id) {
@@ -158,6 +168,11 @@ export function addExportProduct(product) {
   return newProduct;
 }
 
+export function updateExportProduct(id, data) {
+  localStorage.setItem(EXPORT_PRODUCTS_KEY, JSON.stringify(getExportProducts().map(p => p.id === id ? { ...p, ...data } : p)));
+  if (supabase) supabase.from('export_products').update(data).eq('id', id).then(({ error }) => { if (error) console.warn('Supabase export product update failed:', error.message); });
+}
+
 export function deleteExportProduct(id) {
   localStorage.setItem(EXPORT_PRODUCTS_KEY, JSON.stringify(getExportProducts().filter(p => p.id !== id)));
   if (supabase) supabase.from('export_products').delete().eq('id', id).then(({ error }) => { if (error) console.warn('Supabase export product delete failed:', error.message); });
@@ -207,6 +222,11 @@ export function addExportCareer(career) {
   localStorage.setItem(EXPORT_CAREERS_KEY, JSON.stringify([...careers, newCareer]));
   if (supabase) supabase.from('export_careers').insert(newCareer).then(({ error }) => { if (error) console.warn('Supabase export career save failed:', error.message); });
   return newCareer;
+}
+
+export function updateExportCareer(id, data) {
+  localStorage.setItem(EXPORT_CAREERS_KEY, JSON.stringify(getExportCareers().map(c => c.id === id ? { ...c, ...data } : c)));
+  if (supabase) supabase.from('export_careers').update(data).eq('id', id).then(({ error }) => { if (error) console.warn('Supabase export career update failed:', error.message); });
 }
 
 export function deleteExportCareer(id) {
