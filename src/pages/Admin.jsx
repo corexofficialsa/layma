@@ -24,8 +24,6 @@ import {
   getExportProducts, addExportProduct, deleteExportProduct,
   getExportCareers, addExportCareer, deleteExportCareer,
   getImages, updateSiteImage,
-  getTeam, addTeamMember, updateTeamMember, deleteTeamMember,
-  getExportTeam, addExportTeamMember, updateExportTeamMember, deleteExportTeamMember,
 } from '../data/store';
 import { initialImages } from '../data/initialData';
 
@@ -120,19 +118,33 @@ function AddProductModal({ onClose, onSave, brand }) {
   const accentColor = isExport ? '#5C8C46' : '#497336';
 
   const [form, setForm] = useState({ name: '', category: categories[0], origin: '', price: '', description: '', details: '', badge: '', image: '' });
-  const [imageFile, setImageFile] = useState(null);
   const [imagePreview, setImagePreview] = useState('');
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState('');
 
-  const handleImage = (e) => {
+  const handleImage = async (e) => {
     const file = e.target.files[0];
     if (!file) return;
-    setImageFile(file);
+    e.target.value = '';
     const reader = new FileReader();
-    reader.onload = ev => { setImagePreview(ev.target.result); setForm(f => ({ ...f, image: ev.target.result })); };
+    reader.onload = async (ev) => {
+      setImagePreview(ev.target.result);
+      setUploading(true);
+      setUploadError('');
+      try {
+        const url = await uploadToCloudinary(ev.target.result);
+        setForm(f => ({ ...f, image: url }));
+        setImagePreview(url);
+      } catch {
+        setUploadError('Image upload failed. Paste a URL instead.');
+      } finally {
+        setUploading(false);
+      }
+    };
     reader.readAsDataURL(file);
   };
 
-  const handleSubmit = (e) => { e.preventDefault(); onSave(form); onClose(); };
+  const handleSubmit = (e) => { e.preventDefault(); if (!uploading) { onSave(form); onClose(); } };
 
   const inputStyle = { width: '100%', padding: '12px 14px', borderRadius: 10, border: `1.5px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)`, background: 'white', fontFamily: 'Inter, sans-serif', fontSize: 14, color: '#1a1a1a', outline: 'none', boxSizing: 'border-box' };
   const labelStyle = { display: 'block', fontSize: 11, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: accentColor, marginBottom: 6 };
@@ -159,21 +171,21 @@ function AddProductModal({ onClose, onSave, brand }) {
           <div style={{ marginBottom: 28 }}>
             <label style={labelStyle}>Product Image</label>
             <div style={{ display: 'grid', gridTemplateColumns: imagePreview ? '1fr 1fr' : '1fr', gap: 12 }}>
-              <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px 16px', border: '2px dashed rgba(73,115,54,0.3)', borderRadius: 12, background: 'white', cursor: 'pointer' }}>
-                <input type="file" accept="image/*" onChange={handleImage} style={{ display: 'none' }} />
-                <div style={{ fontSize: 28, marginBottom: 6 }}>📷</div>
-                <div style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>Upload from device</div>
+              <label style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '24px 16px', border: '2px dashed rgba(73,115,54,0.3)', borderRadius: 12, background: 'white', cursor: uploading ? 'not-allowed' : 'pointer', opacity: uploading ? 0.6 : 1 }}>
+                <input type="file" accept="image/*" onChange={handleImage} style={{ display: 'none' }} disabled={uploading} />
+                <div style={{ fontSize: 13, fontWeight: 600, color: '#1a1a1a' }}>{uploading ? '⏳ Uploading...' : '📷 Upload from device'}</div>
                 <div style={{ fontSize: 11, color: '#999', marginTop: 2 }}>JPG, PNG, WebP</div>
               </label>
               {imagePreview && <div style={{ borderRadius: 12, overflow: 'hidden', aspectRatio: '1' }}><img src={imagePreview} alt="preview" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /></div>}
             </div>
+            {uploadError && <div style={{ fontSize: 11, color: '#c0392b', marginTop: 6 }}>{uploadError}</div>}
             <div style={{ marginTop: 10 }}>
               <label style={{ ...labelStyle, marginBottom: 6 }}>Or paste image URL</label>
-              <input style={inputStyle} value={imageFile ? '' : form.image} onChange={e => setForm(f => ({ ...f, image: e.target.value }))} placeholder="https://..." disabled={!!imageFile} />
+              <input style={inputStyle} value={form.image.startsWith('data:') ? '' : form.image} onChange={e => setForm(f => ({ ...f, image: e.target.value }))} placeholder="https://..." />
             </div>
           </div>
-          <button type="submit" style={{ width: '100%', background: accentColor, color: '#F0F2F0', border: 'none', borderRadius: 50, padding: '15px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', cursor: 'pointer' }}>
-            Add Product →
+          <button type="submit" disabled={uploading} style={{ width: '100%', background: uploading ? '#aaa' : accentColor, color: '#F0F2F0', border: 'none', borderRadius: 50, padding: '15px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', cursor: uploading ? 'not-allowed' : 'pointer' }}>
+            {uploading ? 'Uploading image...' : 'Add Product →'}
           </button>
         </form>
       </motion.div>
@@ -477,12 +489,9 @@ export default function Admin() {
   const [globalCareers, setGlobalCareers] = useState([]);
   const [exportProducts, setExportProducts] = useState([]);
   const [exportCareers, setExportCareers] = useState([]);
-  const [globalTeam, setGlobalTeam] = useState([]);
-  const [exportTeam, setExportTeam] = useState([]);
   const [images, setImages] = useState({});
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [showAddCareer, setShowAddCareer] = useState(false);
-  const [showTeamModal, setShowTeamModal] = useState(null); // null | 'add' | member object
   const [confirmDelete, setConfirmDelete] = useState(null);
 
   useEffect(() => {
@@ -491,8 +500,6 @@ export default function Admin() {
       setGlobalCareers(getCareers());
       setExportProducts(getExportProducts());
       setExportCareers(getExportCareers());
-      setGlobalTeam(getTeam());
-      setExportTeam(getExportTeam());
       setImages(getImages());
     }
   }, [loggedIn]);
@@ -501,7 +508,6 @@ export default function Admin() {
   const isExport = activeBrand === 'export';
   const products = isExport ? exportProducts : globalProducts;
   const careers = isExport ? exportCareers : globalCareers;
-  const team = isExport ? exportTeam : globalTeam;
 
   const handleAddProduct = (data) => {
     if (isExport) { addExportProduct(data); setExportProducts(getExportProducts()); }
@@ -519,24 +525,6 @@ export default function Admin() {
   const handleDeleteCareer = (id) => {
     if (isExport) { deleteExportCareer(id); setExportCareers(getExportCareers()); }
     else { deleteCareer(id); setGlobalCareers(getCareers()); }
-    setConfirmDelete(null);
-  };
-
-  const handleSaveTeamMember = (data) => {
-    if (typeof showTeamModal === 'object' && showTeamModal?.id) {
-      // editing
-      if (isExport) { updateExportTeamMember(showTeamModal.id, data); setExportTeam(getExportTeam()); }
-      else { updateTeamMember(showTeamModal.id, data); setGlobalTeam(getTeam()); }
-    } else {
-      // adding
-      if (isExport) { addExportTeamMember(data); setExportTeam(getExportTeam()); }
-      else { addTeamMember(data); setGlobalTeam(getTeam()); }
-    }
-    setShowTeamModal(null);
-  };
-  const handleDeleteTeamMember = (id) => {
-    if (isExport) { deleteExportTeamMember(id); setExportTeam(getExportTeam()); }
-    else { deleteTeamMember(id); setGlobalTeam(getTeam()); }
     setConfirmDelete(null);
   };
 
@@ -607,11 +595,11 @@ export default function Admin() {
       {/* Stats */}
       <div style={{ background: 'white', padding: '24px 0', borderBottom: '1px solid rgba(73,115,54,0.08)' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: 24 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(160px, 1fr))', gap: 24 }}>
             {[
               { label: 'Products', value: products.length, emoji: '📦' },
               { label: 'Careers', value: careers.length, emoji: '💼' },
-              { label: 'Team', value: team.length, emoji: '👥' },
+              { label: 'Categories', value: [...new Set(products.map(p => p.category))].length, emoji: '🏷️' },
               { label: 'Site Images', value: brandImages.length, emoji: '🖼️' },
             ].map(s => (
               <div key={s.label} style={{ textAlign: 'center', padding: '12px 0' }}>
@@ -629,7 +617,6 @@ export default function Admin() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 36, background: 'white', borderRadius: 50, padding: 6, width: 'fit-content', border: `1px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.1)` }}>
           {tabBtn('products', 'Products', '📦')}
           {tabBtn('careers', 'Careers', '💼')}
-          {tabBtn('team', 'Our Team', '👥')}
           {tabBtn('images', 'Site Images', '🖼️')}
         </div>
 
@@ -716,53 +703,6 @@ export default function Admin() {
           </div>
         )}
 
-        {/* Team Tab */}
-        {activeTab === 'team' && (
-          <div style={{ paddingBottom: 80 }}>
-            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 36, flexWrap: 'wrap', gap: 16 }}>
-              <div>
-                <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 32, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>Our Team</h2>
-                <div style={{ fontSize: 11, color: brand.green, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 600 }}>{brand.name}</div>
-              </div>
-              <button onClick={() => setShowTeamModal('add')}
-                style={{ background: brand.accent, color: brand.accentText, border: 'none', borderRadius: 40, padding: '12px 28px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', cursor: 'pointer' }}>
-                + Add Member
-              </button>
-            </div>
-            {team.length === 0 && (
-              <div style={{ textAlign: 'center', padding: '80px 0', color: '#aaa' }}>
-                <div style={{ fontSize: 48, marginBottom: 12 }}>👥</div>
-                <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22 }}>No team members yet. Add your first member above.</p>
-              </div>
-            )}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 24 }}>
-              {team.map(member => (
-                <motion.div key={member.id} layout initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
-                  style={{ background: 'white', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(73,115,54,0.08)', textAlign: 'center' }}>
-                  <div style={{ aspectRatio: '1', backgroundImage: member.image ? `url(${member.image})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center top', background: member.image ? undefined : '#e8e9c8', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                    {!member.image && <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(73,115,54,0.15)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: brand.green }}>{member.name.charAt(0)}</div>}
-                  </div>
-                  <div style={{ padding: '18px 16px 20px' }}>
-                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>{member.name}</div>
-                    <div style={{ fontSize: 11, letterSpacing: 1.5, textTransform: 'uppercase', color: brand.green, fontWeight: 600, marginBottom: member.bio ? 10 : 16 }}>{member.role}</div>
-                    {member.bio && <p style={{ fontSize: 12, color: '#888', lineHeight: 1.6, marginBottom: 16 }}>{member.bio}</p>}
-                    <div style={{ display: 'flex', gap: 8 }}>
-                      <button onClick={() => setShowTeamModal(member)}
-                        style={{ flex: 1, background: `rgba(${isExport ? '92,140,70' : '73,115,54'},0.08)`, color: brand.green, border: `1px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)`, borderRadius: 40, padding: '8px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
-                        Edit
-                      </button>
-                      <button onClick={() => setConfirmDelete({ type: 'team', id: member.id, name: member.name })}
-                        style={{ flex: 1, background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)', borderRadius: 40, padding: '8px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
-                        🗑 Remove
-                      </button>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        )}
-
         {/* Images Tab */}
         {activeTab === 'images' && (
           <div style={{ paddingBottom: 80 }}>
@@ -805,7 +745,7 @@ export default function Admin() {
               <p style={{ fontSize: 14, color: '#666', marginBottom: 28 }}>Are you sure you want to remove <strong>"{confirmDelete.name}"</strong>? This cannot be undone.</p>
               <div style={{ display: 'flex', gap: 12 }}>
                 <button onClick={() => setConfirmDelete(null)} style={{ flex: 1, background: 'transparent', border: `1.5px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.3)`, color: brand.green, borderRadius: 40, padding: '12px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
-                <button onClick={() => confirmDelete.type === 'product' ? handleDeleteProduct(confirmDelete.id) : confirmDelete.type === 'career' ? handleDeleteCareer(confirmDelete.id) : handleDeleteTeamMember(confirmDelete.id)}
+                <button onClick={() => confirmDelete.type === 'product' ? handleDeleteProduct(confirmDelete.id) : handleDeleteCareer(confirmDelete.id)}
                   style={{ flex: 1, background: '#c0392b', color: 'white', border: 'none', borderRadius: 40, padding: '12px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
                   Delete
                 </button>
@@ -818,7 +758,6 @@ export default function Admin() {
       <AnimatePresence>
         {showAddProduct && <AddProductModal onClose={() => setShowAddProduct(false)} onSave={handleAddProduct} brand={activeBrand} />}
         {showAddCareer && <AddCareerModal onClose={() => setShowAddCareer(false)} onSave={handleAddCareer} brand={activeBrand} />}
-        {showTeamModal && <TeamMemberModal onClose={() => setShowTeamModal(null)} onSave={handleSaveTeamMember} brand={activeBrand} existing={typeof showTeamModal === 'object' ? showTeamModal : null} />}
       </AnimatePresence>
     </div>
   );

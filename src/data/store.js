@@ -50,11 +50,13 @@ export function addProduct(product) {
   const products = getProducts();
   const newProduct = { ...product, id: Date.now().toString() };
   saveProducts([...products, newProduct]);
+  if (supabase) supabase.from('products').insert(newProduct).then(({ error }) => { if (error) console.warn('Supabase product save failed:', error.message); });
   return newProduct;
 }
 
 export function deleteProduct(id) {
   saveProducts(getProducts().filter(p => p.id !== id));
+  if (supabase) supabase.from('products').delete().eq('id', id).then(({ error }) => { if (error) console.warn('Supabase product delete failed:', error.message); });
 }
 
 export function getCareers() {
@@ -78,6 +80,22 @@ export function addCareer(career) {
 
 export function deleteCareer(id) {
   saveCareers(getCareers().filter(c => c.id !== id));
+}
+
+// Sync products from Supabase on app load
+export async function syncProductsFromSupabase() {
+  if (!supabase) return;
+  try {
+    const [{ data: prods, error: e1 }, { data: expProds, error: e2 }] = await Promise.all([
+      supabase.from('products').select('*'),
+      supabase.from('export_products').select('*'),
+    ]);
+    if (!e1 && prods?.length) localStorage.setItem(PRODUCTS_KEY, JSON.stringify(prods));
+    if (!e2 && expProds?.length) localStorage.setItem(EXPORT_PRODUCTS_KEY, JSON.stringify(expProds));
+    window.dispatchEvent(new Event('layma_products_updated'));
+  } catch (e) {
+    console.warn('Supabase product sync failed, using local cache:', e.message);
+  }
 }
 
 // ── Site Images ──
@@ -134,11 +152,13 @@ export function addExportProduct(product) {
   const products = getExportProducts();
   const newProduct = { ...product, id: 'exp_' + Date.now() };
   localStorage.setItem(EXPORT_PRODUCTS_KEY, JSON.stringify([...products, newProduct]));
+  if (supabase) supabase.from('export_products').insert(newProduct).then(({ error }) => { if (error) console.warn('Supabase export product save failed:', error.message); });
   return newProduct;
 }
 
 export function deleteExportProduct(id) {
   localStorage.setItem(EXPORT_PRODUCTS_KEY, JSON.stringify(getExportProducts().filter(p => p.id !== id)));
+  if (supabase) supabase.from('export_products').delete().eq('id', id).then(({ error }) => { if (error) console.warn('Supabase export product delete failed:', error.message); });
 }
 
 // ── Team ──
