@@ -29,7 +29,7 @@ export default function Careers() {
               Careers at<br /><em style={{ color: '#BABF26' }}>Layma</em>
             </h1>
             <p style={{ fontSize: 18, lineHeight: 1.8, color: 'rgba(241,242,196,0.75)', maxWidth: 560 }}>
-              Be part of a passionate team building something genuinely meaningful — premium food trading that connects cultures, supports communities, and brings quality to the world.
+              Be part of a passionate team building something genuinely meaningful. Premium food trading that connects cultures, supports communities, and brings quality to the world.
             </p>
           </motion.div>
         </div>

@@ -66,7 +66,7 @@ export default function Contact() {
         body: JSON.stringify({
           name: form.name,
           email: form.email,
-          company: form.company || '—',
+          company: form.company || 'N/A',
           subject: form.subject,
           message: form.message,
           _subject: `Layma Website Enquiry: ${form.subject}`,
@@ -96,7 +96,7 @@ export default function Contact() {
               Contact Us
             </h1>
             <p style={{ fontSize: 18, lineHeight: 1.8, color: 'rgba(241,242,196,0.75)', maxWidth: 500, margin: '0 auto' }}>
-              Whether you're sourcing, partnering, or enquiring — our team is ready to connect with you.
+              Whether you're sourcing, partnering, or enquiring, our team is ready to connect with you.
             </p>
           </motion.div>
         </div>

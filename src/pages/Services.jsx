@@ -51,7 +51,7 @@ export default function Services() {
               Layma Global<br /><em style={{ color: '#BABF26' }}>Trading & Services</em>
             </h1>
             <p style={{ fontSize: 17, lineHeight: 1.8, color: 'rgba(241,242,196,0.8)', maxWidth: 600 }}>
-              Qatar's trusted food trading partner — sourcing globally, distributing locally. We supply supermarkets, wholesalers, retailers, and B2B businesses with premium food products in bulk and retail formats.
+              Qatar's trusted food trading partner. Sourcing globally, distributing locally. We supply supermarkets, wholesalers, retailers, and B2B businesses with premium food products in bulk and retail formats.
             </p>
           </motion.div>
         </div>
@@ -163,7 +163,7 @@ export default function Services() {
               Partner with Layma Global
             </h2>
             <p style={{ fontSize: 16, color: 'rgba(241,242,196,0.6)', maxWidth: 480, margin: '0 auto 36px', lineHeight: 1.8 }}>
-              Supermarkets, wholesalers, retailers, and B2B buyers — let's build a reliable supply relationship.
+              Supermarkets, wholesalers, retailers, and B2B buyers. Let's build a reliable supply relationship.
             </p>
             <Link to="/contact" style={{ display: 'inline-flex', alignItems: 'center', gap: 8, background: '#BABF26', color: '#1a1a1a', textDecoration: 'none', padding: '16px 36px', borderRadius: 50, fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase' }}>
               Get in Touch →

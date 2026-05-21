@@ -1,23 +1,27 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
+import { getExportTeam } from '../data/store';
 
-const exportTeam = [
-  { id: '1', name: 'Azhar Ali M', role: 'Director, Purchase & Vendor Management', image: '' },
-  { id: '2', name: 'Muhammed Ismail K', role: 'Director, Distribution & Operations', image: '' },
-];
 
 const values = [
-  { title: 'Quality First', desc: 'Every product we export is verified, graded, and certified before it leaves our facility — no compromises on standards.' },
+  { title: 'Quality First', desc: 'Every product we export is verified, graded, and certified before it leaves our facility. No compromises on standards.' },
   { title: 'Partnership', desc: 'We build long-term relationships with farmers, suppliers, and buyers based on trust and transparent communication.' },
-  { title: 'Global Reach', desc: 'From Kerala to Qatar and beyond — we bridge the best of Indian produce with global markets.' },
+  { title: 'Global Reach', desc: 'From Kerala to Qatar and beyond, we bridge the best of Indian produce with global markets.' },
   { title: 'Reliability', desc: 'On-time delivery, accurate documentation, and consistent supply are what our buyers count on from us.' },
 ];
 
 export default function ExportAbout() {
   const aboutImg = useSiteImage('export_about');
   const heroImg = useSiteImage('export_hero');
+  const [exportTeam, setExportTeam] = useState(getExportTeam);
+  useEffect(() => {
+    const handler = () => setExportTeam(getExportTeam());
+    window.addEventListener('layma_team_updated', handler);
+    return () => window.removeEventListener('layma_team_updated', handler);
+  }, []);
   return (
     <div style={{ background: '#F0F2F0' }}>
       {/* Hero */}
@@ -32,7 +36,7 @@ export default function ExportAbout() {
             <div style={{ fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: '#AFBFA3', fontWeight: 600, marginBottom: 20 }}>Our Story</div>
             <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(52px, 8vw, 96px)', fontWeight: 600, color: '#F0F2F0', lineHeight: 1, marginBottom: 28 }}>About Layma Export</h1>
             <p style={{ fontSize: 18, lineHeight: 1.8, color: 'rgba(240,242,240,0.75)', maxWidth: 600, margin: '0 auto' }}>
-              Kerala's trusted food export company — built on authentic farm sourcing, rigorous quality, and a genuine passion for bringing India's finest produce to the world.
+              Kerala's trusted food export company, built on authentic farm sourcing, rigorous quality, and a genuine passion for bringing India's finest produce to the world.
             </p>
           </motion.div>
         </div>
@@ -121,13 +125,13 @@ export default function ExportAbout() {
               {
                 label: 'Our Mission',
                 title: 'Pure Quality,\nDirect from Source',
-                text: 'To export the finest Kerala produce with uncompromising quality, transparent sourcing, and reliable fulfilment — building lasting partnerships with buyers across the globe.',
+                text: 'To export the finest Kerala produce with uncompromising quality, transparent sourcing, and reliable fulfilment, building lasting partnerships with buyers across the globe.',
                 bg: '#497336', textColor: '#F0F2F0', subColor: '#AFBFA3',
               },
               {
                 label: 'Our Vision',
                 title: "Kerala's Premier\nExport Brand",
-                text: "To become India's most trusted food export brand — known for direct farm access, certified quality, and the authenticity of every spice, nut, and fruit we ship.",
+                text: "To become India's most trusted food export brand, known for direct farm access, certified quality, and the authenticity of every spice, nut, and fruit we ship.",
                 bg: '#88A67B', textColor: '#1a1a1a', subColor: 'rgba(26,26,26,0.55)',
               },
             ].map(item => (

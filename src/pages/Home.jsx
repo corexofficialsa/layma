@@ -44,7 +44,7 @@ const reviews = [
   {
     name: 'Fatima Al-Sayed',
     role: 'Executive Chef, Four Seasons Doha',
-    text: 'The saffron and cardamom from Layma are simply exceptional. You can taste the difference — our guests notice it too. Premium in every sense.',
+    text: 'The saffron and cardamom from Layma are simply exceptional. You can taste the difference, and our guests notice it too. Premium in every sense.',
     rating: 5,
   },
   {

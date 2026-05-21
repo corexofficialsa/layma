@@ -19,7 +19,7 @@ const processSteps = [
 ];
 
 const reviews = [
-  { name: 'Khalid Al-Mansoori', role: 'Import Manager, Gulf Foods Qatar', text: 'Layma Export has been our preferred spice supplier for years. The cardamom and black pepper quality is consistently exceptional — exactly what our customers expect.', rating: 5 },
+  { name: 'Khalid Al-Mansoori', role: 'Import Manager, Gulf Foods Qatar', text: 'Layma Export has been our preferred spice supplier for years. The cardamom and black pepper quality is consistently exceptional. Exactly what our customers expect.', rating: 5 },
   { name: 'Ravi Krishnan', role: 'Procurement Head, Lulu Hypermarket', text: 'Their cashews and dry fruits are among the best we source. Clean, well-graded, and delivered on schedule every single time. A partner we truly trust.', rating: 5 },
   { name: 'Sara Al-Jabri', role: 'Executive Chef, Mandarin Oriental Doha', text: 'The Kerala cardamom from Layma Export is incomparable. You can smell the difference the moment you open the bag. Our kitchen team asks for it by name.', rating: 5 },
 ];

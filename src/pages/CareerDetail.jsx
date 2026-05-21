@@ -89,7 +89,7 @@ export default function CareerDetail() {
               animate={{ opacity: 1, scale: 1 }}
               style={{ display: 'inline-flex', alignItems: 'center', gap: 10, background: 'rgba(186,191,38,0.2)', border: '1px solid rgba(186,191,38,0.4)', borderRadius: 40, padding: '14px 28px', color: '#BABF26', fontWeight: 600, fontSize: 15 }}
             >
-              Application Submitted — We'll be in touch!
+              Application Submitted. We'll be in touch!
             </motion.div>
           )}
         </div>

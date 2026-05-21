@@ -1,7 +1,9 @@
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
+import { getTeam } from '../data/store';
 
 const values = [
   { title: 'Quality', desc: 'We never compromise on product standards. Every item is verified, tested, and certified before it reaches our clients.' },
@@ -10,15 +12,16 @@ const values = [
   { title: 'Qatar Focus', desc: 'Headquartered in Doha, Qatar, we connect premium sourcing origins across India with markets across Qatar.' },
 ];
 
-const globalTeam = [
-  { id: '1', name: 'Salih Backer K', role: 'Chief Executive Officer', image: '' },
-  { id: '2', name: 'Jafar Ali M', role: 'Executive Managing Director', image: '' },
-  { id: '3', name: 'Muhammed Najmudheen PV', role: 'Director, Business Development & Marketing', image: '' },
-];
 
 export default function About() {
   const aboutHeroImg = useSiteImage('about_hero');
   const aboutGlobalImg = useSiteImage('about_global');
+  const [globalTeam, setGlobalTeam] = useState(getTeam);
+  useEffect(() => {
+    const handler = () => setGlobalTeam(getTeam());
+    window.addEventListener('layma_team_updated', handler);
+    return () => window.removeEventListener('layma_team_updated', handler);
+  }, []);
   return (
     <div>
       {/* Hero */}
@@ -33,7 +36,7 @@ export default function About() {
             <div style={{ fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600, marginBottom: 20 }}>Our Story</div>
             <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(52px, 8vw, 96px)', fontWeight: 600, color: '#F1F2C4', lineHeight: 1, marginBottom: 28 }}>About Layma</h1>
             <p style={{ fontSize: 18, lineHeight: 1.8, color: 'rgba(241,242,196,0.8)', maxWidth: 620, margin: '0 auto' }}>
-              Qatar's trusted food trading company — built on quality, reliability, and a genuine passion for premium natural food products from the world's best origins.
+              Qatar's trusted food trading company, built on quality, reliability, and a genuine passion for premium natural food products from the world's best origins.
             </p>
           </motion.div>
         </div>
@@ -121,13 +124,13 @@ export default function About() {
               {
                 label: 'Our Mission',
                 title: 'Quality Products,\nReliable Service',
-                text: 'To provide quality food products with reliable sourcing, professional service, hygienic packaging, and long-term customer relationships — serving Qatar\'s markets and beyond with honesty and consistency.',
+                text: 'To provide quality food products with reliable sourcing, professional service, hygienic packaging, and long-term customer relationships, serving Qatar\'s markets with honesty and consistency.',
                 bg: '#497336',
               },
               {
                 label: 'Our Vision',
                 title: 'A Trusted Global\nFood Brand',
-                text: 'To become a trusted international food trading and export brand delivering premium-quality products worldwide — known for excellence, consistency, and the genuine care we invest in every product we trade.',
+                text: 'To become a trusted international food trading and export brand delivering premium-quality products worldwide, known for excellence, consistency, and the genuine care we invest in every product we trade.',
                 bg: '#BABF26',
               },
             ].map(item => (

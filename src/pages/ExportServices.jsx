@@ -8,7 +8,7 @@ const offerings = [
   { title: 'Processing & Grading', desc: 'Our Ramanattukara facility handles cleaning, drying, sorting, and grading to international specifications for spices, nuts, and dry fruits.' },
   { title: 'Bulk Export Packaging', desc: 'Available in 5kg, 10kg, 25kg, and custom FIBC sacks for wholesale and commercial buyers with proper FSSAI and export-compliant labelling.' },
   { title: 'Layma Branded Local Distribution', desc: 'Layma branded consumer packs (50g to 1kg) supplied for local distribution across Qatar and the GCC in export-quality packaging.' },
-  { title: 'Sea & Air Freight', desc: 'FCL/LCL sea freight and air cargo solutions with complete export documentation — Bill of Lading, COO, Health Certificate, Phytosanitary.' },
+  { title: 'Sea & Air Freight', desc: 'FCL/LCL sea freight and air cargo solutions with complete export documentation: Bill of Lading, COO, Health Certificate, Phytosanitary.' },
   { title: 'Quality Certification', desc: 'All products supplied with relevant certifications: FSSAI, ISO, organic (where applicable). CoS certification provided for countries that require it.' },
   { title: 'Export Documentation', desc: 'Full handling of shipping bill, packing list, invoice, certificates of origin, and customs clearance paperwork for hassle-free import at destination.' },
   { title: 'Long-Term Supply', desc: 'Consistent monthly or quarterly supply programmes for importers, distributors, and hospitality buyers who need reliable year-round stock.' },
@@ -49,7 +49,7 @@ export default function ExportServices() {
             <div style={{ fontSize: 11, letterSpacing: 4, textTransform: 'uppercase', color: '#AFBFA3', fontWeight: 600, marginBottom: 20 }}>Export Solutions</div>
             <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(52px, 8vw, 96px)', fontWeight: 600, color: '#F0F2F0', lineHeight: 1, marginBottom: 28 }}>Our Services</h1>
             <p style={{ fontSize: 18, lineHeight: 1.8, color: 'rgba(240,242,240,0.75)', maxWidth: 580, margin: '0 auto' }}>
-              End-to-end food export solutions — from farm sourcing and processing to certified packaging and global shipping.
+              End-to-end food export solutions, from farm sourcing and processing to certified packaging and global shipping.
             </p>
           </motion.div>
         </div>

@@ -1,4 +1,4 @@
-import { initialProducts, initialCareers, initialImages, initialExportProducts, initialExportCareers } from './initialData';
+import { initialProducts, initialCareers, initialImages, initialExportProducts, initialExportCareers, initialGlobalTeam, initialExportTeam } from './initialData';
 import { supabase } from '../lib/supabaseClient';
 
 const PRODUCTS_KEY = 'layma_products';
@@ -32,8 +32,20 @@ seed(CAREERS_KEY, initialCareers);
 seed(IMAGES_KEY, initialImages);
 seed(EXPORT_PRODUCTS_KEY, initialExportProducts);
 seed(EXPORT_CAREERS_KEY, initialExportCareers);
-seed(TEAM_KEY, []);
-seed(EXPORT_TEAM_KEY, []);
+seed(TEAM_KEY, initialGlobalTeam);
+seed(EXPORT_TEAM_KEY, initialExportTeam);
+
+// Seed team with defaults if stored as empty (from old version)
+const TEAM_INIT_KEY = 'layma_team_init_v1';
+if (!localStorage.getItem(TEAM_INIT_KEY)) {
+  if (JSON.parse(localStorage.getItem(TEAM_KEY) || '[]').length === 0) {
+    localStorage.setItem(TEAM_KEY, JSON.stringify(initialGlobalTeam));
+  }
+  if (JSON.parse(localStorage.getItem(EXPORT_TEAM_KEY) || '[]').length === 0) {
+    localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(initialExportTeam));
+  }
+  localStorage.setItem(TEAM_INIT_KEY, '1');
+}
 
 export function getProducts() {
   return JSON.parse(localStorage.getItem(PRODUCTS_KEY) || '[]');
@@ -187,13 +199,19 @@ export function addTeamMember(member) {
   const team = getTeam();
   const m = { ...member, id: Date.now().toString() };
   localStorage.setItem(TEAM_KEY, JSON.stringify([...team, m]));
+  window.dispatchEvent(new Event('layma_team_updated'));
+  if (supabase) supabase.from('team').insert(m).then(({ error }) => { if (error) console.warn('Supabase team save failed:', error.message); });
   return m;
 }
 export function updateTeamMember(id, data) {
   localStorage.setItem(TEAM_KEY, JSON.stringify(getTeam().map(m => m.id === id ? { ...m, ...data } : m)));
+  window.dispatchEvent(new Event('layma_team_updated'));
+  if (supabase) supabase.from('team').update(data).eq('id', id).then(({ error }) => { if (error) console.warn('Supabase team update failed:', error.message); });
 }
 export function deleteTeamMember(id) {
   localStorage.setItem(TEAM_KEY, JSON.stringify(getTeam().filter(m => m.id !== id)));
+  window.dispatchEvent(new Event('layma_team_updated'));
+  if (supabase) supabase.from('team').delete().eq('id', id).then(({ error }) => { if (error) console.warn('Supabase team delete failed:', error.message); });
 }
 
 export function getExportTeam() {
@@ -203,13 +221,34 @@ export function addExportTeamMember(member) {
   const team = getExportTeam();
   const m = { ...member, id: 'expt_' + Date.now() };
   localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify([...team, m]));
+  window.dispatchEvent(new Event('layma_team_updated'));
+  if (supabase) supabase.from('export_team').insert(m).then(({ error }) => { if (error) console.warn('Supabase export team save failed:', error.message); });
   return m;
 }
 export function updateExportTeamMember(id, data) {
   localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(getExportTeam().map(m => m.id === id ? { ...m, ...data } : m)));
+  window.dispatchEvent(new Event('layma_team_updated'));
+  if (supabase) supabase.from('export_team').update(data).eq('id', id).then(({ error }) => { if (error) console.warn('Supabase export team update failed:', error.message); });
 }
 export function deleteExportTeamMember(id) {
   localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(getExportTeam().filter(m => m.id !== id)));
+  window.dispatchEvent(new Event('layma_team_updated'));
+  if (supabase) supabase.from('export_team').delete().eq('id', id).then(({ error }) => { if (error) console.warn('Supabase export team delete failed:', error.message); });
+}
+
+export async function syncTeamFromSupabase() {
+  if (!supabase) return;
+  try {
+    const [{ data: team, error: e1 }, { data: expTeam, error: e2 }] = await Promise.all([
+      supabase.from('team').select('*'),
+      supabase.from('export_team').select('*'),
+    ]);
+    if (!e1 && team?.length) localStorage.setItem(TEAM_KEY, JSON.stringify(team));
+    if (!e2 && expTeam?.length) localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(expTeam));
+    window.dispatchEvent(new Event('layma_team_updated'));
+  } catch (e) {
+    console.warn('Supabase team sync failed, using local cache:', e.message);
+  }
 }
 
 // ── Export Careers ──

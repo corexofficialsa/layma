@@ -24,6 +24,8 @@ import {
   getExportProducts, addExportProduct, updateExportProduct, deleteExportProduct,
   getExportCareers, addExportCareer, updateExportCareer, deleteExportCareer,
   getImages, updateSiteImage,
+  getTeam, addTeamMember, updateTeamMember, deleteTeamMember,
+  getExportTeam, addExportTeamMember, updateExportTeamMember, deleteExportTeamMember,
 } from '../data/store';
 import { initialImages } from '../data/initialData';
 
@@ -494,10 +496,14 @@ export default function Admin() {
   const [exportProducts, setExportProducts] = useState([]);
   const [exportCareers, setExportCareers] = useState([]);
   const [images, setImages] = useState({});
+  const [globalTeam, setGlobalTeam] = useState([]);
+  const [exportTeam, setExportTeam] = useState([]);
   const [showAddProduct, setShowAddProduct] = useState(false);
   const [showAddCareer, setShowAddCareer] = useState(false);
+  const [showAddTeam, setShowAddTeam] = useState(false);
   const [editingProduct, setEditingProduct] = useState(null);
   const [editingCareer, setEditingCareer] = useState(null);
+  const [editingTeam, setEditingTeam] = useState(null);
   const [confirmDelete, setConfirmDelete] = useState(null);
 
   useEffect(() => {
@@ -507,6 +513,8 @@ export default function Admin() {
       setExportProducts(getExportProducts());
       setExportCareers(getExportCareers());
       setImages(getImages());
+      setGlobalTeam(getTeam());
+      setExportTeam(getExportTeam());
     }
   }, [loggedIn]);
 
@@ -514,6 +522,7 @@ export default function Admin() {
   const isExport = activeBrand === 'export';
   const products = isExport ? exportProducts : globalProducts;
   const careers = isExport ? exportCareers : globalCareers;
+  const team = isExport ? exportTeam : globalTeam;
 
   const handleAddProduct = (data) => {
     if (isExport) { addExportProduct(data); setExportProducts(getExportProducts()); }
@@ -543,6 +552,21 @@ export default function Admin() {
     if (isExport) { updateExportCareer(editingCareer.id, data); setExportCareers(getExportCareers()); }
     else { updateCareer(editingCareer.id, data); setGlobalCareers(getCareers()); }
     setEditingCareer(null);
+  };
+
+  const handleAddTeam = (data) => {
+    if (isExport) { addExportTeamMember(data); setExportTeam(getExportTeam()); }
+    else { addTeamMember(data); setGlobalTeam(getTeam()); }
+  };
+  const handleUpdateTeam = (data) => {
+    if (isExport) { updateExportTeamMember(editingTeam.id, data); setExportTeam(getExportTeam()); }
+    else { updateTeamMember(editingTeam.id, data); setGlobalTeam(getTeam()); }
+    setEditingTeam(null);
+  };
+  const handleDeleteTeam = (id) => {
+    if (isExport) { deleteExportTeamMember(id); setExportTeam(getExportTeam()); }
+    else { deleteTeamMember(id); setGlobalTeam(getTeam()); }
+    setConfirmDelete(null);
   };
 
   // Switch brand → reset to products tab
@@ -616,7 +640,7 @@ export default function Admin() {
             {[
               { label: 'Products', value: products.length, emoji: '📦' },
               { label: 'Careers', value: careers.length, emoji: '💼' },
-              { label: 'Categories', value: [...new Set(products.map(p => p.category))].length, emoji: '🏷️' },
+              { label: 'Team Members', value: team.length, emoji: '👥' },
               { label: 'Site Images', value: brandImages.length, emoji: '🖼️' },
             ].map(s => (
               <div key={s.label} style={{ textAlign: 'center', padding: '12px 0' }}>
@@ -634,6 +658,7 @@ export default function Admin() {
         <div style={{ display: 'flex', gap: 8, marginBottom: 36, background: 'white', borderRadius: 50, padding: 6, width: 'fit-content', border: `1px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.1)` }}>
           {tabBtn('products', 'Products', '📦')}
           {tabBtn('careers', 'Careers', '💼')}
+          {tabBtn('team', 'Team', '👥')}
           {tabBtn('images', 'Site Images', '🖼️')}
         </div>
 
@@ -732,6 +757,53 @@ export default function Admin() {
           </div>
         )}
 
+        {/* Team Tab */}
+        {activeTab === 'team' && (
+          <div style={{ paddingBottom: 80 }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 28, flexWrap: 'wrap', gap: 16 }}>
+              <div>
+                <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 32, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>Team Members</h2>
+                <div style={{ fontSize: 11, color: brand.green, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 600 }}>{brand.name}</div>
+              </div>
+              <button onClick={() => setShowAddTeam(true)}
+                style={{ background: brand.accent, color: brand.accentText, border: 'none', borderRadius: 40, padding: '12px 28px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', cursor: 'pointer' }}>
+                + Add Member
+              </button>
+            </div>
+            {team.length === 0 && (
+              <div style={{ textAlign: 'center', padding: '80px 0', color: '#aaa' }}>
+                <div style={{ fontSize: 48, marginBottom: 12 }}>👥</div>
+                <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22 }}>No team members yet. Add your first member above.</p>
+              </div>
+            )}
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 20 }}>
+              {team.map(m => (
+                <motion.div key={m.id} layout initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }}
+                  style={{ background: 'white', borderRadius: 20, overflow: 'hidden', border: '1px solid rgba(73,115,54,0.08)' }}>
+                  <div style={{ aspectRatio: '1', backgroundImage: m.image ? `url(${m.image})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center top', position: 'relative', background: m.image ? undefined : (isExport ? 'rgba(92,140,70,0.1)' : 'rgba(73,115,54,0.1)') }}>
+                    {!m.image && <div style={{ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 72, height: 72, borderRadius: '50%', background: isExport ? 'rgba(92,140,70,0.2)' : 'rgba(73,115,54,0.2)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 32, color: brand.green }}>{m.name.charAt(0)}</div></div>}
+                  </div>
+                  <div style={{ padding: '16px 18px 20px' }}>
+                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600, color: '#1a1a1a', marginBottom: 4 }}>{m.name}</div>
+                    <div style={{ fontSize: 11, letterSpacing: 1.5, textTransform: 'uppercase', color: brand.green, fontWeight: 600, marginBottom: m.bio ? 8 : 12 }}>{m.role}</div>
+                    {m.bio && <div style={{ fontSize: 13, color: '#777', lineHeight: 1.6, marginBottom: 12 }}>{m.bio}</div>}
+                    <div style={{ display: 'flex', gap: 8 }}>
+                      <button onClick={() => setEditingTeam(m)}
+                        style={{ flex: 1, background: `rgba(${isExport ? '92,140,70' : '73,115,54'},0.08)`, color: brand.green, border: `1px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)`, borderRadius: 40, padding: '8px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
+                        ✏ Edit
+                      </button>
+                      <button onClick={() => setConfirmDelete({ type: 'team', id: m.id, name: m.name })}
+                        style={{ flex: 1, background: 'rgba(192,57,43,0.08)', color: '#c0392b', border: '1px solid rgba(192,57,43,0.2)', borderRadius: 40, padding: '8px', fontFamily: 'Inter, sans-serif', fontSize: 12, fontWeight: 600, cursor: 'pointer', letterSpacing: 1, textTransform: 'uppercase' }}>
+                        🗑 Remove
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        )}
+
         {/* Images Tab */}
         {activeTab === 'images' && (
           <div style={{ paddingBottom: 80 }}>
@@ -774,7 +846,7 @@ export default function Admin() {
               <p style={{ fontSize: 14, color: '#666', marginBottom: 28 }}>Are you sure you want to remove <strong>"{confirmDelete.name}"</strong>? This cannot be undone.</p>
               <div style={{ display: 'flex', gap: 12 }}>
                 <button onClick={() => setConfirmDelete(null)} style={{ flex: 1, background: 'transparent', border: `1.5px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.3)`, color: brand.green, borderRadius: 40, padding: '12px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>Cancel</button>
-                <button onClick={() => confirmDelete.type === 'product' ? handleDeleteProduct(confirmDelete.id) : handleDeleteCareer(confirmDelete.id)}
+                <button onClick={() => confirmDelete.type === 'product' ? handleDeleteProduct(confirmDelete.id) : confirmDelete.type === 'career' ? handleDeleteCareer(confirmDelete.id) : handleDeleteTeam(confirmDelete.id)}
                   style={{ flex: 1, background: '#c0392b', color: 'white', border: 'none', borderRadius: 40, padding: '12px', fontFamily: 'Inter, sans-serif', fontSize: 13, fontWeight: 600, cursor: 'pointer' }}>
                   Delete
                 </button>
@@ -787,8 +859,10 @@ export default function Admin() {
       <AnimatePresence>
         {showAddProduct && <AddProductModal onClose={() => setShowAddProduct(false)} onSave={handleAddProduct} brand={activeBrand} />}
         {showAddCareer && <AddCareerModal onClose={() => setShowAddCareer(false)} onSave={handleAddCareer} brand={activeBrand} />}
+        {showAddTeam && <TeamMemberModal onClose={() => setShowAddTeam(false)} onSave={handleAddTeam} brand={activeBrand} />}
         {editingProduct && <AddProductModal onClose={() => setEditingProduct(null)} onSave={handleUpdateProduct} brand={activeBrand} existing={editingProduct} />}
         {editingCareer && <AddCareerModal onClose={() => setEditingCareer(null)} onSave={handleUpdateCareer} brand={activeBrand} existing={editingCareer} />}
+        {editingTeam && <TeamMemberModal onClose={() => setEditingTeam(null)} onSave={handleUpdateTeam} brand={activeBrand} existing={editingTeam} />}
       </AnimatePresence>
     </div>
   );
