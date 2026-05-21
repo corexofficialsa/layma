@@ -240,6 +240,18 @@ export function deleteExportTeamMember(id) {
   if (supabase) supabase.from('export_team').delete().eq('id', id).then(({ error }) => { if (error) console.warn('Supabase export team delete failed:', error.message); });
 }
 
+function mergeTeam(remote, localKey) {
+  const local = JSON.parse(localStorage.getItem(localKey) || '[]');
+  // Build map of local members so we can preserve images Supabase doesn't have
+  const localMap = Object.fromEntries(local.map(m => [m.id, m]));
+  // Include all remote members (merged with local image if remote image missing)
+  const merged = remote.map(r => ({ ...r, image: r.image || localMap[r.id]?.image || '' }));
+  // Also keep any local-only members Supabase doesn't know about
+  const remoteIds = new Set(remote.map(r => r.id));
+  local.forEach(m => { if (!remoteIds.has(m.id)) merged.push(m); });
+  return merged;
+}
+
 export async function syncTeamFromSupabase() {
   if (!supabase) return;
   try {
@@ -247,8 +259,8 @@ export async function syncTeamFromSupabase() {
       supabase.from('team').select('*'),
       supabase.from('export_team').select('*'),
     ]);
-    if (!e1 && team?.length) localStorage.setItem(TEAM_KEY, JSON.stringify(team));
-    if (!e2 && expTeam?.length) localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(expTeam));
+    if (!e1 && team?.length) localStorage.setItem(TEAM_KEY, JSON.stringify(mergeTeam(team, TEAM_KEY)));
+    if (!e2 && expTeam?.length) localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(mergeTeam(expTeam, EXPORT_TEAM_KEY)));
     window.dispatchEvent(new Event('layma_team_updated'));
   } catch (e) {
     console.warn('Supabase team sync failed, using local cache:', e.message);
