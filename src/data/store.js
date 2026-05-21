@@ -204,9 +204,11 @@ export function addTeamMember(member) {
   return m;
 }
 export function updateTeamMember(id, data) {
-  localStorage.setItem(TEAM_KEY, JSON.stringify(getTeam().map(m => m.id === id ? { ...m, ...data } : m)));
+  const updated = getTeam().map(m => m.id === id ? { ...m, ...data } : m);
+  localStorage.setItem(TEAM_KEY, JSON.stringify(updated));
   window.dispatchEvent(new Event('layma_team_updated'));
-  if (supabase) supabase.from('team').update(data).eq('id', id).then(({ error }) => { if (error) console.warn('Supabase team update failed:', error.message); });
+  const member = updated.find(m => m.id === id);
+  if (supabase && member) supabase.from('team').upsert(member, { onConflict: 'id' }).then(({ error }) => { if (error) console.warn('Supabase team update failed:', error.message); });
 }
 export function deleteTeamMember(id) {
   localStorage.setItem(TEAM_KEY, JSON.stringify(getTeam().filter(m => m.id !== id)));
@@ -226,9 +228,11 @@ export function addExportTeamMember(member) {
   return m;
 }
 export function updateExportTeamMember(id, data) {
-  localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(getExportTeam().map(m => m.id === id ? { ...m, ...data } : m)));
+  const updated = getExportTeam().map(m => m.id === id ? { ...m, ...data } : m);
+  localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(updated));
   window.dispatchEvent(new Event('layma_team_updated'));
-  if (supabase) supabase.from('export_team').update(data).eq('id', id).then(({ error }) => { if (error) console.warn('Supabase export team update failed:', error.message); });
+  const member = updated.find(m => m.id === id);
+  if (supabase && member) supabase.from('export_team').upsert(member, { onConflict: 'id' }).then(({ error }) => { if (error) console.warn('Supabase export team update failed:', error.message); });
 }
 export function deleteExportTeamMember(id) {
   localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(getExportTeam().filter(m => m.id !== id)));

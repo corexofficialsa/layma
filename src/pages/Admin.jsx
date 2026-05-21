@@ -256,6 +256,7 @@ function TeamMemberModal({ onClose, onSave, brand, existing }) {
   const [preview, setPreview] = useState(existing?.image || '');
   const [cropSrc, setCropSrc] = useState(null);
   const [uploadError, setUploadError] = useState('');
+  const imageRef = useRef(existing?.image || '');
 
   const inputStyle = { width: '100%', padding: '12px 14px', borderRadius: 10, border: `1.5px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)`, background: 'white', fontFamily: 'Inter, sans-serif', fontSize: 14, color: '#1a1a1a', outline: 'none', boxSizing: 'border-box' };
   const labelStyle = { display: 'block', fontSize: 11, fontWeight: 600, letterSpacing: 2, textTransform: 'uppercase', color: accentColor, marginBottom: 6 };
@@ -270,6 +271,7 @@ function TeamMemberModal({ onClose, onSave, brand, existing }) {
   };
 
   const handleCropConfirm = (url) => {
+    imageRef.current = url;
     setCropSrc(null);
     setPreview(url);
     setForm(f => ({ ...f, image: url }));
@@ -277,7 +279,7 @@ function TeamMemberModal({ onClose, onSave, brand, existing }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSave({ ...form, image: form.image || preview });
+    onSave({ ...form, image: imageRef.current || form.image || preview });
     onClose();
   };
 
@@ -304,7 +306,7 @@ function TeamMemberModal({ onClose, onSave, brand, existing }) {
                 📷 Upload Photo
               </label>
               <input style={{ ...inputStyle, fontSize: 12 }} placeholder="Or paste photo URL..." value={form.image.startsWith('data:') ? '' : form.image}
-                onChange={e => { setForm(f => ({ ...f, image: e.target.value })); setPreview(e.target.value); }} />
+                onChange={e => { imageRef.current = e.target.value; setForm(f => ({ ...f, image: e.target.value })); setPreview(e.target.value); }} />
               {uploadError && <div style={{ fontSize: 11, color: '#c0392b', marginTop: 6 }}>{uploadError}</div>}
             </div>
           </div>
