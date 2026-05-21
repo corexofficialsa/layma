@@ -255,7 +255,6 @@ function TeamMemberModal({ onClose, onSave, brand, existing }) {
     : { name: '', role: '', bio: '', image: '' });
   const [preview, setPreview] = useState(existing?.image || '');
   const [cropSrc, setCropSrc] = useState(null);
-  const [uploading, setUploading] = useState(false);
   const [uploadError, setUploadError] = useState('');
 
   const inputStyle = { width: '100%', padding: '12px 14px', borderRadius: 10, border: `1.5px solid rgba(${isExport ? '92,140,70' : '73,115,54'},0.2)`, background: 'white', fontFamily: 'Inter, sans-serif', fontSize: 14, color: '#1a1a1a', outline: 'none', boxSizing: 'border-box' };
@@ -270,19 +269,9 @@ function TeamMemberModal({ onClose, onSave, brand, existing }) {
     e.target.value = '';
   };
 
-  const handleCropConfirm = async (dataUrl) => {
-    setUploading(true);
-    setUploadError('');
-    setCropSrc(null);
-    try {
-      const url = await uploadToCloudinary(dataUrl);
-      setPreview(url);
-      setForm(f => ({ ...f, image: url }));
-    } catch {
-      setUploadError('Upload failed — check Cloudinary credentials.');
-    } finally {
-      setUploading(false);
-    }
+  const handleCropConfirm = (url) => {
+    setPreview(url);
+    setForm(f => ({ ...f, image: url }));
   };
 
   const handleSubmit = (e) => {
@@ -309,9 +298,9 @@ function TeamMemberModal({ onClose, onSave, brand, existing }) {
               {preview ? <img src={preview} alt="" style={{ width: '100%', height: '100%', objectFit: 'cover' }} /> : <span style={{ fontSize: 32, color: '#ccc' }}>👤</span>}
             </div>
             <div style={{ flex: 1 }}>
-              <label style={{ display: 'flex', alignItems: 'center', gap: 8, background: accentColor, color: '#F0F2F0', borderRadius: 40, padding: '10px 18px', cursor: uploading ? 'not-allowed' : 'pointer', fontSize: 12, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', width: 'fit-content', marginBottom: 10, opacity: uploading ? 0.6 : 1 }}>
-                <input type="file" accept="image/*" onChange={handleFile} style={{ display: 'none' }} disabled={uploading} />
-                {uploading ? '⏳ Uploading...' : '📷 Upload Photo'}
+              <label style={{ display: 'flex', alignItems: 'center', gap: 8, background: accentColor, color: '#F0F2F0', borderRadius: 40, padding: '10px 18px', cursor: 'pointer', fontSize: 12, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', width: 'fit-content', marginBottom: 10 }}>
+                <input type="file" accept="image/*" onChange={handleFile} style={{ display: 'none' }} />
+                📷 Upload Photo
               </label>
               <input style={{ ...inputStyle, fontSize: 12 }} placeholder="Or paste photo URL..." value={form.image.startsWith('data:') ? '' : form.image}
                 onChange={e => { setForm(f => ({ ...f, image: e.target.value })); setPreview(e.target.value); }} />
