@@ -182,8 +182,10 @@ export default function ExportAbout() {
             {exportTeam.map((member, i) => (
               <ScrollReveal key={member.id} delay={i * 0.1}>
                 <motion.div whileHover={{ y: -6 }} style={{ background: 'rgba(240,242,240,0.07)', border: '1px solid rgba(136,166,123,0.25)', borderRadius: 24, overflow: 'hidden', textAlign: 'center' }}>
-                  <div style={{ aspectRatio: '1', backgroundImage: member.image ? `url(${member.image})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center top', background: member.image ? undefined : 'rgba(136,166,123,0.15)' }}>
-                    {!member.image && <div style={{ height: '100%', minHeight: 180, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(136,166,123,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#88A67B' }}>{member.name.charAt(0)}</div></div>}
+                  <div style={{ aspectRatio: '1', background: 'rgba(136,166,123,0.15)', overflow: 'hidden', position: 'relative', minHeight: 200 }}>
+                    {member.image
+                      ? <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top', position: 'absolute', inset: 0 }} />
+                      : <div style={{ height: '100%', minHeight: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(136,166,123,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#88A67B' }}>{member.name.charAt(0)}</div></div>}
                   </div>
                   <div style={{ padding: '24px 20px' }}>
                     <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#F0F2F0', marginBottom: 6 }}>{member.name}</div>
