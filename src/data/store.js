@@ -8,16 +8,17 @@ const EXPORT_PRODUCTS_KEY = 'layma_export_products';
 const EXPORT_CAREERS_KEY = 'layma_export_careers';
 const TEAM_KEY = 'layma_team';
 const EXPORT_TEAM_KEY = 'layma_export_team';
-const DATA_VERSION = 'layma_data_v4';
+const DATA_VERSION = 'layma_data_v5';
 
 // Reset data when version changes so seed updates take effect
-if (localStorage.getItem(DATA_VERSION) !== '4') {
+if (localStorage.getItem(DATA_VERSION) !== '5') {
   localStorage.removeItem(PRODUCTS_KEY);
   localStorage.removeItem(CAREERS_KEY);
   localStorage.removeItem(IMAGES_KEY);
   localStorage.removeItem(EXPORT_PRODUCTS_KEY);
   localStorage.removeItem(EXPORT_CAREERS_KEY);
-  localStorage.setItem(DATA_VERSION, '4');
+  localStorage.removeItem('layma_data_v4');
+  localStorage.setItem(DATA_VERSION, '5');
 }
 
 function seed(key, initial) {

@@ -7,9 +7,9 @@ const offerings = [
   { title: 'Farm-Direct Sourcing', desc: 'We work directly with certified farmers and growers across Kerala, Karnataka, and Tamil Nadu, ensuring provenance and eliminating unnecessary markups.' },
   { title: 'Processing & Grading', desc: 'Our Ramanattukara facility handles cleaning, drying, sorting, and grading to international specifications for spices, nuts, and dry fruits.' },
   { title: 'Bulk Export Packaging', desc: 'Available in 5kg, 10kg, 25kg, and custom FIBC sacks for wholesale and commercial buyers with proper FSSAI and export-compliant labelling.' },
-  { title: 'Private Label & Retail', desc: 'Custom branded retail packs (50g–1kg) with your label — ideal for supermarkets, specialty stores, and Gulf retail brands.' },
+  { title: 'Layma Branded Local Distribution', desc: 'Layma branded consumer packs (50g to 1kg) supplied for local distribution across Qatar and the GCC in export-quality packaging.' },
   { title: 'Sea & Air Freight', desc: 'FCL/LCL sea freight and air cargo solutions with complete export documentation — Bill of Lading, COO, Health Certificate, Phytosanitary.' },
-  { title: 'Quality Certification', desc: 'All products supplied with relevant certifications: FSSAI, ISO, organic (where applicable), and GCC food import compliance.' },
+  { title: 'Quality Certification', desc: 'All products supplied with relevant certifications: FSSAI, ISO, organic (where applicable). CoS certification provided for countries that require it.' },
   { title: 'Export Documentation', desc: 'Full handling of shipping bill, packing list, invoice, certificates of origin, and customs clearance paperwork for hassle-free import at destination.' },
   { title: 'Long-Term Supply', desc: 'Consistent monthly or quarterly supply programmes for importers, distributors, and hospitality buyers who need reliable year-round stock.' },
 ];
@@ -17,22 +17,20 @@ const offerings = [
 const products = [
   { name: 'Green Cardamom', origin: 'Idukki, Kerala', category: 'Spices' },
   { name: 'Black Pepper', origin: 'Wayanad, Kerala', category: 'Spices' },
-  { name: 'Turmeric Powder', origin: 'Erode, Tamil Nadu', category: 'Spices' },
+  { name: 'Turmeric Powder', origin: 'Kerala', category: 'Spices' },
   { name: 'Premium Cashews', origin: 'Kollam, Kerala', category: 'Nuts' },
-  { name: 'Whole Almonds', origin: 'California (via India)', category: 'Nuts' },
-  { name: 'Sun-Dried Raisins', origin: 'Nashik, Maharashtra', category: 'Dry Fruits' },
-  { name: 'Dried Mango Slices', origin: 'Alphonso, Maharashtra', category: 'Dry Fruits' },
+  { name: 'Whole Almonds', origin: 'Kerala', category: 'Nuts' },
+  { name: 'Sun-Dried Raisins', origin: 'Kerala', category: 'Dry Fruits' },
+  { name: 'Dried Mango Slices', origin: 'Kerala', category: 'Dry Fruits' },
   { name: 'Jackfruit Chips', origin: 'Kerala', category: 'Dry Fruits' },
-  { name: 'Wild Forest Honey', origin: 'Kerala Forests', category: 'Honey' },
+  { name: 'Wild Forest Honey (Bottled)', origin: 'Kerala Forests', category: 'Honey' },
   { name: 'Kerala Tea Powder', origin: 'Munnar, Kerala', category: 'Tea' },
-  { name: 'Medjool Dates', origin: 'Saudi Arabia', category: 'Dates' },
-  { name: 'Ajwa Dates', origin: 'Madinah, KSA', category: 'Dates' },
 ];
 
 const packagingOptions = [
-  { title: 'Bulk Export', subtitle: 'For Importers & Distributors', desc: 'FIBC jumbo bags (500kg–1MT), 25kg woven sacks, 10kg PP bags. Proper moisture-barrier inner lining for long-haul sea freight.', color: '#497336', textColor: '#F0F2F0' },
-  { title: 'Wholesale', subtitle: 'For Retailers & Wholesalers', desc: '1kg–5kg retail-ready packs in kraft, zipper pouches, or tins — suitable for direct shelf display or repacking.', color: '#5C8C46', textColor: '#F0F2F0' },
-  { title: 'Private Label', subtitle: 'Your Brand, Our Product', desc: 'Custom-branded 50g–1kg packs with your logo, nutrition info, and GCC barcode. MOQ applies. Lead time: 3–4 weeks.', color: '#88A67B', textColor: '#1a1a1a' },
+  { title: 'Bulk Export', subtitle: 'For Importers & Distributors', desc: 'FIBC jumbo bags (500kg to 1MT), 25kg woven sacks, 10kg PP bags. Proper moisture-barrier inner lining for long-haul sea freight.', color: '#497336', textColor: '#F0F2F0' },
+  { title: 'Wholesale Packs', subtitle: 'For Retailers & Wholesalers', desc: '1kg to 5kg retail-ready packs in kraft or zipper pouches, suitable for direct shelf display or repacking.', color: '#5C8C46', textColor: '#F0F2F0' },
+  { title: 'Layma Branded', subtitle: 'Local Distribution Packs', desc: 'Layma branded 50g to 1kg consumer packs in export quality for local distribution across Qatar and the GCC.', color: '#88A67B', textColor: '#1a1a1a' },
 ];
 
 export default function ExportServices() {

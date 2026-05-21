@@ -12,10 +12,10 @@ const stats = [
 ];
 
 const processSteps = [
-  { num: '01', title: 'Farm Sourcing', desc: 'We partner directly with certified farmers across Kerala, Karnataka, and Tamil Nadu — cutting out middlemen to bring you the freshest produce at competitive prices.' },
+  { num: '01', title: 'Farm Sourcing', desc: 'We partner directly with certified farmers in Kerala, cutting out middlemen to bring you the freshest produce at competitive prices.' },
   { num: '02', title: 'Processing & Grading', desc: 'Products are cleaned, dried, and graded at our Ramanattukara facility under strict hygienic conditions to meet international food safety standards.' },
-  { num: '03', title: 'Packaging & Certification', desc: 'Packed in bulk sacks or custom retail formats with full export documentation — FSSAI, COO, Health Certificate, and GCC import compliance.' },
-  { num: '04', title: 'Global Export', desc: 'Shipped via sea or air to Qatar, GCC, and international destinations — on-time, with full traceability from farm to final delivery.' },
+  { num: '03', title: 'Packaging & Certification', desc: 'Packed in Layma branded consumer packs or bulk export formats with full documentation: FSSAI, COO, Health Certificate, and CoS where required.' },
+  { num: '04', title: 'Distribution & Export', desc: 'Supplied locally in Qatar and the GCC in Layma branded packs, and shipped via sea or air to international destinations with full traceability from farm to delivery.' },
 ];
 
 const reviews = [
@@ -25,12 +25,12 @@ const reviews = [
 ];
 
 const faqs = [
-  { q: 'Where are your products sourced from?', a: 'We source directly from certified farms across Kerala, Karnataka, Tamil Nadu, and Maharashtra — spices, nuts, dry fruits, honey, and tea. Dates are sourced from Saudi Arabia.' },
-  { q: 'What are your packaging options?', a: 'We offer bulk export packaging (5–25kg sacks, FIBC jumbo bags), wholesale packs (1–5kg), and custom private-label retail packs (50g–1kg) with your branding.' },
-  { q: 'Do you handle export documentation?', a: 'Yes — we handle all export paperwork including shipping bill, packing list, invoice, certificate of origin, health certificate, and phytosanitary certificate as required.' },
-  { q: 'What is the minimum order quantity?', a: 'MOQ varies by product — typically 25kg per SKU for B2B wholesale orders. Contact us for a personalised quote based on your requirements.' },
-  { q: 'Which countries do you export to?', a: 'We primarily export to Qatar and GCC countries through our parent company Layma Global. We also ship directly to importers across the Middle East, Europe, and Southeast Asia.' },
-  { q: 'Are your products certified?', a: 'Yes. All products carry FSSAI certification, and relevant export-grade certificates (organic, APEDA, HACCP) are available for specific products on request.' },
+  { q: 'Where are your products sourced from?', a: 'We source directly from certified farms in Kerala, spices, nuts, dry fruits, honey, and tea from their own origin regions.' },
+  { q: 'What are your packaging options?', a: 'We supply Layma branded consumer packs (50g to 1kg) for local distribution across Qatar and the GCC, and bulk export packaging (5kg to 25kg sacks) for international buyers. All products are under the Layma brand.' },
+  { q: 'Do you handle export documentation?', a: 'Yes. We handle all export paperwork including shipping bill, packing list, invoice, certificate of origin, health certificate, and phytosanitary certificate as required. For countries that require it, we also provide CoS (Certificate of Conformity) certification.' },
+  { q: 'What is the minimum order quantity?', a: 'MOQ varies by product, typically 25kg per SKU for B2B wholesale orders. Contact us for a personalised quote based on your requirements.' },
+  { q: 'Which countries do you supply to?', a: 'We supply locally across Qatar and the GCC through Layma branded distribution packs, and export globally to importers across the Middle East, Europe, and Southeast Asia.' },
+  { q: 'Are your products certified?', a: 'Yes. All products carry FSSAI certification, and relevant export-grade certificates (APEDA, HACCP) are available on request. CoS certification is provided for countries that require it.' },
 ];
 
 export default function ExportHome() {
@@ -105,7 +105,7 @@ export default function ExportHome() {
               transition={{ delay: 0.7, duration: 0.8 }}
               style={{ fontSize: 17, lineHeight: 1.8, color: 'rgba(240,242,240,0.85)', maxWidth: 580, marginBottom: 44, fontWeight: 300, textAlign: 'center' }}
             >
-              Layma Export sources and ships premium spices, nuts, dry fruits, honey, and tea — directly from Kerala's finest farms — to Qatar, the GCC, and buyers worldwide.
+              Layma Export sources premium spices, nuts, dry fruits, honey, and tea directly from Kerala's finest farms. We supply in Layma branded packs for local distribution across Qatar and the GCC, and export globally to buyers worldwide.
             </motion.p>
 
             <motion.div
@@ -177,18 +177,9 @@ export default function ExportHome() {
             <ScrollReveal direction="right">
               <div style={{ position: 'relative' }}>
                 <div style={{ borderRadius: 24, overflow: 'hidden', aspectRatio: '4/5', backgroundImage: `url(${introImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-                  style={{ position: 'absolute', top: -20, right: -20, width: 100, height: 100, borderRadius: '50%', border: '2px dashed #88A67B', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
-                >
-                  <div style={{ width: 70, height: 70, background: '#88A67B', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 10, fontWeight: 700, letterSpacing: 1.5, textTransform: 'uppercase', textAlign: 'center', lineHeight: 1.4, color: '#1a1a1a' }}>
-                    Since<br/>2016
-                  </div>
-                </motion.div>
                 <div style={{ position: 'absolute', bottom: 24, left: 24, background: 'rgba(92,140,70,0.9)', backdropFilter: 'blur(12px)', borderRadius: 16, padding: '16px 20px', color: '#F0F2F0' }}>
-                  <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: '#AFBFA3', marginBottom: 4 }}>Origin</div>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600 }}>Kerala · Karnataka<br/>Tamil Nadu</div>
+                  <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: '#AFBFA3', marginBottom: 4 }}>Source</div>
+                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600 }}>Kerala, India</div>
                 </div>
               </div>
             </ScrollReveal>
@@ -201,10 +192,10 @@ export default function ExportHome() {
                   <em style={{ color: '#5C8C46' }}>Purpose</em> & Precision
                 </h2>
                 <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 20 }}>
-                  Layma Export is the Kerala-based sourcing and export arm of Layma Global Trading & Services. We procure, process, and ship premium food products directly from India's finest farms to buyers across Qatar, the GCC, and the world.
+                  Layma Export is the Kerala-based sourcing and distribution arm of Layma Global Trading & Services. We procure, process, and supply premium food products directly from Kerala's finest farms in Layma branded packs for local distribution across Qatar and the GCC, and export globally to buyers worldwide.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 36 }}>
-                  From our Ramanattukara facility, we handle everything — farm sourcing, processing, grading, packaging, certification, and export logistics — delivering consistent quality in every shipment.
+                  From our Ramanattukara facility, we handle everything: farm sourcing, processing, grading, Layma branded packaging, certification, and export logistics, delivering consistent quality in every shipment.
                 </p>
                 <Link to="/export/about" style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8, color: '#5C8C46',

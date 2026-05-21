@@ -5,9 +5,9 @@ import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
 
 const stats = [
-  { value: '5+', label: 'Product Categories' },
-  { value: 'GCC+', label: 'Markets Served' },
-  { value: 'GCC+', label: 'Distribution Reach' },
+  { value: '10+', label: 'Products' },
+  { value: '3+', label: 'Hypermarkets Served' },
+  { value: '15+', label: 'Stores Reach' },
   { value: '100%', label: 'Quality Committed' },
 ];
 
@@ -15,22 +15,22 @@ const processSteps = [
   {
     num: '01',
     title: 'Global Sourcing',
-    desc: 'We source premium food products from trusted origins — spices from Kerala, dates from Saudi Arabia, nuts from Iran and India — through direct supplier relationships.',
+    desc: 'We source premium food products from trusted origins across India through direct supplier relationships, ensuring authenticity and the highest quality standards.',
   },
   {
     num: '02',
     title: 'Quality Control',
-    desc: 'Every batch is quality-checked and tested — from origin to our Qatar warehouse — ensuring only certified, premium-grade products reach your business.',
+    desc: 'Every batch is quality-checked and tested from origin to our Qatar warehouse, ensuring only certified, premium-grade products reach your business.',
   },
   {
     num: '03',
     title: 'Packaging & Branding',
-    desc: 'Products are cleaned, graded, and packed in bulk supply formats or retail branded small packets — with private-label options available for wholesale clients.',
+    desc: 'Products are cleaned, graded, and packed in bulk supply formats or retail-branded small packets ready for supermarkets and wholesalers.',
   },
   {
     num: '04',
     title: 'Reliable Supply',
-    desc: 'Our Qatar distribution team ensures timely, accurate delivery to supermarkets, wholesalers, and retailers across Qatar and the GCC — dependable supply, every order.',
+    desc: 'Our Qatar distribution team ensures timely, accurate delivery to supermarkets, wholesalers, and retailers across Qatar. Dependable supply, every order.',
   },
 ];
 
@@ -57,20 +57,16 @@ const reviews = [
 
 const faqs = [
   {
-    q: 'What regions do you source your products from?',
-    a: 'We source premium nuts, spices, dates, and honey primarily from India (Kerala, Kashmir), Saudi Arabia, Iran, Turkey, and Sri Lanka — working directly with trusted farmers and certified exporters.',
+    q: 'Where do your products come from?',
+    a: 'Each product is sourced directly from its own origin region, ensuring authenticity and freshness in every batch we supply.',
   },
   {
     q: 'Do you supply to retail, hospitality, and wholesale clients?',
-    a: 'Yes. We cater to a wide range of clients including retail chains, specialty food stores, hotels, restaurants, and wholesale distributors across Qatar and internationally.',
+    a: 'Yes. We supply supermarkets, specialty food stores, hotels, restaurants, and wholesale distributors across Qatar.',
   },
   {
     q: 'Are your products certified and tested?',
-    a: 'Absolutely. All our products undergo rigorous quality testing and carry relevant certifications (ISO, FSSAI, APEDA, HACCP as applicable). We maintain full traceability from origin to delivery.',
-  },
-  {
-    q: 'Can I order custom quantities or private-label products?',
-    a: 'Yes, we offer flexible quantity options and can arrange private-label packaging for qualified clients. Please get in touch with our team to discuss your requirements.',
+    a: 'Absolutely. All our products undergo rigorous quality testing and carry relevant certifications. Where required by destination regulations, we also provide Certificate of Conformity (CoS) certification. We maintain full traceability from origin to delivery.',
   },
   {
     q: 'How do you ensure freshness during shipping?',
@@ -99,7 +95,7 @@ export default function Home() {
   const categories = [
     { name: 'Spices', img: catImgSpices, count: 'Cardamom · Pepper · Cloves · More' },
     { name: 'Nuts', img: catImgNuts, count: 'Cashew · Almonds · Walnuts · Pistachios' },
-    { name: 'Dry Fruits', img: catImgDryFruits, count: 'Raisins · Figs · Dates · Banana · More' },
+    { name: 'Dry Fruits', img: catImgDryFruits, count: 'Raisins · Figs · Mango · Banana · More' },
     { name: 'Honey', img: catImgHoney, count: 'Pure Honey · Small Bottles' },
     { name: 'Tea', img: catImgTea, count: 'Kerala CTC Tea Powder' },
   ];
@@ -152,7 +148,7 @@ export default function Home() {
             >
               <span style={{ width: 6, height: 6, background: '#BABF26', borderRadius: '50%', display: 'inline-block' }} />
               <span style={{ fontFamily: 'Inter, sans-serif', fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600 }}>
-                Doha, Qatar · GCC Region
+                Doha, Qatar
               </span>
             </motion.div>
 
@@ -188,7 +184,7 @@ export default function Home() {
                 textAlign: 'center',
               }}
             >
-              Layma Global Trading sources and supplies premium nuts, spices, dry fruits, honey, and tea — from trusted origins in India and Saudi Arabia — to supermarkets, wholesalers, and retailers across Qatar and the GCC.
+              Layma Global Trading sources and supplies premium nuts, spices, dry fruits, honey, and tea from trusted origins in India to supermarkets, wholesalers, and retailers across Qatar.
             </motion.p>
 
             <motion.div
@@ -287,52 +283,6 @@ export default function Home() {
                   backgroundSize: 'cover',
                   backgroundPosition: 'center',
                 }} />
-                <motion.div
-                  animate={{ rotate: [0, 360] }}
-                  transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
-                  style={{
-                    position: 'absolute',
-                    top: -20,
-                    right: -20,
-                    width: 100,
-                    height: 100,
-                    borderRadius: '50%',
-                    border: '2px dashed #BABF26',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                  }}
-                >
-                  <div style={{
-                    width: 70,
-                    height: 70,
-                    background: '#BABF26',
-                    borderRadius: '50%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    fontSize: 10,
-                    fontWeight: 700,
-                    letterSpacing: 1.5,
-                    textTransform: 'uppercase',
-                    textAlign: 'center',
-                    lineHeight: 1.4,
-                    color: '#1a1a1a',
-                  }}>Since<br/>2016</div>
-                </motion.div>
-                <div style={{
-                  position: 'absolute',
-                  bottom: 24,
-                  left: 24,
-                  background: 'rgba(73,115,54,0.9)',
-                  backdropFilter: 'blur(12px)',
-                  borderRadius: 16,
-                  padding: '16px 20px',
-                  color: '#F1F2C4',
-                }}>
-                  <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: '#BABF26', marginBottom: 4 }}>Origin</div>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 20, fontWeight: 600 }}>Kerala · Kashmir<br/>Saudi Arabia</div>
-                </div>
               </div>
             </ScrollReveal>
 
@@ -344,10 +294,10 @@ export default function Home() {
                   <em style={{ color: '#497336' }}>Purpose</em> & Precision
                 </h2>
                 <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 20 }}>
-                  Layma Global Trading & Services is Qatar's trusted food trading partner — headquartered in Doha, managing international sourcing, import, and B2B distribution across the GCC and beyond.
+                  Layma Global Trading & Services is Qatar's trusted food trading partner, headquartered in Doha, managing international sourcing, import, and B2B distribution.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 36 }}>
-                  We source, package, and distribute premium spices, nuts, dry fruits, honey, and tea powder — in bulk supply and retail branded formats — to supermarkets, wholesalers, retailers, and food businesses across Qatar and the GCC.
+                  We source, package, and distribute premium spices, nuts, dry fruits, honey, and tea powder in bulk supply and retail branded formats to supermarkets, wholesalers, retailers, and food businesses across Qatar.
                 </p>
                 <Link to="/about" style={{
                   display: 'inline-flex',

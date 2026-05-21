@@ -14,7 +14,7 @@ export default function ExportContact() {
       const res = await fetch('https://formsubmit.co/ajax/Laymaexport@gmail.com', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({ ...form, _subject: 'New Export Enquiry — Layma Export' }),
+        body: JSON.stringify({ ...form, _subject: 'New Export Enquiry: Layma Export' }),
       });
       const data = await res.json();
       if (data.success === 'true' || data.success === true) {

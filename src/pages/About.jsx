@@ -1,19 +1,22 @@
-import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
-import { getTeam } from '../data/store';
 
 const values = [
-  { title: 'Quality', desc: 'We never compromise on product standards — every item is verified, tested, and certified before it reaches our clients.' },
+  { title: 'Quality', desc: 'We never compromise on product standards. Every item is verified, tested, and certified before it reaches our clients.' },
   { title: 'Trust', desc: 'Transparent dealings, consistent supply, and honest communication are the foundation of every Layma partnership.' },
-  { title: 'Reliability', desc: 'On-time delivery, accurate order fulfilment, and responsive service — we do what we say, every time.' },
-  { title: 'Global Reach', desc: 'Headquartered in Doha, Qatar, we connect premium sourcing origins across India, Saudi Arabia, and beyond with markets across the GCC.' },
+  { title: 'Reliability', desc: 'On-time delivery, accurate order fulfilment, and responsive service. We do what we say, every time.' },
+  { title: 'Qatar Focus', desc: 'Headquartered in Doha, Qatar, we connect premium sourcing origins across India with markets across Qatar.' },
+];
+
+const globalTeam = [
+  { id: '1', name: 'Salih Backer K', role: 'Chief Executive Officer', image: '' },
+  { id: '2', name: 'Jafar Ali M', role: 'Executive Managing Director', image: '' },
+  { id: '3', name: 'Muhammed Najmudheen PV', role: 'Director, Business Development & Marketing', image: '' },
 ];
 
 export default function About() {
-  const team = getTeam();
   const aboutHeroImg = useSiteImage('about_hero');
   const aboutGlobalImg = useSiteImage('about_global');
   return (
@@ -64,21 +67,21 @@ export default function About() {
                   Layma Global<br />Trading & Services
                 </h2>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
-                  Layma Global Trading & Services is the parent company of the group, headquartered in Doha, Qatar. We specialise in international sourcing and supply chain solutions — importing premium food products from India, Saudi Arabia, and other key origins and distributing them across Qatar's supermarkets, wholesalers, retailers, and B2B food businesses.
+                  Layma Global Trading & Services is the parent company of the group, headquartered in Doha, Qatar. We specialise in international sourcing and supply chain solutions, importing premium food products from India and distributing them across Qatar's supermarkets, wholesalers, retailers, and food businesses.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
-                  Our product portfolio spans nuts (cashew, almonds, walnuts), dry fruits (raisins, figs, dried banana, jackfruit, mango, pineapple, dates), spices (cardamom, black pepper), tea powder, and honey — supplied in both bulk packaging and retail branded small packets to meet the diverse needs of the Qatar market.
+                  Our product portfolio spans nuts (cashew, almonds, walnuts), dry fruits (raisins, figs, dried banana, jackfruit, mango, pineapple), spices (cardamom, black pepper), tea powder, and honey supplied in both bulk packaging and retail branded small packets to meet the diverse needs of the Qatar market.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 32 }}>
-                  With a professional approach to product branding, customised packaging, and B2B supply, Layma Global acts as a reliable food trading partner for businesses across the GCC seeking consistent quality and dependable delivery.
+                  With a professional approach to product branding, packaging, and B2B supply, Layma Global acts as a reliable food trading partner for businesses across Qatar seeking consistent quality and dependable delivery.
                 </p>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16, marginBottom: 32 }}>
                   {[
-                    { label: 'Type', value: 'International Trading & Distribution' },
+                    { label: 'Type', value: 'Trading & Services' },
                     { label: 'Location', value: 'Doha, Qatar' },
-                    { label: 'Markets', value: 'Qatar · GCC Region' },
-                    { label: 'Supply Formats', value: 'Bulk · Retail Packets · Private Label' },
+                    { label: 'Markets', value: 'Qatar' },
+                    { label: 'Supply Formats', value: 'Bulk Supply · Retail Packets' },
                   ].map(item => (
                     <div key={item.label} style={{ padding: '14px 16px', background: 'white', borderRadius: 12, border: '1px solid rgba(73,115,54,0.1)' }}>
                       <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#497336', fontWeight: 600, marginBottom: 4 }}>{item.label}</div>
@@ -100,9 +103,8 @@ export default function About() {
               { label: 'Supermarket & Retail Supply' },
               { label: 'Wholesale Distribution' },
               { label: 'Product Branding & Packaging' },
-              { label: 'Import & Export Services' },
+              { label: 'Import Services' },
               { label: 'B2B Supply Solutions' },
-              { label: 'Private Label Packaging' },
               { label: 'Logistics Coordination' },
             ].map((s, i) => (
               <ScrollReveal key={s.label} delay={i * 0.06}>
@@ -171,34 +173,31 @@ export default function About() {
       </section>
 
       {/* Team */}
-      {team.length > 0 && (
-        <section style={{ padding: '100px 0', background: '#497336' }}>
-          <div className="container">
-            <ScrollReveal>
-              <div style={{ textAlign: 'center', marginBottom: 64 }}>
-                <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600, marginBottom: 14 }}>The People Behind Layma</div>
-                <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F1F2C4' }}>Our Team</h2>
-              </div>
-            </ScrollReveal>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 28 }}>
-              {team.map((member, i) => (
-                <ScrollReveal key={member.id} delay={i * 0.1}>
-                  <motion.div whileHover={{ y: -6 }} style={{ background: 'rgba(241,242,196,0.07)', border: '1px solid rgba(186,191,38,0.2)', borderRadius: 24, overflow: 'hidden', textAlign: 'center' }}>
-                    <div style={{ aspectRatio: '1', backgroundImage: member.image ? `url(${member.image})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center top', background: member.image ? undefined : 'rgba(186,191,38,0.1)' }}>
-                      {!member.image && <div style={{ height: '100%', minHeight: 180, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(186,191,38,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#BABF26' }}>{member.name.charAt(0)}</div></div>}
-                    </div>
-                    <div style={{ padding: '24px 20px' }}>
-                      <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#F1F2C4', marginBottom: 6 }}>{member.name}</div>
-                      <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600, marginBottom: member.bio ? 12 : 0 }}>{member.role}</div>
-                      {member.bio && <p style={{ fontSize: 13, lineHeight: 1.7, color: 'rgba(241,242,196,0.65)', marginTop: 10 }}>{member.bio}</p>}
-                    </div>
-                  </motion.div>
-                </ScrollReveal>
-              ))}
+      <section style={{ padding: '100px 0', background: '#497336' }}>
+        <div className="container">
+          <ScrollReveal>
+            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+              <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600, marginBottom: 14 }}>The People Behind Layma</div>
+              <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F1F2C4' }}>Our Team</h2>
             </div>
+          </ScrollReveal>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 28 }}>
+            {globalTeam.map((member, i) => (
+              <ScrollReveal key={member.id} delay={i * 0.1}>
+                <motion.div whileHover={{ y: -6 }} style={{ background: 'rgba(241,242,196,0.07)', border: '1px solid rgba(186,191,38,0.2)', borderRadius: 24, overflow: 'hidden', textAlign: 'center' }}>
+                  <div style={{ aspectRatio: '1', backgroundImage: member.image ? `url(${member.image})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center top', background: member.image ? undefined : 'rgba(186,191,38,0.1)' }}>
+                    {!member.image && <div style={{ height: '100%', minHeight: 180, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(186,191,38,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#BABF26' }}>{member.name.charAt(0)}</div></div>}
+                  </div>
+                  <div style={{ padding: '24px 20px' }}>
+                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#F1F2C4', marginBottom: 6 }}>{member.name}</div>
+                    <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600 }}>{member.role}</div>
+                  </div>
+                </motion.div>
+              </ScrollReveal>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       <style>{`
         @media (max-width: 768px) {

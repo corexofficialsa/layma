@@ -32,7 +32,8 @@ const MapPin = () => (
 
 const socials = [
   { icon: <Instagram />, label: 'Instagram', handle: '@laymaglobal', href: 'https://www.instagram.com/laymaglobal/', color: '#E1306C' },
-  { icon: <WhatsApp />, label: 'WhatsApp', handle: '+974 7207 4466', href: 'https://wa.me/97472074466', color: '#25D366' },
+  { icon: <Phone />, label: 'Contact', handle: '+974 7207 44 33', href: 'tel:+97472074433', color: '#497336' },
+  { icon: <WhatsApp />, label: 'WhatsApp', handle: '+974 7207 44 66', href: 'https://wa.me/97472074466', color: '#25D366' },
   { icon: <Mail />, label: 'Email', handle: 'info@laymaglobal.com', href: 'mailto:info@laymaglobal.com', color: '#497336' },
 ];
 
@@ -40,9 +41,9 @@ const offices = [
   {
     name: 'Layma Global Trading & Services',
     city: 'Doha, Qatar',
-    type: 'International Trading & Distribution',
-    address: 'Doha, Qatar',
-    phone: '+974 7207 4466',
+    type: 'Trading & Services | CR NO: 227840',
+    address: 'Office No B214, Building 43, Street 100, Zone 56, Doha, Qatar | PO Box: 14644',
+    phone: '+974 7207 44 33 / +974 7207 44 66',
     email: 'info@laymaglobal.com',
   },
 ];
@@ -68,7 +69,7 @@ export default function Contact() {
           company: form.company || '—',
           subject: form.subject,
           message: form.message,
-          _subject: `Layma Website Enquiry — ${form.subject}`,
+          _subject: `Layma Website Enquiry: ${form.subject}`,
         }),
       });
       const data = await res.json();

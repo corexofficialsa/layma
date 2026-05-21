@@ -4,14 +4,13 @@ import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
 
 const offerings = [
-  { title: 'International Product Sourcing', desc: 'We source premium food products from trusted suppliers across India, Saudi Arabia, Iran, Turkey, and beyond — building direct relationships with producers to guarantee authenticity and competitive pricing.' },
+  { title: 'International Product Sourcing', desc: 'We source premium food products from trusted suppliers across India, building direct relationships with producers to guarantee authenticity and competitive pricing.' },
   { title: 'Supermarket & Retail Supply', desc: 'We supply supermarkets and retail chains across Qatar with consistent, quality-verified products in bulk formats and branded retail small packets ready for shelf display.' },
-  { title: 'Wholesale Distribution', desc: 'Flexible bulk supply agreements for distributors, wholesalers, and food service operators — with competitive pricing, reliable delivery schedules, and customisable order quantities.' },
-  { title: 'Product Branding & Retail Packaging', desc: 'We offer retail-ready branded small packet packaging and customised private-label packaging solutions — helping your products stand out on the shelf with professional presentation.' },
-  { title: 'Private Label Solutions', desc: 'Supply premium nuts, spices, dry fruits, honey, or tea under your own brand identity. We manage sourcing, grading, packaging, and labelling to your specifications.' },
-  { title: 'B2B Supply Solutions', desc: 'Tailored B2B supply programmes for hotels, restaurants, catering companies, and institutional buyers — consistent quality, dedicated account management, and flexible delivery.' },
-  { title: 'Import & Logistics Coordination', desc: 'Full import management including customs clearance, quality documentation, and last-mile distribution to your warehouse or retail outlets across Qatar and the GCC.' },
-  { title: 'Quality Certification & Documentation', desc: 'All products come with complete documentation — lab test reports, certificates of origin, and relevant food safety certifications for GCC market compliance.' },
+  { title: 'Wholesale Distribution', desc: 'Flexible bulk supply agreements for distributors, wholesalers, and food service operators with competitive pricing, reliable delivery schedules, and customisable order quantities.' },
+  { title: 'Product Branding & Retail Packaging', desc: 'We offer retail-ready branded small packet packaging helping our products stand out on the shelf with professional presentation.' },
+  { title: 'B2B Supply Solutions', desc: 'Tailored B2B supply programmes for hotels, restaurants, catering companies, and institutional buyers with consistent quality, dedicated account management, and flexible delivery.' },
+  { title: 'Import & Logistics Coordination', desc: 'Full import management including customs clearance, quality documentation, and last-mile distribution to your warehouse or retail outlets across Qatar.' },
+  { title: 'Quality Certification & Documentation', desc: 'All products come with complete documentation including lab test reports, certificates of origin, and relevant food safety certifications. CoS certification provided where required.' },
 ];
 
 const products = [
@@ -24,8 +23,7 @@ const products = [
   { name: 'Dried Figs', origin: 'Turkey', tag: 'Sun-dried' },
   { name: 'Dried Banana', origin: 'Kerala, India', tag: 'Nendran' },
   { name: 'Dried Mango', origin: 'India', tag: 'No Added Sugar' },
-  { name: 'Dates', origin: 'Saudi Arabia', tag: 'Saudi Select' },
-  { name: 'Pure Honey', origin: 'Kerala / Saudi Arabia', tag: 'Raw & Pure' },
+  { name: 'Honey (Bottled)', origin: 'Kerala, India', tag: 'Raw & Pure' },
   { name: 'Tea Powder', origin: 'Kerala, India', tag: 'CTC Grade' },
 ];
 
@@ -46,7 +44,7 @@ export default function Services() {
               <span style={{ fontSize: 36 }}>🇶🇦</span>
               <div>
                 <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600 }}>Doha, Qatar</div>
-                <div style={{ fontSize: 11, color: 'rgba(241,242,196,0.5)', marginTop: 2, letterSpacing: 1 }}>International Trading · Import · Distribution</div>
+                <div style={{ fontSize: 11, color: 'rgba(241,242,196,0.5)', marginTop: 2, letterSpacing: 1 }}>Trading · Import · Distribution</div>
               </div>
             </div>
             <h1 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(44px, 7vw, 80px)', fontWeight: 600, color: '#F1F2C4', lineHeight: 1.05, marginBottom: 24 }}>
@@ -64,7 +62,7 @@ export default function Services() {
         <div className="container">
           <ScrollReveal>
             <div style={{ display: 'flex', flexWrap: 'wrap', gap: 12, alignItems: 'center', justifyContent: 'center' }}>
-              {['B2B Wholesale Supply', 'Retail Branded Packaging', 'Import & Export', 'Global Sourcing', 'Private Label', 'Supermarket Supply'].map(tag => (
+              {['B2B Wholesale Supply', 'Retail Branded Packaging', 'Import & Export', 'Global Sourcing', 'Supermarket Supply'].map(tag => (
                 <span key={tag} style={{ background: 'rgba(26,26,26,0.12)', borderRadius: 40, padding: '8px 18px', fontSize: 13, fontWeight: 600, color: '#1a1a1a', letterSpacing: 0.5 }}>{tag}</span>
               ))}
             </div>
@@ -113,7 +111,7 @@ export default function Services() {
                 Products We Supply
               </h2>
               <p style={{ fontSize: 15, color: 'rgba(241,242,196,0.65)', maxWidth: 520, margin: '0 auto' }}>
-                Available in bulk supply packaging, retail branded small packets, and customised private-label formats.
+                Available in bulk supply packaging and retail branded small packets.
               </p>
             </div>
           </ScrollReveal>
@@ -145,7 +143,6 @@ export default function Services() {
             {[
               { name: 'Bulk Supply Packaging', desc: 'For wholesalers and distributors requiring large-quantity orders.' },
               { name: 'Retail Branded Packets', desc: 'Layma-branded small consumer packets ready for retail shelving.' },
-              { name: 'Private Label Packaging', desc: 'Custom packaging under your own brand identity and specifications.' },
             ].map((p, i) => (
               <ScrollReveal key={p.name} delay={i * 0.1}>
                 <div style={{ background: 'white', borderRadius: 20, padding: '32px 24px', textAlign: 'center', border: '1px solid rgba(73,115,54,0.1)' }}>

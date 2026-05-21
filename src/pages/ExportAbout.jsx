@@ -2,7 +2,11 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
-import { getExportTeam } from '../data/store';
+
+const exportTeam = [
+  { id: '1', name: 'Azhar Ali M', role: 'Director, Purchase & Vendor Management', image: '' },
+  { id: '2', name: 'Muhammed Ismail K', role: 'Director, Distribution & Operations', image: '' },
+];
 
 const values = [
   { title: 'Quality First', desc: 'Every product we export is verified, graded, and certified before it leaves our facility — no compromises on standards.' },
@@ -12,7 +16,6 @@ const values = [
 ];
 
 export default function ExportAbout() {
-  const team = getExportTeam();
   const aboutImg = useSiteImage('export_about');
   const heroImg = useSiteImage('export_hero');
   return (
@@ -63,21 +66,21 @@ export default function ExportAbout() {
                   Layma Export<br />Ramanattukara, Kerala
                 </h2>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
-                  Layma Export is the sourcing and export subsidiary of Layma Global Trading & Services, headquartered in Ramanattukara, Kerala, India. We specialise in procuring premium spices, nuts, dry fruits, honey, and tea from Kerala's farms and processing them for international export.
+                  Layma Export is the sourcing, distribution, and export subsidiary of Layma Global Trading & Services, headquartered in Ramanattukara, Kerala, India. We specialise in procuring premium spices, nuts, dry fruits, honey, and tea from Kerala's farms and supplying them in Layma branded packs.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
-                  Our products reach Qatar, the GCC region, and international markets through our parent company's distribution network, as well as direct B2B export partnerships with importers, wholesalers, and food businesses worldwide.
+                  We supply Layma branded consumer packs for local distribution across Qatar and the GCC through our parent company, and export in bulk to importers, wholesalers, and food businesses worldwide. All products are under the Layma brand.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 32 }}>
-                  With direct farm relationships, a modern processing facility, and deep expertise in food export compliance, we deliver consistency, quality, and reliability in every shipment.
+                  With direct farm relationships, a modern processing facility, and deep expertise in food export compliance, we deliver consistency, quality, and reliability in every shipment. CoS certification is provided for countries that require it.
                 </p>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
                   {[
-                    { label: 'Type', value: 'Food Export & Sourcing' },
+                    { label: 'Type', value: 'Export & Local Distribution' },
                     { label: 'Location', value: 'Ramanattukara, Kerala' },
                     { label: 'Markets', value: 'Qatar · GCC · Global' },
-                    { label: 'Formats', value: 'Bulk · Retail · Private Label' },
+                    { label: 'Formats', value: 'Bulk Export · Layma Branded Packs' },
                   ].map(item => (
                     <div key={item.label} style={{ padding: '14px 16px', background: 'white', borderRadius: 12, border: '1px solid rgba(92,140,70,0.1)' }}>
                       <div style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: '#5C8C46', fontWeight: 600, marginBottom: 4 }}>{item.label}</div>
@@ -97,8 +100,8 @@ export default function ExportAbout() {
             {[
               { label: 'Farm-Level Sourcing' },
               { label: 'Processing & Grading' },
-              { label: 'Custom Packaging' },
-              { label: 'Private Label' },
+              { label: 'Layma Branded Packaging' },
+              { label: 'Local Distribution' },
               { label: 'Sea & Air Export' },
               { label: 'Export Documentation' },
               { label: 'Quality Certification' },
@@ -170,34 +173,31 @@ export default function ExportAbout() {
       </section>
 
       {/* Team */}
-      {team.length > 0 && (
-        <section style={{ padding: '100px 0', background: '#497336' }}>
-          <div className="container">
-            <ScrollReveal>
-              <div style={{ textAlign: 'center', marginBottom: 64 }}>
-                <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#AFBFA3', fontWeight: 600, marginBottom: 14 }}>The People Behind Layma Export</div>
-                <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F0F2F0' }}>Our Team</h2>
-              </div>
-            </ScrollReveal>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 28 }}>
-              {team.map((member, i) => (
-                <ScrollReveal key={member.id} delay={i * 0.1}>
-                  <motion.div whileHover={{ y: -6 }} style={{ background: 'rgba(240,242,240,0.07)', border: '1px solid rgba(136,166,123,0.25)', borderRadius: 24, overflow: 'hidden', textAlign: 'center' }}>
-                    <div style={{ aspectRatio: '1', backgroundImage: member.image ? `url(${member.image})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center top', background: member.image ? undefined : 'rgba(136,166,123,0.15)' }}>
-                      {!member.image && <div style={{ height: '100%', minHeight: 180, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(136,166,123,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#88A67B' }}>{member.name.charAt(0)}</div></div>}
-                    </div>
-                    <div style={{ padding: '24px 20px' }}>
-                      <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#F0F2F0', marginBottom: 6 }}>{member.name}</div>
-                      <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: '#88A67B', fontWeight: 600, marginBottom: member.bio ? 12 : 0 }}>{member.role}</div>
-                      {member.bio && <p style={{ fontSize: 13, lineHeight: 1.7, color: 'rgba(240,242,240,0.65)', marginTop: 10 }}>{member.bio}</p>}
-                    </div>
-                  </motion.div>
-                </ScrollReveal>
-              ))}
+      <section style={{ padding: '100px 0', background: '#497336' }}>
+        <div className="container">
+          <ScrollReveal>
+            <div style={{ textAlign: 'center', marginBottom: 64 }}>
+              <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#AFBFA3', fontWeight: 600, marginBottom: 14 }}>The People Behind Layma Export</div>
+              <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F0F2F0' }}>Our Team</h2>
             </div>
+          </ScrollReveal>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 28 }}>
+            {exportTeam.map((member, i) => (
+              <ScrollReveal key={member.id} delay={i * 0.1}>
+                <motion.div whileHover={{ y: -6 }} style={{ background: 'rgba(240,242,240,0.07)', border: '1px solid rgba(136,166,123,0.25)', borderRadius: 24, overflow: 'hidden', textAlign: 'center' }}>
+                  <div style={{ aspectRatio: '1', backgroundImage: member.image ? `url(${member.image})` : 'none', backgroundSize: 'cover', backgroundPosition: 'center top', background: member.image ? undefined : 'rgba(136,166,123,0.15)' }}>
+                    {!member.image && <div style={{ height: '100%', minHeight: 180, display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(136,166,123,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#88A67B' }}>{member.name.charAt(0)}</div></div>}
+                  </div>
+                  <div style={{ padding: '24px 20px' }}>
+                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#F0F2F0', marginBottom: 6 }}>{member.name}</div>
+                    <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: '#88A67B', fontWeight: 600 }}>{member.role}</div>
+                  </div>
+                </motion.div>
+              </ScrollReveal>
+            ))}
           </div>
-        </section>
-      )}
+        </div>
+      </section>
 
       <style>{`
         @media (max-width: 768px) {
