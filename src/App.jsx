@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
-import { syncImagesFromSupabase, syncProductsFromSupabase, syncCareersFromSupabase, syncTeamFromSupabase } from './data/store';
+import { syncImagesFromSupabase, syncProductsFromSupabase, syncCareersFromSupabase } from './data/store';
 import { AnimatePresence, motion } from 'framer-motion';
 import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
@@ -89,7 +89,6 @@ export default function App() {
     syncImagesFromSupabase();
     syncProductsFromSupabase();
     syncCareersFromSupabase();
-    syncTeamFromSupabase();
     return () => clearTimeout(t);
   }, []);
 

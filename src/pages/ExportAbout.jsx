@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
-import { getExportTeam } from '../data/store';
+import { initialExportTeam } from '../data/initialData';
 
 
 const values = [
@@ -16,12 +14,7 @@ const values = [
 export default function ExportAbout() {
   const aboutImg = useSiteImage('export_about');
   const heroImg = useSiteImage('export_hero');
-  const [exportTeam, setExportTeam] = useState(getExportTeam);
-  useEffect(() => {
-    const handler = () => setExportTeam(getExportTeam());
-    window.addEventListener('layma_team_updated', handler);
-    return () => window.removeEventListener('layma_team_updated', handler);
-  }, []);
+  const exportTeam = initialExportTeam;
   return (
     <div style={{ background: '#F0F2F0' }}>
       {/* Hero */}

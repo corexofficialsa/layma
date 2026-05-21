@@ -1,9 +1,7 @@
-import { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
-import { getTeam } from '../data/store';
+import { initialGlobalTeam } from '../data/initialData';
 
 const values = [
   { title: 'Quality', desc: 'We never compromise on product standards. Every item is verified, tested, and certified before it reaches our clients.' },
@@ -16,12 +14,7 @@ const values = [
 export default function About() {
   const aboutHeroImg = useSiteImage('about_hero');
   const aboutGlobalImg = useSiteImage('about_global');
-  const [globalTeam, setGlobalTeam] = useState(getTeam);
-  useEffect(() => {
-    const handler = () => setGlobalTeam(getTeam());
-    window.addEventListener('layma_team_updated', handler);
-    return () => window.removeEventListener('layma_team_updated', handler);
-  }, []);
+  const globalTeam = initialGlobalTeam;
   return (
     <div>
       {/* Hero */}

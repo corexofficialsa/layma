@@ -399,14 +399,14 @@ export const initialExportCareers = [
 ];
 
 export const initialGlobalTeam = [
-  { id: 'gt1', name: 'Salih Backer K', role: 'Chief Executive Officer', image: '', bio: '' },
-  { id: 'gt2', name: 'Jafar Ali M', role: 'Executive Managing Director', image: '', bio: '' },
-  { id: 'gt3', name: 'Muhammed Najmudheen PV', role: 'Director, Business Development & Marketing', image: '', bio: '' },
+  { id: 'gt1', name: 'Salih Backer K', role: 'Chief Executive Officer', image: '/team/salih.jpg', bio: '' },
+  { id: 'gt2', name: 'Jafar Ali M', role: 'Executive Managing Director', image: '/team/jafar.jpg', bio: '' },
+  { id: 'gt3', name: 'Muhammed Najmudheen PV', role: 'Director, Business Development & Marketing', image: '/team/najmudheen.jpg', bio: '' },
 ];
 
 export const initialExportTeam = [
-  { id: 'et1', name: 'Azhar Ali M', role: 'Director, Purchase & Vendor Management', image: '', bio: '' },
-  { id: 'et2', name: 'Muhammed Ismail K', role: 'Director, Distribution & Operations', image: '', bio: '' },
+  { id: 'et1', name: 'Azhar Ali M', role: 'Director, Purchase & Vendor Management', image: '/team/azhar.jpg', bio: '' },
+  { id: 'et2', name: 'Muhammed Ismail K', role: 'Director, Distribution & Operations', image: '/team/ismail.jpg', bio: '' },
 ];
 
 export const initialImages = {
