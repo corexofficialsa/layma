@@ -270,6 +270,7 @@ function TeamMemberModal({ onClose, onSave, brand, existing }) {
   };
 
   const handleCropConfirm = (url) => {
+    setCropSrc(null);
     setPreview(url);
     setForm(f => ({ ...f, image: url }));
   };
