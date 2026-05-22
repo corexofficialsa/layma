@@ -281,13 +281,23 @@ function CropModal({ imageSrc, aspectRatio, onConfirm, onCancel }) {
   const doCrop = () => {
     setUploading(true);
     setUploadError('');
-    const canvas = document.createElement('canvas');
-    canvas.width = CROP_W; canvas.height = CROP_H;
-    const ctx = canvas.getContext('2d');
     const img = new window.Image();
     img.onload = async () => {
-      ctx.drawImage(img, CROP_W / 2 + offset.x - dispW / 2, CROP_H / 2 + offset.y - dispH / 2, dispW, dispH);
-      const base64 = canvas.toDataURL('image/jpeg', 0.85);
+      // Render at original image resolution (capped at 4× for sanity)
+      const renderScale = Math.min(imgNatural.w / CROP_W, imgNatural.h / CROP_H, 4);
+      const outW = Math.round(CROP_W * renderScale);
+      const outH = Math.round(CROP_H * renderScale);
+      const canvas = document.createElement('canvas');
+      canvas.width = outW; canvas.height = outH;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(
+        img,
+        (CROP_W / 2 + offset.x - dispW / 2) * renderScale,
+        (CROP_H / 2 + offset.y - dispH / 2) * renderScale,
+        dispW * renderScale,
+        dispH * renderScale
+      );
+      const base64 = canvas.toDataURL('image/jpeg', 0.92);
       try {
         const url = await uploadToCloudinary(base64);
         onConfirm(url);
