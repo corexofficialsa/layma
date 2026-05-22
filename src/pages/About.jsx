@@ -177,11 +177,11 @@ export default function About() {
               <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F1F2C4' }}>Our Team</h2>
             </div>
           </ScrollReveal>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: 28 }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 240px))', gap: 28, justifyContent: 'center' }}>
             {globalTeam.map((member, i) => (
               <ScrollReveal key={member.id} delay={i * 0.1}>
                 <motion.div whileHover={{ y: -6 }} style={{ background: 'rgba(241,242,196,0.07)', border: '1px solid rgba(186,191,38,0.2)', borderRadius: 24, overflow: 'hidden', textAlign: 'center' }}>
-                  <div style={{ height: 240, background: 'rgba(186,191,38,0.1)', overflow: 'hidden', position: 'relative' }}>
+                  <div style={{ aspectRatio: '1', background: 'rgba(186,191,38,0.1)', overflow: 'hidden' }}>
                     {member.image
                       ? <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
                       : <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(186,191,38,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#BABF26' }}>{member.name.charAt(0)}</div></div>}
