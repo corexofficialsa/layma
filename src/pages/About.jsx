@@ -177,9 +177,9 @@ export default function About() {
               <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F1F2C4' }}>Our Team</h2>
             </div>
           </ScrollReveal>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 240px))', gap: 28, justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 28, justifyContent: 'center' }}>
             {globalTeam.map((member, i) => (
-              <ScrollReveal key={member.id} delay={i * 0.1}>
+              <ScrollReveal key={member.id} delay={i * 0.1} style={{ width: 240 }}>
                 <motion.div whileHover={{ y: -6 }} style={{ background: 'rgba(241,242,196,0.07)', border: '1px solid rgba(186,191,38,0.2)', borderRadius: 24, overflow: 'hidden', textAlign: 'center' }}>
                   <div style={{ aspectRatio: '1', background: 'rgba(186,191,38,0.1)', overflow: 'hidden' }}>
                     {member.image

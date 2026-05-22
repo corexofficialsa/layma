@@ -178,9 +178,9 @@ export default function ExportAbout() {
               <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F0F2F0' }}>Our Team</h2>
             </div>
           </ScrollReveal>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 240px))', gap: 28, justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 28, justifyContent: 'center' }}>
             {exportTeam.map((member, i) => (
-              <ScrollReveal key={member.id} delay={i * 0.1}>
+              <ScrollReveal key={member.id} delay={i * 0.1} style={{ width: 240 }}>
                 <motion.div whileHover={{ y: -6 }} style={{ background: 'rgba(240,242,240,0.07)', border: '1px solid rgba(136,166,123,0.25)', borderRadius: 24, overflow: 'hidden', textAlign: 'center' }}>
                   <div style={{ aspectRatio: '1', background: 'rgba(136,166,123,0.15)', overflow: 'hidden' }}>
                     {member.image
