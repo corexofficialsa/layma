@@ -405,8 +405,11 @@ export const initialGlobalTeam = [
 ];
 
 export const initialExportTeam = [
-  { id: 'et1', name: 'Azhar Ali M', role: 'Director, Purchase & Vendor Management', image: '/team/azhar.jpg', bio: '' },
-  { id: 'et2', name: 'Muhammed Ismail K', role: 'Director, Distribution & Operations', image: '/team/ismail.jpg', bio: '' },
+  { id: 'et1', name: 'Salih Backer K', role: 'Chief Executive Officer (CEO)', image: '/team/salih.jpg', bio: '' },
+  { id: 'et2', name: 'Jafar Ali Matra', role: 'Executive Managing Director', image: '/team/jafar.jpg', bio: '' },
+  { id: 'et3', name: 'Muhammed Najmudheen PV', role: 'Director, Business Development & Marketing', image: '/team/najmudheen.jpg', bio: '' },
+  { id: 'et4', name: 'Azhar M', role: 'Director, Purchase & Vendor Management', image: '/team/azhar.jpg', bio: '' },
+  { id: 'et5', name: 'Muhammed Ismail K', role: 'Director, Distribution & Operations', image: '/team/ismail.jpg', bio: '' },
 ];
 
 export const initialImages = {
