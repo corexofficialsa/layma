@@ -401,7 +401,7 @@ export const initialExportCareers = [
 export const initialGlobalTeam = [
   { id: 'gt1', name: 'Salih Backer K', role: 'Chief Executive Officer', image: '/team/salih.jpg', bio: '' },
   { id: 'gt2', name: 'Jafar Ali M', role: 'Executive Managing Director', image: '/team/jafar.jpg', bio: '' },
-  { id: 'gt3', name: 'Muhammed Najmudheen PV', role: 'Director, Business Development & Marketing', image: '/team/najmudheen.jpg', bio: '' },
+  { id: 'gt3', name: 'Hashim Shibil KP', role: 'Supervisor, Delivery & Sales', image: '', bio: '' },
 ];
 
 export const initialExportTeam = [
