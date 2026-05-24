@@ -43,8 +43,8 @@ export default function ExportAbout() {
               <div style={{ position: 'relative' }}>
                 <div style={{ borderRadius: 24, overflow: 'hidden', aspectRatio: '4/5', backgroundImage: `url(${aboutImg})`, backgroundSize: 'cover', backgroundPosition: 'center' }} />
                 <div style={{ position: 'absolute', top: -16, left: -16, background: '#5C8C46', borderRadius: 16, padding: '20px 24px', boxShadow: '0 12px 40px rgba(92,140,70,0.4)' }}>
-                  <div style={{ fontSize: 36 }}>🇮🇳</div>
-                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#AFBFA3' }}>Kerala, India</div>
+                  <div style={{ fontSize: 36 }}>🌏</div>
+                  <div style={{ fontSize: 11, fontWeight: 700, letterSpacing: 2, textTransform: 'uppercase', color: '#AFBFA3' }}>Kerala, India · Across the Globe</div>
                 </div>
                 <div style={{ position: 'absolute', bottom: 20, right: 20, background: '#88A67B', borderRadius: 16, padding: '16px 20px' }}>
                   <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 32, fontWeight: 700, color: '#1a1a1a', lineHeight: 1 }}>Export</div>
@@ -76,7 +76,7 @@ export default function ExportAbout() {
                   {[
                     { label: 'Type', value: 'Export & Local Distribution' },
                     { label: 'Location', value: 'Ramanattukara, Kerala' },
-                    { label: 'Markets', value: 'Qatar · GCC · Global' },
+                    { label: 'Markets', value: 'India, Qatar, GCC & Worldwide' },
                     { label: 'Formats', value: 'Bulk Export · Layma Branded Packs' },
                   ].map(item => (
                     <div key={item.label} style={{ padding: '14px 16px', background: 'white', borderRadius: 12, border: '1px solid rgba(92,140,70,0.1)' }}>
