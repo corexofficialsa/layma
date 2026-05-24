@@ -15,18 +15,17 @@ const offerings = [
 ];
 
 const products = [
-  { name: 'Cashew Nuts', origin: 'Kerala, India', tag: 'Grade W240' },
-  { name: 'Almonds', origin: 'California / Spain', tag: 'Non-pareil' },
-  { name: 'Walnuts', origin: 'Afghanistan', tag: 'Light Amber' },
-  { name: 'Cardamom', origin: 'Kerala, India', tag: 'AGEB Grade' },
-  { name: 'Black Pepper', origin: 'Kerala, India', tag: 'Malabar Select' },
-  { name: 'Raisins', origin: 'Iran / Afghanistan', tag: 'Sulphur-free' },
-  { name: 'Dried Figs', origin: 'Turkey', tag: 'Sun-dried' },
-  { name: 'Dried Banana', origin: 'Kerala, India', tag: 'Nendran' },
-  { name: 'Dried Mango', origin: 'India', tag: 'No Added Sugar' },
-  { name: 'Dates', origin: 'Saudi Arabia', tag: 'Saudi Select' },
-  { name: 'Pure Honey', origin: 'Kerala / Saudi Arabia', tag: 'Raw & Pure' },
-  { name: 'Tea Powder', origin: 'Kerala, India', tag: 'CTC Grade' },
+  { name: 'Cashew Nuts', origin: 'India / Vietnam / Ivory Coast', tag: 'W320 · W240 · W180' },
+  { name: 'Almonds', origin: 'USA', tag: '27/30 · 32/34' },
+  { name: 'Walnuts', origin: 'China / USA', tag: 'Premium' },
+  { name: 'Cardamom', origin: 'India / Guatemala', tag: '7mm · 8mm' },
+  { name: 'Black Pepper', origin: 'India / Vietnam', tag: 'Whole Peppercorn' },
+  { name: 'Raisins', origin: 'Iran / Afghanistan', tag: 'Green · Gold · Black' },
+  { name: 'Dried Figs', origin: 'Turkey / Iran', tag: 'Rope' },
+  { name: 'Dried Banana', origin: 'Uganda', tag: 'Natural Dried' },
+  { name: 'Dried Mango', origin: 'Uganda', tag: 'No Added Sugar' },
+  { name: 'Pure Honey', origin: 'Nilambur, Kerala, India', tag: 'Nilambur Forest' },
+  { name: 'Tea Powder', origin: 'India', tag: 'CTC Grade' },
 ];
 
 export default function ServicesGlobal() {
