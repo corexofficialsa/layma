@@ -8,17 +8,20 @@ const EXPORT_PRODUCTS_KEY = 'layma_export_products';
 const EXPORT_CAREERS_KEY = 'layma_export_careers';
 const TEAM_KEY = 'layma_team';
 const EXPORT_TEAM_KEY = 'layma_export_team';
-const DATA_VERSION = 'layma_data_v5';
+const DATA_VERSION = 'layma_data_v6';
 
 // Reset data when version changes so seed updates take effect
-if (localStorage.getItem(DATA_VERSION) !== '5') {
+if (localStorage.getItem(DATA_VERSION) !== '6') {
   localStorage.removeItem(PRODUCTS_KEY);
   localStorage.removeItem(CAREERS_KEY);
   localStorage.removeItem(IMAGES_KEY);
   localStorage.removeItem(EXPORT_PRODUCTS_KEY);
   localStorage.removeItem(EXPORT_CAREERS_KEY);
+  localStorage.removeItem(TEAM_KEY);
+  localStorage.removeItem(EXPORT_TEAM_KEY);
+  localStorage.removeItem('layma_data_v5');
   localStorage.removeItem('layma_data_v4');
-  localStorage.setItem(DATA_VERSION, '5');
+  localStorage.setItem(DATA_VERSION, '6');
 }
 
 function seed(key, initial) {
@@ -35,17 +38,6 @@ seed(EXPORT_CAREERS_KEY, initialExportCareers);
 seed(TEAM_KEY, initialGlobalTeam);
 seed(EXPORT_TEAM_KEY, initialExportTeam);
 
-// Seed team with defaults if stored as empty (from old version)
-const TEAM_INIT_KEY = 'layma_team_init_v1';
-if (!localStorage.getItem(TEAM_INIT_KEY)) {
-  if (JSON.parse(localStorage.getItem(TEAM_KEY) || '[]').length === 0) {
-    localStorage.setItem(TEAM_KEY, JSON.stringify(initialGlobalTeam));
-  }
-  if (JSON.parse(localStorage.getItem(EXPORT_TEAM_KEY) || '[]').length === 0) {
-    localStorage.setItem(EXPORT_TEAM_KEY, JSON.stringify(initialExportTeam));
-  }
-  localStorage.setItem(TEAM_INIT_KEY, '1');
-}
 
 export function getProducts() {
   return JSON.parse(localStorage.getItem(PRODUCTS_KEY) || '[]');
