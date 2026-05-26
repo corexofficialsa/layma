@@ -4,18 +4,11 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion'
 import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
 
-const stats = [
-  { value: '10+', label: 'Products' },
-  { value: '3+', label: 'Hypermarkets Served' },
-  { value: '15+', label: 'Stores Reach' },
-  { value: '100%', label: 'Quality Committed' },
-];
-
 const processSteps = [
   {
     num: '01',
     title: 'Global Sourcing',
-    desc: 'We source premium food products from trusted origins across India through direct supplier relationships, ensuring authenticity and the highest quality standards.',
+    desc: 'We source premium food products from trusted origins across India and other countries through direct supplier relationships, ensuring authenticity and the highest quality standards.',
   },
   {
     num: '02',
@@ -31,27 +24,6 @@ const processSteps = [
     num: '04',
     title: 'Reliable Supply',
     desc: 'Our Qatar distribution team ensures timely, accurate delivery to supermarkets, wholesalers, and retailers across Qatar. Dependable supply, every order.',
-  },
-];
-
-const reviews = [
-  {
-    name: 'Ahmed Al-Rashidi',
-    role: 'Head Buyer, Landmark Group Qatar',
-    text: 'Layma Global has been our preferred spice supplier for over three years. The consistency of quality and reliability of delivery is unmatched in the market.',
-    rating: 5,
-  },
-  {
-    name: 'Fatima Al-Sayed',
-    role: 'Executive Chef, Four Seasons Doha',
-    text: 'The saffron and cardamom from Layma are simply exceptional. You can taste the difference, and our guests notice it too. Premium in every sense.',
-    rating: 5,
-  },
-  {
-    name: 'Mohammed Khalid',
-    role: 'Owner, Noor Fine Foods',
-    text: 'Their Medjool dates and Sidr honey are the best we have sourced. Layma\'s team is professional, transparent, and genuinely passionate about quality.',
-    rating: 5,
   },
 ];
 
@@ -80,7 +52,6 @@ const faqs = [
 
 export default function Home() {
   const [activeFaq, setActiveFaq] = useState(null);
-  const [activeReview, setActiveReview] = useState(0);
   const { scrollY } = useScroll();
   const heroY = useTransform(scrollY, [0, 600], [0, 180]);
   const heroOpacity = useTransform(scrollY, [0, 400], [1, 0]);
@@ -99,11 +70,6 @@ export default function Home() {
     { name: 'Honey', img: catImgHoney, count: 'Pure Honey · Small Bottles' },
     { name: 'Tea', img: catImgTea, count: 'Kerala CTC Tea Powder' },
   ];
-
-  useEffect(() => {
-    const timer = setInterval(() => setActiveReview(v => (v + 1) % reviews.length), 5000);
-    return () => clearInterval(timer);
-  }, []);
 
   return (
     <div>
@@ -253,21 +219,6 @@ export default function Home() {
 
       </section>
 
-      {/* Stats Bar */}
-      <section style={{ background: '#497336', padding: '40px 0' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))', gap: 32 }}>
-            {stats.map((s, i) => (
-              <ScrollReveal key={s.label} delay={i * 0.1} direction="up">
-                <div style={{ textAlign: 'center' }}>
-                  <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 48, fontWeight: 700, color: '#BABF26', lineHeight: 1 }}>{s.value}</div>
-                  <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: 'rgba(241,242,196,0.7)', marginTop: 6, fontWeight: 500 }}>{s.label}</div>
-                </div>
-              </ScrollReveal>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* Intro */}
       <section style={{ padding: '120px 0' }}>
@@ -422,63 +373,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Reviews */}
-      <section style={{ padding: '100px 0', background: '#1a1a1a', overflow: 'hidden' }}>
-        <div className="container">
-          <ScrollReveal>
-            <div style={{ textAlign: 'center', marginBottom: 64 }}>
-              <div style={{ fontSize: 11, letterSpacing: 3, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600, marginBottom: 14 }}>Testimonials</div>
-              <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F1F2C4', lineHeight: 1.1 }}>
-                What Our Clients Say
-              </h2>
-            </div>
-          </ScrollReveal>
-
-          <div style={{ position: 'relative', maxWidth: 800, margin: '0 auto' }}>
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeReview}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -30 }}
-                transition={{ duration: 0.5 }}
-                style={{ textAlign: 'center' }}
-              >
-                <div style={{ fontSize: 48, color: '#BABF26', marginBottom: 24, lineHeight: 1 }}>"</div>
-                <p style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(20px, 2.5vw, 28px)', lineHeight: 1.6, color: '#F1F2C4', fontStyle: 'italic', marginBottom: 32 }}>
-                  {reviews[activeReview].text}
-                </p>
-                <div style={{ display: 'flex', justifyContent: 'center', gap: 4, marginBottom: 16 }}>
-                  {Array(reviews[activeReview].rating).fill(0).map((_, i) => (
-                    <span key={i} style={{ color: '#BABF26', fontSize: 16 }}>★</span>
-                  ))}
-                </div>
-                <div style={{ fontFamily: 'Inter, sans-serif', fontWeight: 600, color: '#F1F2C4', fontSize: 15 }}>{reviews[activeReview].name}</div>
-                <div style={{ fontSize: 13, color: 'rgba(241,242,196,0.5)', marginTop: 4 }}>{reviews[activeReview].role}</div>
-              </motion.div>
-            </AnimatePresence>
-
-            <div style={{ display: 'flex', justifyContent: 'center', gap: 8, marginTop: 40 }}>
-              {reviews.map((_, i) => (
-                <button
-                  key={i}
-                  onClick={() => setActiveReview(i)}
-                  style={{
-                    width: i === activeReview ? 28 : 8,
-                    height: 8,
-                    borderRadius: 4,
-                    background: i === activeReview ? '#BABF26' : 'rgba(186,191,38,0.3)',
-                    border: 'none',
-                    cursor: 'pointer',
-                    transition: 'all 0.3s',
-                    padding: 0,
-                  }}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* FAQs */}
       <section style={{ padding: '120px 0', background: '#F1F2C4' }}>

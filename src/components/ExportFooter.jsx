@@ -29,7 +29,7 @@ export default function ExportFooter() {
               <img src="/logo-export.png" alt="Layma Export" style={{ height: 48, width: 'auto', marginBottom: 8 }} />
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(240,242,240,0.65)', maxWidth: 240, marginBottom: 24 }}>
-              Kerala's premier spice and food export company — sourcing and shipping the finest natural products to Qatar, GCC, and global markets.
+              Kerala's premier spice and food export company, sourcing and shipping the finest natural products to Qatar, GCC, and global markets.
             </p>
             <div style={{ display: 'flex', gap: 12 }}>
               {[

@@ -63,7 +63,7 @@ export default function About() {
                   Layma Global<br />Trading & Services
                 </h2>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
-                  Layma Global Trading & Services is the parent company of the group, headquartered in Doha, Qatar. We specialise in international sourcing and supply chain solutions, importing premium food products from India and distributing them across Qatar's supermarkets, wholesalers, retailers, and food businesses.
+                  Layma Global Trading & Services is the parent company of the group, headquartered in Doha, Qatar. We specialise in international sourcing and supply chain solutions, importing premium food products from India and the world's best origins, distributing them across Qatar's supermarkets, wholesalers, retailers, and food businesses.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
                   Our product portfolio spans nuts (cashew, almonds, walnuts), dry fruits (raisins, figs, dried banana, jackfruit, mango, pineapple), spices (cardamom, black pepper), tea powder, and honey supplied in both bulk packaging and retail branded small packets to meet the diverse needs of the Qatar market.
@@ -177,18 +177,18 @@ export default function About() {
               <h2 style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 'clamp(36px, 4vw, 56px)', fontWeight: 600, color: '#F1F2C4' }}>Our Team</h2>
             </div>
           </ScrollReveal>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 28, justifyContent: 'center' }}>
+          <div style={{ display: 'flex', flexWrap: 'wrap', gap: 20, justifyContent: 'center' }}>
             {globalTeam.map((member, i) => (
-              <ScrollReveal key={member.id} delay={i * 0.1} style={{ width: 240 }}>
-                <motion.div whileHover={{ y: -6 }} style={{ background: 'rgba(241,242,196,0.07)', border: '1px solid rgba(186,191,38,0.2)', borderRadius: 24, overflow: 'hidden', textAlign: 'center' }}>
+              <ScrollReveal key={member.id} delay={i * 0.1} style={{ width: 155 }}>
+                <motion.div whileHover={{ y: -4 }} style={{ background: 'rgba(241,242,196,0.07)', border: '1px solid rgba(186,191,38,0.2)', borderRadius: 16, overflow: 'hidden', textAlign: 'center' }}>
                   <div style={{ aspectRatio: '1', background: 'rgba(186,191,38,0.1)', overflow: 'hidden' }}>
                     {member.image
                       ? <img src={member.image} alt={member.name} style={{ width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'center top' }} />
-                      : <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(186,191,38,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 28, color: '#BABF26' }}>{member.name.charAt(0)}</div></div>}
+                      : <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><div style={{ width: 48, height: 48, borderRadius: '50%', background: 'rgba(186,191,38,0.3)', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Cormorant Garamond, serif', fontSize: 22, color: '#BABF26' }}>{member.name.charAt(0)}</div></div>}
                   </div>
-                  <div style={{ padding: '24px 20px' }}>
-                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 22, fontWeight: 600, color: '#F1F2C4', marginBottom: 6 }}>{member.name}</div>
-                    <div style={{ fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600 }}>{member.role}</div>
+                  <div style={{ padding: '14px 12px' }}>
+                    <div style={{ fontFamily: 'Cormorant Garamond, serif', fontSize: 16, fontWeight: 600, color: '#F1F2C4', marginBottom: 5 }}>{member.name}</div>
+                    <div style={{ fontSize: 9, letterSpacing: 1.5, textTransform: 'uppercase', color: '#BABF26', fontWeight: 600, lineHeight: 1.4 }}>{member.role}</div>
                   </div>
                 </motion.div>
               </ScrollReveal>
