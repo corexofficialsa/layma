@@ -5,7 +5,7 @@ import { initialExportTeam } from '../data/initialData';
 
 
 const values = [
-  { title: 'Quality First', desc: 'Every product we export is verified, graded, and certified before it leaves our facility. No compromises on standards.' },
+  { title: 'Quality First', desc: 'Every product we supply and export is carefully verified, graded, and certified before dispatch, ensuring consistent quality and compliance. We cater to both the Indian domestic market and international export markets, maintaining the same high standards in every delivery.' },
   { title: 'Partnership', desc: 'We build long-term relationships with farmers, suppliers, and buyers based on trust and transparent communication.' },
   { title: 'Global Reach', desc: 'From Kerala to Qatar and beyond, we bridge the best of Indian produce with global markets.' },
   { title: 'Reliability', desc: 'On-time delivery, accurate documentation, and consistent supply are what our buyers count on from us.' },
@@ -63,13 +63,13 @@ export default function ExportAbout() {
                   Layma Export<br />Ramanattukara, Kerala
                 </h2>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
-                  Layma Export is the sourcing, distribution, and export subsidiary of Layma Global Trading & Services, headquartered in Ramanattukara, Kerala, India. We specialise in procuring premium spices, nuts, dry fruits, honey, and tea from Kerala's farms and supplying them in Layma branded packs.
+                  Layma Export is the sourcing, distribution, and export subsidiary of Layma Global Trading & Services, headquartered in Ramanattukara, Kerala, India. We specialize in procuring premium spices, nuts, dry fruits, honey, and tea from trusted farms across Kerala and supplying them under the Layma brand.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
-                  We supply Layma branded consumer packs for local distribution across Qatar and the GCC through our parent company, and export in bulk to importers, wholesalers, and food businesses worldwide. All products are under the Layma brand.
+                  We distribute Layma-branded consumer packs across the Indian market, while also supplying through our parent company to Qatar and GCC markets. In addition, we export bulk quantities to importers, wholesalers, and food businesses worldwide, maintaining the same quality standards across all channels.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 32 }}>
-                  With direct farm relationships, a modern processing facility, and deep expertise in food export compliance, we deliver consistency, quality, and reliability in every shipment. CoS certification is provided for countries that require it.
+                  With direct farm partnerships, a modern processing facility, and strong expertise in export compliance, we ensure consistency, quality, and reliability in every shipment. Certificate of Sale (CoS) documentation is provided for countries where required.
                 </p>
 
                 <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 16 }}>
@@ -118,7 +118,7 @@ export default function ExportAbout() {
               {
                 label: 'Our Mission',
                 title: 'Pure Quality,\nDirect from Source',
-                text: 'To export the finest Kerala produce with uncompromising quality, transparent sourcing, and reliable fulfilment, building lasting partnerships with buyers across the globe.',
+                text: 'To export the finest produce from Kerala with uncompromising quality, transparent sourcing practices, and reliable fulfilment, while building long-term, trusted partnerships with buyers across global markets.',
                 bg: '#497336', textColor: '#F0F2F0', subColor: '#AFBFA3',
               },
               {

@@ -150,7 +150,7 @@ export default function Home() {
                 textAlign: 'center',
               }}
             >
-              Layma Global Trading sources and supplies premium nuts, spices, dry fruits, honey, and tea from trusted origins in India to supermarkets, wholesalers, and retailers across Qatar.
+              Layma Global Trading specializes in sourcing and supplying premium nuts, spices, dry fruits, honey, and tea from carefully selected and trusted origins across India and other leading producing countries, delivering quality products to supermarkets, wholesalers, and retailers throughout Qatar.
             </motion.p>
 
             <motion.div
@@ -245,10 +245,10 @@ export default function Home() {
                   <em style={{ color: '#497336' }}>Purpose</em> & Precision
                 </h2>
                 <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 20 }}>
-                  Layma Global Trading & Services is Qatar's trusted food trading partner, headquartered in Doha, managing international sourcing, import, and B2B distribution.
+                  Layma Global Trading & Services is a trusted food trading company based in Doha, Qatar, dedicated to sourcing and supplying high-quality organic food products from trusted origins worldwide.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 36 }}>
-                  We source, package, and distribute premium spices, nuts, dry fruits, honey, and tea powder in bulk supply and retail branded formats to supermarkets, wholesalers, retailers, and food businesses across Qatar.
+                  We specialize in the import, packaging, and distribution of organic spices, nuts, dry fruits, honey, and tea powder, offering both bulk supply and retail-ready branded products to supermarkets, wholesalers, retailers, and food businesses throughout Qatar.
                 </p>
                 <Link to="/about" style={{
                   display: 'inline-flex',

@@ -8,7 +8,7 @@ const processSteps = [
   { num: '01', title: 'Farm Sourcing', desc: 'We partner directly with certified farmers in Kerala, cutting out middlemen to bring you the freshest produce at competitive prices.' },
   { num: '02', title: 'Processing & Grading', desc: 'Products are cleaned, dried, and graded at our Ramanattukara facility under strict hygienic conditions to meet international food safety standards.' },
   { num: '03', title: 'Packaging & Certification', desc: 'Packed in Layma branded consumer packs or bulk export formats with full documentation: FSSAI, COO, Health Certificate, and CoS where required.' },
-  { num: '04', title: 'Distribution & Export', desc: 'Supplied locally in Qatar and the GCC in Layma branded packs, and shipped via sea or air to international destinations with full traceability from farm to delivery.' },
+  { num: '04', title: 'Distribution & Export', desc: 'Supplied across the Indian market in Layma-branded packs and exported to international destinations via sea and air freight, with a strong focus on quality assurance, efficient logistics, and complete traceability throughout the supply chain.' },
 ];
 
 const faqs = [
@@ -86,7 +86,7 @@ export default function ExportHome() {
               transition={{ delay: 0.7, duration: 0.8 }}
               style={{ fontSize: 17, lineHeight: 1.8, color: 'rgba(240,242,240,0.85)', maxWidth: 580, marginBottom: 44, fontWeight: 300, textAlign: 'center' }}
             >
-              Layma Export sources premium spices, nuts, dry fruits, honey, and tea directly from Kerala's finest farms. We supply in Layma branded packs for local distribution across Qatar and the GCC, and export globally to buyers worldwide.
+              Layma Export sources premium spices, nuts, dry fruits, honey, and tea from trusted producers and suppliers. We distribute our products across India and GCC markets under the Layma brand and export to international buyers worldwide, delivering quality products that meet global standards.
             </motion.p>
 
             <motion.div
@@ -158,10 +158,13 @@ export default function ExportHome() {
                   <em style={{ color: '#5C8C46' }}>Purpose</em> & Precision
                 </h2>
                 <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 20 }}>
-                  Layma Export is the Kerala-based sourcing and distribution arm of Layma Global Trading & Services. We procure, process, and supply premium food products directly from Kerala's finest farms in Layma branded packs for local distribution across Qatar and the GCC, and export globally to buyers worldwide.
+                  Layma Export is the sourcing, processing, and distribution division of Layma Global Trading & Services, dedicated to delivering premium-quality food products to domestic and international markets.
+                </p>
+                <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 20 }}>
+                  We source, process, and package high-quality spices, nuts, dry fruits, honey, and tea under the Layma brand, serving distributors, wholesalers, retailers, and food businesses across India while also exporting to customers in international markets.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.85, color: '#555', marginBottom: 36 }}>
-                  From our Ramanattukara facility, we handle everything: farm sourcing, processing, grading, Layma branded packaging, certification, and export logistics, delivering consistent quality in every shipment.
+                  From our facility in Ramanattukara, we oversee every stage of the supply chain from sourcing and quality control to grading, packaging, certification, and export coordination ensuring consistent quality, reliability, and value in every product we deliver.
                 </p>
                 <Link to="/export/about" style={{
                   display: 'inline-flex', alignItems: 'center', gap: 8, color: '#5C8C46',

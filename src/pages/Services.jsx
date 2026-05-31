@@ -4,12 +4,11 @@ import ScrollReveal from '../components/ScrollReveal';
 import useSiteImage from '../hooks/useSiteImage';
 
 const offerings = [
-  { title: 'International Product Sourcing', desc: 'We source premium food products from trusted suppliers across India, building direct relationships with producers to guarantee authenticity and competitive pricing.' },
+  { title: 'International Product Sourcing', desc: 'We source premium food products from trusted suppliers across India and other leading producing countries, building strong relationships with manufacturers and producers to ensure consistent quality, product authenticity, and competitive pricing.' },
   { title: 'Supermarket & Retail Supply', desc: 'We supply supermarkets and retail chains across Qatar with consistent, quality-verified products in bulk formats and branded retail small packets ready for shelf display.' },
   { title: 'Wholesale Distribution', desc: 'Flexible bulk supply agreements for distributors, wholesalers, and food service operators with competitive pricing, reliable delivery schedules, and customisable order quantities.' },
   { title: 'Product Branding & Retail Packaging', desc: 'We offer retail-ready branded small packet packaging helping our products stand out on the shelf with professional presentation.' },
   { title: 'B2B Supply Solutions', desc: 'Tailored B2B supply programmes for hotels, restaurants, catering companies, and institutional buyers with consistent quality, dedicated account management, and flexible delivery.' },
-  { title: 'Import & Logistics Coordination', desc: 'Full import management including customs clearance, quality documentation, and last-mile distribution to your warehouse or retail outlets across Qatar.' },
   { title: 'Quality Certification & Documentation', desc: 'All products come with complete documentation including lab test reports, certificates of origin, and relevant food safety certifications. CoS certification provided where required.' },
 ];
 

@@ -29,7 +29,7 @@ export default function Footer() {
               <img src="/logo.png" alt="Layma" style={{ height: 52, width: 'auto', marginBottom: 8 }} />
             </div>
             <p style={{ fontSize: 14, lineHeight: 1.7, color: 'rgba(241,242,196,0.7)', maxWidth: 240, marginBottom: 24 }}>
-              Premium food trading and distribution, sourcing the finest spices, nuts, dry fruits, honey, and tea from trusted global origins, supplied to Qatar and the GCC.
+              Premium food trading and distribution company specializing in the sourcing, import, and supply of high-quality spices, nuts, dry fruits, honey, and tea from trusted global origins, serving supermarkets, wholesalers, retailers, and food businesses across Qatar.
             </p>
             <div style={{ display: 'flex', gap: 12 }}>
               {[

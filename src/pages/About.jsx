@@ -63,7 +63,7 @@ export default function About() {
                   Layma Global<br />Trading & Services
                 </h2>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
-                  Layma Global Trading & Services is the parent company of the group, headquartered in Doha, Qatar. We specialise in international sourcing and supply chain solutions, importing premium food products from India and the world's best origins, distributing them across Qatar's supermarkets, wholesalers, retailers, and food businesses.
+                  Layma Global Trading & Services is a leading food trading and distribution company headquartered in Doha, Qatar. We specialize in the sourcing, import, packaging, and distribution of premium-quality food products from trusted origins around the world, serving supermarkets, wholesalers, retailers, and food service businesses across Qatar.
                 </p>
                 <p style={{ fontSize: 16, lineHeight: 1.9, color: '#555', marginBottom: 16 }}>
                   Our product portfolio spans nuts (cashew, almonds, walnuts), dry fruits (raisins, figs, dried banana, jackfruit, mango, pineapple), spices (cardamom, black pepper), tea powder, and honey supplied in both bulk packaging and retail branded small packets to meet the diverse needs of the Qatar market.
